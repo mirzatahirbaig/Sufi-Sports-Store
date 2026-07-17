@@ -1,0 +1,30 @@
+<nav class="navbar-wrapper">
+  <div class="navbar-container">
+    <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
+      <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <div class="navbar-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/blog" routerLinkActive="active">Blog</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
+    </div>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation">
+      <i class="fa" [class.fa-bars]="!isMobileMenuOpen" [class.fa-xmark]="isMobileMenuOpen"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  @if (isMobileMenuOpen) {
+    <div class="mobile-menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Products</a>
+      <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Blog</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+    </div>
+  }
+</nav>

@@ -1,0 +1,81 @@
+<div class="detail-container container">
+  <div class="back-link">
+    <a routerLink="/products"><i class="fa fa-arrow-left-long"></i> Back to Catalog</a>
+  </div>
+
+  @if (isLoading) {
+    <div class="loader-container glass-card">
+      <i class="fa fa-circle-notch fa-spin loader-icon"></i>
+      <p>Loading product details...</p>
+    </div>
+  } @else if (errorMsg) {
+    <div class="error-container glass-card">
+      <i class="fa fa-circle-exclamation error-icon"></i>
+      <p>{{ errorMsg }}</p>
+    </div>
+  } @else if (product) {
+    <div class="product-detail-grid">
+      <!-- Image Gallery -->
+      <div class="gallery-wrapper">
+        <div class="main-image-box glass-card">
+          <img [src]="selectedImage" [alt]="product.name" class="main-image" />
+        </div>
+        
+        @if (product.imageUrls && product.imageUrls.length > 1) {
+          <div class="thumbnails-row">
+            @for (img of product.imageUrls; track img) {
+              <button 
+                class="thumbnail-btn glass-card" 
+                [class.active]="resolveImageUrl(img) === selectedImage" 
+                (click)="selectImage(img)">
+                <img [src]="resolveImageUrl(img)" alt="Thumbnail" />
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Info Details -->
+      <div class="info-wrapper glass-card">
+        <span class="category-tag">{{ product.category }}</span>
+        <h1 class="product-title">{{ product.name }}</h1>
+        
+        <div class="price-stock-row">
+          <span class="price-value">${{ product.price.toFixed(2) }}</span>
+          
+          @if (product.stockQuantity > 0) {
+            <span class="status-badge instock">
+              <i class="fa fa-circle-check"></i> In Stock ({{ product.stockQuantity }})
+            </span>
+          } @else {
+            <span class="status-badge outstock">
+              <i class="fa fa-circle-xmark"></i> Out of Stock
+            </span>
+          }
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="description-section">
+          <h3>Description</h3>
+          <p>{{ product.description }}</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Specifications -->
+        <div class="specs-section">
+          <h3>Specifications</h3>
+          <div class="specs-table">
+            @for (spec of getSpecs(); track spec.name) {
+              <div class="spec-row">
+                <span class="spec-name">{{ spec.name }}</span>
+                <span class="spec-value">{{ spec.value }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,110 @@
+<!-- Hero Banner Carousel -->
+<app-banner-carousel></app-banner-carousel>
+
+<!-- Featured Products Section -->
+<section class="section featured-products-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Curated Gear</span>
+      <h2 class="section-title">Featured Equipment</h2>
+      <p class="section-subtitle">Gear up with our top-performing equipment selected for professional training and match play.</p>
+    </div>
+
+    @if (isLoadingProducts) {
+      <div class="loading-grid">
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+      </div>
+    } @else {
+      @if (featuredProducts.length > 0) {
+        <div class="products-grid">
+          @for (product of featuredProducts; track product.id) {
+            <app-product-card [product]="product"></app-product-card>
+          }
+        </div>
+      } @else {
+        <div class="empty-state glass-card">
+          <i class="fa fa-box-open"></i>
+          <p>No featured products found.</p>
+        </div>
+      }
+    }
+
+    <div class="section-cta">
+      <a routerLink="/products" class="btn-primary">
+        View All Equipment
+        <i class="fa fa-store"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Promotional / Highlights Section -->
+<section class="promo-section">
+  <div class="promo-overlay"></div>
+  <div class="container promo-content">
+    <span class="promo-tag">Sialkot Craftsmanship</span>
+    <h2 class="promo-title">HANDCRAFTED. BATTLE TESTED.</h2>
+    <p class="promo-desc">
+      Each product is designed and built to withstand intense athletic use. From the selection of premium materials to the final stitching, we maintain the highest standards of sports engineering.
+    </p>
+    <div class="highlights-grid">
+      <div class="highlight-item">
+        <i class="fa fa-shield-halved"></i>
+        <h4>Elite Protection</h4>
+        <p>Advanced high-density padding systems designed to absorb shock and protect joints.</p>
+      </div>
+      <div class="highlight-item">
+        <i class="fa fa-award"></i>
+        <h4>Match Certified</h4>
+        <p>Equipment crafted according to international match specifications and tournament standards.</p>
+      </div>
+      <div class="highlight-item">
+        <i class="fa fa-circle-check"></i>
+        <h4>100% Quality</h4>
+        <p>Thoroughly inspected for durability, fit, and performance before leaving the factory.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Articles Section -->
+<section class="section news-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Fighter Feed</span>
+      <h2 class="section-title">Latest Articles</h2>
+      <p class="section-subtitle">Insights, training guidelines, and expert gear advice to help raise your game.</p>
+    </div>
+
+    @if (isLoadingArticles) {
+      <div class="loading-grid-3">
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+      </div>
+    } @else {
+      @if (recentArticles.length > 0) {
+        <div class="articles-grid">
+          @for (article of recentArticles; track article.id) {
+            <app-article-card [article]="article"></app-article-card>
+          }
+        </div>
+      } @else {
+        <div class="empty-state glass-card">
+          <i class="fa fa-newspaper"></i>
+          <p>No recent articles found.</p>
+        </div>
+      }
+    }
+
+    <div class="section-cta">
+      <a routerLink="/blog" class="btn-primary">
+        Read More Articles
+        <i class="fa fa-book-open"></i>
+      </a>
+    </div>
+  </div>
+</section>

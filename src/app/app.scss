@@ -1,0 +1,8 @@
+@import '../styles/variables';
+
+.main-content {
+  padding-top: $navbar-height;
+  min-height: calc(100vh - #{$navbar-height});
+  display: flex;
+  flex-direction: column;
+}

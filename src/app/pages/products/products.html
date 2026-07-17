@@ -1,0 +1,85 @@
+<section class="catalog-hero">
+  <div class="container">
+    <h1>EQUIPMENT CATALOG</h1>
+    <p>Discover our range of professional-grade athletic products and fighting gear.</p>
+  </div>
+</section>
+
+<div class="catalog-container container">
+  <!-- Sidebar Filters -->
+  <aside class="catalog-sidebar glass-card">
+    <h3>Categories</h3>
+    <div class="category-list">
+      @for (category of categories; track category) {
+      <button class="category-btn" [class.active]="category === selectedCategory" (click)="setCategory(category)">
+        {{ category }}
+      </button>
+      }
+    </div>
+  </aside>
+
+  <!-- Main Catalog Content -->
+  <main class="catalog-content">
+    <!-- Filter Toolbar -->
+    <div class="filter-toolbar glass-card">
+      <div class="search-box">
+        <i class="fa fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()"
+          class="search-input" />
+        <button (click)="onSearch()" class="search-btn">Search</button>
+      </div>
+
+      <div class="sort-box">
+        <label for="sort-select">Sort By:</label>
+        <select id="sort-select" [(ngModel)]="sortBy" (change)="onSortChange()" class="sort-select">
+          <option value="name-asc">Alphabetical (A-Z)</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Products Display -->
+    @if (isLoading) {
+    <div class="loading-grid">
+      <div class="skeleton-card glass-card"></div>
+      <div class="skeleton-card glass-card"></div>
+      <div class="skeleton-card glass-card"></div>
+    </div>
+    } @else {
+    @if (products.length > 0) {
+    <div class="products-grid">
+      @for (product of products; track product.id) {
+      <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+
+    <!-- Custom Pagination -->
+    @if (totalPages > 1) {
+    <div class="pagination-container">
+      <button class="page-btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
+        aria-label="Previous Page">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+
+      @for (dummy of [].constructor(totalPages); track $index; let idx = $index) {
+      <button class="page-btn" [class.active]="(idx + 1) === currentPage" (click)="onPageChange(idx + 1)">
+        {{ idx + 1 }}
+      </button>
+      }
+
+      <button class="page-btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)"
+        aria-label="Next Page">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+    }
+    } @else {
+    <div class="empty-state glass-card">
+      <i class="fa fa-box-open"></i>
+      <p>No products found matching your criteria.</p>
+    </div>
+    }
+    }
+  </main>
+</div>

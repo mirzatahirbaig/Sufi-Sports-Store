@@ -1,0 +1,59 @@
+<section class="blog-hero">
+  <div class="container">
+    <h1>FIGHTER BLOG & ARTICLES</h1>
+    <p>Get professional advice, workouts, boxing training drills, and elite equipment breakdowns.</p>
+  </div>
+</section>
+
+<div class="blog-container container">
+  @if (isLoading) {
+    <div class="loading-grid">
+      <div class="skeleton-card glass-card"></div>
+      <div class="skeleton-card glass-card"></div>
+      <div class="skeleton-card glass-card"></div>
+    </div>
+  } @else {
+    @if (articles.length > 0) {
+      <div class="articles-grid">
+        @for (article of articles; track article.id) {
+          <app-article-card [article]="article"></app-article-card>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages > 1) {
+        <div class="pagination-container">
+          <button 
+            class="page-btn" 
+            [disabled]="currentPage === 1" 
+            (click)="onPageChange(currentPage - 1)"
+            aria-label="Previous Page">
+            <i class="fa fa-chevron-left"></i>
+          </button>
+
+          @for (dummy of [].constructor(totalPages); track $index; let idx = $index) {
+            <button 
+              class="page-btn" 
+              [class.active]="(idx + 1) === currentPage" 
+              (click)="onPageChange(idx + 1)">
+              {{ idx + 1 }}
+            </button>
+          }
+
+          <button 
+            class="page-btn" 
+            [disabled]="currentPage === totalPages" 
+            (click)="onPageChange(currentPage + 1)"
+            aria-label="Next Page">
+            <i class="fa fa-chevron-right"></i>
+          </button>
+        </div>
+      }
+    } @else {
+      <div class="empty-state glass-card">
+        <i class="fa fa-newspaper"></i>
+        <p>No published articles found.</p>
+      </div>
+    }
+  }
+</div>

@@ -1,0 +1,27 @@
+<div class="product-card-inner glass-card">
+  <div class="product-image-container">
+    <img [src]="resolveImageUrl(product.imageUrls)" [alt]="product.name" class="product-image" />
+    
+    <!-- Status Badges -->
+    @if (product.isFeatured) {
+      <span class="badge featured-badge">Featured</span>
+    }
+    @if (isOutOfStock()) {
+      <span class="badge out-of-stock-badge">Out of Stock</span>
+    }
+  </div>
+
+  <div class="product-info">
+    <span class="product-category">{{ product.category }}</span>
+    <h3 class="product-name">
+      <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+    </h3>
+    
+    <div class="product-footer">
+      <span class="product-price">${{ product.price.toFixed(2) }}</span>
+      <a [routerLink]="['/products', product.id]" class="view-details-btn" aria-label="View product details">
+        <i class="fa fa-arrow-right-long"></i>
+      </a>
+    </div>
+  </div>
+</div>

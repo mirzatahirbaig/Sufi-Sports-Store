@@ -1,0 +1,38 @@
+<div class="article-detail-container container">
+  <div class="back-link">
+    <a routerLink="/blog"><i class="fa fa-arrow-left-long"></i> Back to Blog</a>
+  </div>
+
+  @if (isLoading) {
+    <div class="loader-container glass-card">
+      <i class="fa fa-circle-notch fa-spin loader-icon"></i>
+      <p>Loading article...</p>
+    </div>
+  } @else if (errorMsg) {
+    <div class="error-container glass-card">
+      <i class="fa fa-circle-exclamation error-icon"></i>
+      <p>{{ errorMsg }}</p>
+    </div>
+  } @else if (article) {
+    <article class="article-body-wrapper glass-card">
+      <!-- Article Header -->
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="meta-item"><i class="fa fa-calendar-days"></i> {{ formatDate(article.publishedDate) }}</span>
+          <span class="meta-item"><i class="fa fa-user"></i> By {{ article.author }}</span>
+        </div>
+        <h1 class="article-title">{{ article.title }}</h1>
+      </header>
+
+      <!-- Cover Image -->
+      @if (article.coverImageUrl) {
+        <div class="cover-image-box">
+          <img [src]="resolveImageUrl(article.coverImageUrl)" [alt]="article.title" />
+        </div>
+      }
+
+      <!-- Safe Rich Text Content -->
+      <div class="article-content" [innerHTML]="safeContent"></div>
+    </article>
+  }
+</div>
