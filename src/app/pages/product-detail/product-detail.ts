@@ -1,7 +1,9 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/models';
+import { resolveImageUrl } from '../../utils/image.utils';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,9 +15,11 @@ import { Product } from '../../models/models';
 export class ProductDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly productService = inject(ProductService);
+  private readonly sanitizer = inject(DomSanitizer);
   private readonly cdr = inject(ChangeDetectorRef);
 
   product: Product | null = null;
+  safeDescription: SafeHtml | null = null;
   selectedImage = '';
   isLoading = true;
   errorMsg = '';
@@ -35,6 +39,9 @@ export class ProductDetailComponent implements OnInit {
       next: (response) => {
         if (response.success && response.data) {
           this.product = response.data;
+          this.safeDescription = this.product.description 
+            ? this.sanitizer.bypassSecurityTrustHtml(this.product.description) 
+            : '';
           this.initializeGallery();
         } else {
           this.errorMsg = response.message || 'Product not found';
@@ -50,45 +57,55 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  selectedImageIndex = 0;
+
   private initializeGallery(): void {
     if (this.product && this.product.imageUrls?.length > 0) {
+      this.selectedImageIndex = 0;
       this.selectedImage = this.resolveImageUrl(this.product.imageUrls[0]);
     } else {
+      this.selectedImageIndex = 0;
       this.selectedImage = 'images/product_fallback.jpg';
     }
   }
 
-  resolveImageUrl(url: string): string {
-    if (!url) return 'images/product_fallback.jpg';
-    return url;
+  resolveImageUrl(url: string | undefined): string {
+    return resolveImageUrl(url, 'images/product_fallback.jpg');
   }
 
-  selectImage(url: string): void {
-    this.selectedImage = this.resolveImageUrl(url);
+  selectImageIndex(index: number): void {
+    if (this.product && this.product.imageUrls && index >= 0 && index < this.product.imageUrls.length) {
+      this.selectedImageIndex = index;
+      this.selectedImage = this.resolveImageUrl(this.product.imageUrls[index]);
+    }
+  }
+
+  nextImage(): void {
+    if (this.product && this.product.imageUrls && this.product.imageUrls.length > 1) {
+      const nextIdx = (this.selectedImageIndex + 1) % this.product.imageUrls.length;
+      this.selectImageIndex(nextIdx);
+    }
+  }
+
+  prevImage(): void {
+    if (this.product && this.product.imageUrls && this.product.imageUrls.length > 1) {
+      const prevIdx = (this.selectedImageIndex - 1 + this.product.imageUrls.length) % this.product.imageUrls.length;
+      this.selectImageIndex(prevIdx);
+    }
   }
 
   getSpecs(): { name: string; value: string }[] {
     if (!this.product) return [];
-    if (this.product.category === 'Football') {
-      return [
-        { name: 'Material', value: 'High-grade TPU with foam backing' },
-        { name: 'Size', value: 'Official Size 5' },
-        { name: 'Construction', value: 'Machine Stitched 32 panels' },
-        { name: 'Bladder', value: 'Reinforced rubber bladder for air retention' }
-      ];
-    } else if (this.product.category === 'Cricket') {
-      return [
-        { name: 'Willow Type', value: 'English Willow' },
-        { name: 'Handle Type', value: 'Treble-spring cane handle' },
-        { name: 'Size', value: 'Short Handle (Full Size)' },
-        { name: 'Grip', value: 'Chevron scale dynamic grip' }
-      ];
+
+    if (this.product.specifications && Object.keys(this.product.specifications).length > 0) {
+      return Object.entries(this.product.specifications).map(([name, value]) => ({ name, value }));
     }
+
     return [
       { name: 'Material', value: 'Premium Grade Materials' },
       { name: 'Durability', value: 'Reinforced seams and stitching' },
       { name: 'Origin', value: 'Sialkot, Pakistan' },
-      { name: 'Warranty', value: '1 Year limited warranty' }
+      { name: 'Warranty', value: '1 Year factory guarantee' }
     ];
   }
 }

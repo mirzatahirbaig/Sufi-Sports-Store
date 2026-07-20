@@ -1,37 +1,39 @@
 <div class="article-detail-container container">
   <div class="back-link">
-    <a routerLink="/blog"><i class="fa fa-arrow-left-long"></i> Back to Blog</a>
+    <a routerLink="/blog" class="btn-shopify-outline btn-sm">
+      <i class="fa-solid fa-arrow-left"></i> Back to Fighter Journal
+    </a>
   </div>
 
   @if (isLoading) {
-    <div class="loader-container glass-card">
-      <i class="fa fa-circle-notch fa-spin loader-icon"></i>
-      <p>Loading article...</p>
+    <div class="loader-container shopify-card">
+      <i class="fa-solid fa-circle-notch fa-spin loader-icon text-red"></i>
+      <p>Loading article content...</p>
     </div>
   } @else if (errorMsg) {
-    <div class="error-container glass-card">
-      <i class="fa fa-circle-exclamation error-icon"></i>
+    <div class="error-container shopify-card">
+      <i class="fa-solid fa-circle-exclamation error-icon text-red"></i>
+      <h3>Article Not Found</h3>
       <p>{{ errorMsg }}</p>
+      <a routerLink="/blog" class="btn-shopify-red">Return to Blog</a>
     </div>
   } @else if (article) {
-    <article class="article-body-wrapper glass-card">
-      <!-- Article Header -->
+    <article class="article-body-wrapper shopify-card">
       <header class="article-header">
-        <div class="article-meta">
-          <span class="meta-item"><i class="fa fa-calendar-days"></i> {{ formatDate(article.publishedDate) }}</span>
-          <span class="meta-item"><i class="fa fa-user"></i> By {{ article.author }}</span>
-        </div>
+        <span class="badge-red">FIGHTER JOURNAL</span>
         <h1 class="article-title">{{ article.title }}</h1>
+        <div class="article-meta">
+          <span class="meta-item"><i class="fa-solid fa-calendar-days text-orange"></i> Published {{ formatDate(article.publishedDate) }}</span>
+          <span class="meta-item"><i class="fa-solid fa-user text-orange"></i> Author: {{ article.author || 'Sufi Editorial' }}</span>
+        </div>
       </header>
 
-      <!-- Cover Image -->
       @if (article.coverImageUrl) {
         <div class="cover-image-box">
           <img [src]="resolveImageUrl(article.coverImageUrl)" [alt]="article.title" />
         </div>
       }
 
-      <!-- Safe Rich Text Content -->
       <div class="article-content" [innerHTML]="safeContent"></div>
     </article>
   }

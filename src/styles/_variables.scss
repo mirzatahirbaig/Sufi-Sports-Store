@@ -1,28 +1,53 @@
-// Color Palette
-$color-bg-dark: #0a0c10;
-$color-bg-card: rgba(18, 22, 32, 0.75);
-$color-bg-card-hover: rgba(26, 32, 46, 0.9);
-$color-primary: #ff5722; // Electric Orange
-$color-secondary: #ffb300; // Gold
-$color-accent: #00d2ff; // Cyan Highlight
-$color-text-main: #f3f4f6;
-$color-text-muted: #9ca3af;
-$color-border: rgba(255, 255, 255, 0.08);
-$color-border-hover: rgba(255, 87, 34, 0.3);
+// CSS Custom Property Mappings for Dynamic Global Theme
+:root {
+  --theme-bg-light: #ffffff;
+  --theme-bg-section: #f8f9fa;
+  --theme-bg-card: #ffffff;
+  --theme-bg-dark: #111111;
+
+  --theme-text-main: #111111;
+  --theme-text-muted: #555555;
+  --theme-text-light: #ffffff;
+
+  --theme-primary-red: #e60000;
+  --theme-secondary-orange: #ff6600;
+  --theme-black: #111111;
+  --theme-white: #ffffff;
+
+  --theme-border-light: #e5e7eb;
+}
+
+// SCSS Variable Aliases pointing to CSS Custom Properties
+$color-bg-light: var(--theme-bg-light, #ffffff);
+$color-bg-section: var(--theme-bg-section, #f8f9fa);
+$color-bg-card: var(--theme-bg-card, #ffffff);
+$color-bg-dark: var(--theme-bg-dark, #111111);
+
+$color-text-main: var(--theme-text-main, #111111);
+$color-text-muted: var(--theme-text-muted, #555555);
+$color-text-light: var(--theme-text-light, #ffffff);
+
+$color-primary-red: var(--theme-primary-red, #e60000);
+$color-secondary-orange: var(--theme-secondary-orange, #ff6600);
+$color-black: var(--theme-black, #111111);
+$color-white: var(--theme-white, #ffffff);
+
+$color-border-light: var(--theme-border-light, #e5e7eb);
+$color-border-dark: var(--theme-black, #111111);
+$color-border-accent: var(--theme-primary-red, #e60000);
 
 // Fonts
 $font-family-body: 'Inter', sans-serif;
 $font-family-title: 'Outfit', sans-serif;
 
 // Layout
-$max-width-container: 1200px;
-$navbar-height: 80px;
+$max-width-container: 1240px;
+$navbar-height: 76px;
 
-// Shadows & Blurs
-$blur-glass: blur(12px);
-$shadow-neon-orange: 0 0 15px rgba(255, 87, 34, 0.4);
-$shadow-neon-cyan: 0 0 15px rgba(0, 210, 255, 0.4);
-$shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+// Shadows & Effects
+$shadow-shopify-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+$shadow-shopify-hover: 0 10px 30px rgba(230, 0, 0, 0.12);
+$shadow-shopify-header: 0 2px 12px rgba(0, 0, 0, 0.05);
 
 // Transitions
-$transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+$transition-smooth: all 0.25s ease-in-out;

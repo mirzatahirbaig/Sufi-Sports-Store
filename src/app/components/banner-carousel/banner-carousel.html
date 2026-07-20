@@ -1,40 +1,47 @@
-<div class="carousel-container" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+<div class="carousel-container">
   @for (banner of banners; track banner.id; let idx = $index) {
-  <div class="carousel-slide" [class.active]="idx === currentIndex">
-    <div class="slide-image-wrapper">
-      <img [src]="resolveImageUrl(banner.imageUrl)" alt="Sufi Sports Banner" class="slide-image" />
-      <div class="slide-overlay"></div>
-    </div>
+    <div class="carousel-slide" [class.active]="idx === currentIndex">
+      <div class="slide-image-wrapper">
+        <img [src]="resolveImageUrl(banner.imageUrl)" alt="Sufi Sports Banner" class="slide-image" />
+        <div class="slide-overlay"></div>
+      </div>
 
-    <div class="slide-content">
-      <span class="slide-subtitle">SUFI SPORTS ELITE GEAR</span>
-      <h1 class="slide-title">UNLEASH THE CHAMPION WITHIN</h1>
-      <p class="slide-desc">Step into the ring with professional boxing gloves, protective gear, and premium training
-        apparel engineered for championship performance.</p>
-      <a [routerLink]="banner.targetUrl" class="btn-primary">
-        {{ banner.callToAction || 'Shop Now' }}
-        <i class="fa fa-arrow-right"></i>
-      </a>
+      <div class="container slide-content-wrapper">
+        <div class="slide-content">
+          <span class="slide-tag"><i class="fa-solid fa-bolt"></i> PRO GEAR COLLECTION</span>
+          <h1 class="slide-title">ENGINEERED FOR CHAMPIONS</h1>
+          <p class="slide-desc">
+            Equip yourself with handcrafted boxing gloves, competition protective gear, and fight training equipment built to international match standards.
+          </p>
+          <div class="slide-actions">
+            <a [routerLink]="banner.targetUrl || '/products'" class="btn-shopify-red">
+              {{ banner.callToAction || 'Shop Collection' }}
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a routerLink="/contact" class="btn-shopify-black">
+              Bulk Order Inquiry
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   }
 
-  <!-- Navigation Arrows -->
+  <!-- Navigation Controls -->
   @if (banners.length > 1) {
-  <button class="nav-btn prev" (click)="prevSlide(true)" aria-label="Previous slide">
-    <i class="fa fa-chevron-left"></i>
-  </button>
-  <button class="nav-btn next" (click)="nextSlide(true)" aria-label="Next slide">
-    <i class="fa fa-chevron-right"></i>
-  </button>
-
-  <!-- Indicators/Dots -->
-  <div class="carousel-indicators">
-    @for (banner of banners; track banner.id; let idx = $index) {
-    <button class="indicator-dot" [class.active]="idx === currentIndex" (click)="setSlide(idx)"
-      [aria-label]="'Go to slide ' + (idx + 1)">
+    <button class="nav-btn prev" (click)="prevSlide(true)" aria-label="Previous slide">
+      <i class="fa-solid fa-chevron-left"></i>
     </button>
-    }
-  </div>
+    <button class="nav-btn next" (click)="nextSlide(true)" aria-label="Next slide">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <!-- Slide Indicators -->
+    <div class="carousel-indicators">
+      @for (banner of banners; track banner.id; let idx = $index) {
+        <button class="indicator-dot" [class.active]="idx === currentIndex" (click)="setSlide(idx)" [aria-label]="'Slide ' + (idx + 1)">
+        </button>
+      }
+    </div>
   }
 </div>

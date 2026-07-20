@@ -1,36 +1,36 @@
 <section class="catalog-hero">
-  <div class="container">
-    <h1>EQUIPMENT CATALOG</h1>
-    <p>Discover our range of professional-grade athletic products and fighting gear.</p>
+  <div class="container catalog-hero-content">
+    <span class="hero-tag"><i class="fa-solid fa-store"></i> SUFI STOREFRONT</span>
+    <h1 class="hero-title">EQUIPMENT & GEAR CATALOG</h1>
+    <p class="hero-subtitle">Explore our full line of competition-certified boxing gloves, protective gear, and training equipment.</p>
   </div>
 </section>
 
-<div class="catalog-container container">
-  <!-- Sidebar Filters -->
-  <aside class="catalog-sidebar glass-card">
-    <h3>Categories</h3>
-    <div class="category-list">
-      @for (category of categories; track category) {
-      <button class="category-btn" [class.active]="category === selectedCategory" (click)="setCategory(category)">
-        {{ category }}
-      </button>
+<div class="container catalog-layout">
+  <!-- Horizontal Category Pills Bar (Shopify Storefront Pattern) -->
+  <div class="category-pills-bar">
+    <span class="filter-label"><i class="fa-solid fa-filter"></i> Categories:</span>
+    <div class="pills-scroll">
+      @for (cat of categories; track cat) {
+        <button class="pill-btn" [class.active]="cat === selectedCategory" (click)="setCategory(cat)">
+          {{ cat }}
+        </button>
       }
     </div>
-  </aside>
+  </div>
 
-  <!-- Main Catalog Content -->
-  <main class="catalog-content">
-    <!-- Filter Toolbar -->
-    <div class="filter-toolbar glass-card">
-      <div class="search-box">
-        <i class="fa fa-magnifying-glass search-icon"></i>
-        <input type="text" placeholder="Search products..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()"
-          class="search-input" />
-        <button (click)="onSearch()" class="search-btn">Search</button>
-      </div>
+  <!-- Filter & Search Toolbar -->
+  <div class="toolbar-box shopify-card">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass search-icon text-muted"></i>
+      <input type="text" placeholder="Search equipment by name or keyword..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" class="search-input" />
+      <button (click)="onSearch()" class="btn-shopify-red btn-search">Search</button>
+    </div>
 
+    <div class="toolbar-meta">
+      <span class="results-count">Showing <strong>{{ products.length }}</strong> products</span>
       <div class="sort-box">
-        <label for="sort-select">Sort By:</label>
+        <label for="sort-select"><i class="fa-solid fa-sort"></i> Sort By:</label>
         <select id="sort-select" [(ngModel)]="sortBy" (change)="onSortChange()" class="sort-select">
           <option value="name-asc">Alphabetical (A-Z)</option>
           <option value="price-asc">Price: Low to High</option>
@@ -38,48 +38,51 @@
         </select>
       </div>
     </div>
+  </div>
 
-    <!-- Products Display -->
-    @if (isLoading) {
+  <!-- Products Grid -->
+  @if (isLoading) {
     <div class="loading-grid">
-      <div class="skeleton-card glass-card"></div>
-      <div class="skeleton-card glass-card"></div>
-      <div class="skeleton-card glass-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
     </div>
-    } @else {
+  } @else {
     @if (products.length > 0) {
-    <div class="products-grid">
-      @for (product of products; track product.id) {
-      <app-product-card [product]="product"></app-product-card>
+      <div class="products-grid">
+        @for (product of products; track product.id) {
+          <app-product-card [product]="product"></app-product-card>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages > 1) {
+        <div class="pagination-container">
+          <button class="page-btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          @for (dummy of [].constructor(totalPages); track $index; let idx = $index) {
+            <button class="page-btn" [class.active]="(idx + 1) === currentPage" (click)="onPageChange(idx + 1)">
+              {{ idx + 1 }}
+            </button>
+          }
+
+          <button class="page-btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       }
-    </div>
-
-    <!-- Custom Pagination -->
-    @if (totalPages > 1) {
-    <div class="pagination-container">
-      <button class="page-btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)"
-        aria-label="Previous Page">
-        <i class="fa fa-chevron-left"></i>
-      </button>
-
-      @for (dummy of [].constructor(totalPages); track $index; let idx = $index) {
-      <button class="page-btn" [class.active]="(idx + 1) === currentPage" (click)="onPageChange(idx + 1)">
-        {{ idx + 1 }}
-      </button>
-      }
-
-      <button class="page-btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)"
-        aria-label="Next Page">
-        <i class="fa fa-chevron-right"></i>
-      </button>
-    </div>
-    }
     } @else {
-    <div class="empty-state glass-card">
-      <i class="fa fa-box-open"></i>
-      <p>No products found matching your criteria.</p>
-    </div>
+      <div class="empty-state shopify-card">
+        <i class="fa-solid fa-box-open text-orange"></i>
+        <h3>No Products Found</h3>
+        <p>Try resetting your search term or select another category filter.</p>
+        <button class="btn-shopify-red" (click)="setCategory('All'); searchTerm = ''; onSearch();">
+          Reset Filters
+        </button>
+      </div>
     }
-    }
-  </main>
+  }
 </div>

@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/models';
 import { ProductCardComponent } from '../../components/product-card/product-card';
@@ -13,11 +14,12 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 })
 export class ProductsComponent implements OnInit {
   private readonly productService = inject(ProductService);
+  private readonly route = inject(ActivatedRoute);
   private readonly cdr = inject(ChangeDetectorRef);
 
   products: Product[] = [];
-  categories: string[] = ['Boxing'];
-  selectedCategory = 'Boxing';
+  categories: string[] = ['All', 'Boxing Gloves', 'Hand Wraps', 'Headgear', 'Punching Bags', 'Protective Gear', 'Apparel'];
+  selectedCategory = 'All';
   searchTerm = '';
   sortBy = 'name-asc';
 
@@ -28,29 +30,33 @@ export class ProductsComponent implements OnInit {
   isLoading = true;
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.route.queryParams.subscribe(params => {
+      if (params['category']) {
+        this.selectedCategory = params['category'];
+      }
+      this.loadProducts();
+    });
   }
 
   loadProducts(): void {
     this.isLoading = true;
-
     this.productService.getProducts({
       pageNumber: this.currentPage,
       pageSize: this.pageSize,
       searchTerm: this.searchTerm || undefined,
       isActive: true
     }).subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.products = response.data.items;
-          this.totalPages = response.data.totalPages;
-          this.totalCount = response.data.totalCount;
-          this.sortProductsList();
+      next: (res) => {
+        if (res.success && res.data) {
+          this.products = res.data.items;
+          this.totalPages = res.data.totalPages;
+          this.totalCount = res.data.totalCount;
+          this.filterAndSort();
         }
         this.isLoading = false;
         this.cdr.markForCheck();
       },
-      error: (e) => {
+      error: () => {
         this.isLoading = false;
         this.cdr.markForCheck();
       }
@@ -69,7 +75,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onSortChange(): void {
-    this.sortProductsList();
+    this.filterAndSort();
   }
 
   onPageChange(page: number): void {
@@ -79,13 +85,12 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  private sortProductsList(): void {
-    if (this.sortBy === 'price-asc') {
-      this.products.sort((a, b) => a.price - b.price);
-    } else if (this.sortBy === 'price-desc') {
-      this.products.sort((a, b) => b.price - a.price);
-    } else {
-      this.products.sort((a, b) => a.name.localeCompare(b.name));
+  private filterAndSort(): void {
+    if (this.selectedCategory !== 'All') {
+      this.products = this.products.filter(p => p.category?.toLowerCase() === this.selectedCategory.toLowerCase());
     }
+    if (this.sortBy === 'price-asc') this.products.sort((a, b) => a.price - b.price);
+    else if (this.sortBy === 'price-desc') this.products.sort((a, b) => b.price - a.price);
+    else this.products.sort((a, b) => a.name.localeCompare(b.name));
   }
 }

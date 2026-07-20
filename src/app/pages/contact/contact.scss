@@ -1,28 +1,43 @@
 @import '../../../styles/variables';
 
 .contact-hero {
-  padding: 60px 0;
-  text-align: center;
-  background: linear-gradient(180deg, rgba($color-primary, 0.05) 0%, transparent 100%);
-  margin-bottom: 40px;
+  background-color: $color-black;
+  color: $color-white;
+  padding: 48px 0;
+  border-bottom: 3px solid $color-primary-red;
 
-  h1 {
-    font-size: 2.5rem;
-    color: #fff;
+  .contact-hero-content {
+    text-align: center;
+  }
+
+  .hero-tag {
+    color: $color-secondary-orange;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+    color: $color-white;
     margin-bottom: 8px;
   }
 
-  p {
-    color: $color-text-muted;
+  .hero-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 
 .contact-container {
+  padding: 48px 20px 64px;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 40px;
-  align-items: start;
-  margin-bottom: 80px;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 36px;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
@@ -35,48 +50,38 @@
   gap: 24px;
 }
 
-.info-card, .contact-form-wrapper, .map-card {
-  padding: 40px;
+.info-card {
+  padding: 32px;
+  background-color: $color-white;
 
-  @media (max-width: 576px) {
-    padding: 24px;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-    color: #fff;
+  .card-title {
+    font-size: 1.4rem;
+    color: $color-black;
     margin-bottom: 8px;
   }
 
-  .subtitle {
+  .card-subtitle {
+    font-size: 0.9rem;
     color: $color-text-muted;
-    font-size: 0.95rem;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
-}
-
-.map-card {
-  padding: 12px;
 }
 
 .info-details {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
 
   li {
     display: flex;
-    gap: 16px;
     align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
 
     .icon-box {
       width: 44px;
       height: 44px;
-      border-radius: 8px;
-      background-color: rgba($color-primary, 0.1);
-      border: 1px solid rgba($color-primary, 0.2);
-      color: $color-primary;
+      border-radius: 50%;
+      background-color: rgba(230, 0, 0, 0.08);
+      color: $color-primary-red;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -86,21 +91,42 @@
 
     .info-text {
       h4 {
-        font-size: 1rem;
-        color: #fff;
+        font-size: 0.95rem;
+        color: $color-black;
         margin-bottom: 4px;
       }
 
       p, a {
-        color: $color-text-muted;
         font-size: 0.9rem;
-        line-height: 1.4;
+        color: $color-text-muted;
       }
 
       a:hover {
-        color: $color-primary;
+        color: $color-primary-red;
       }
     }
+  }
+}
+
+.map-card {
+  padding: 12px;
+  background-color: $color-white;
+}
+
+.contact-form-wrapper {
+  padding: 32px;
+  background-color: $color-white;
+
+  .form-title {
+    font-size: 1.4rem;
+    color: $color-black;
+    margin-bottom: 8px;
+  }
+
+  .form-subtitle {
+    font-size: 0.9rem;
+    color: $color-text-muted;
+    margin-bottom: 24px;
   }
 }
 
@@ -113,80 +139,75 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 
   label {
-    color: #fff;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: $color-black;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   input, textarea {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid $color-border;
-    border-radius: 8px;
     padding: 12px 16px;
-    color: #fff;
+    border: 1px solid $color-border-light;
+    border-radius: 6px;
+    background-color: $color-white;
+    color: $color-black;
     font-family: $font-family-body;
     font-size: 0.95rem;
-    outline: none;
     transition: $transition-smooth;
 
     &:focus {
-      border-color: $color-primary;
-      box-shadow: 0 0 8px rgba($color-primary, 0.2);
-      background-color: rgba(255, 255, 255, 0.04);
+      outline: none;
+      border-color: $color-primary-red;
+      box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
     }
 
     &.invalid {
-      border-color: #ef5350;
-      box-shadow: 0 0 8px rgba(239, 83, 80, 0.2);
+      border-color: $color-primary-red;
+      background-color: rgba(230, 0, 0, 0.02);
     }
   }
-}
 
-.field-error {
-  color: #ef5350;
-  font-size: 0.8rem;
-  font-weight: 500;
+  .field-error {
+    font-size: 0.8rem;
+    color: $color-primary-red;
+    font-weight: 600;
+  }
 }
 
 .submit-btn {
-  align-self: flex-start;
-  min-width: 180px;
-
-  @media (max-width: 576px) {
-    width: 100%;
-  }
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  margin-top: 8px;
 }
 
 .feedback-banner {
   display: flex;
-  gap: 16px;
-  padding: 16px 20px;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
   border-radius: 8px;
   margin-bottom: 24px;
-  font-size: 0.9rem;
-  line-height: 1.4;
 
-  i {
-    font-size: 1.5rem;
-    margin-top: 2px;
-  }
-
-  h4 {
-    margin-bottom: 2px;
-  }
+  i { font-size: 1.4rem; }
+  h4 { font-size: 0.95rem; margin-bottom: 2px; }
+  p { font-size: 0.85rem; }
 
   &.success-banner {
-    background-color: rgba(102, 187, 106, 0.1);
-    border: 1px solid rgba(102, 187, 106, 0.2);
-    color: #66bb6a;
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid #10b981;
+    color: #065f46;
+    i { color: #10b981; }
   }
 
   &.error-banner {
-    background-color: rgba(239, 83, 80, 0.1);
-    border: 1px solid rgba(239, 83, 80, 0.2);
-    color: #ef5350;
+    background-color: rgba(230, 0, 0, 0.1);
+    border: 1px solid $color-primary-red;
+    color: #991b1b;
+    i { color: $color-primary-red; }
   }
 }

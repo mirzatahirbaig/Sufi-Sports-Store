@@ -24,6 +24,7 @@ export interface Product {
   isFeatured: boolean;
   isActive: boolean;
   imageUrls: string[];
+  specifications?: Record<string, string>;
 }
 
 export interface Banner {

@@ -1,24 +1,29 @@
-<div class="article-card-inner glass-card">
-  <div class="article-image-container">
-    <img [src]="resolveImageUrl(article.coverImageUrl)" [alt]="article.title" class="article-image" />
+<div class="shopify-article-card shopify-card">
+  <div class="article-image-box">
+    <a [routerLink]="['/blog', article.slug]">
+      <img [src]="resolveImageUrl(article.coverImageUrl)" [alt]="article.title" class="article-image" />
+    </a>
+    <span class="badge-red article-tag">JOURNAL</span>
   </div>
 
-  <div class="article-info">
+  <div class="article-details">
     <div class="article-meta">
-      <span class="meta-item"><i class="fa fa-calendar-days"></i> {{ formatDate(article.publishedDate) }}</span>
-      <span class="meta-item"><i class="fa fa-user"></i> {{ article.author }}</span>
+      <span class="meta-item"><i class="fa-solid fa-calendar-days text-orange"></i> {{ formatDate(article.publishedDate) }}</span>
+      <span class="meta-item"><i class="fa-solid fa-user text-orange"></i> {{ article.author || 'Sufi Editorial' }}</span>
     </div>
-    
+
     <h3 class="article-title">
       <a [routerLink]="['/blog', article.slug]">{{ article.title }}</a>
     </h3>
-    
+
     <p class="article-snippet">
       {{ getSnippet(article.content) }}
     </p>
-    
-    <a [routerLink]="['/blog', article.slug]" class="read-more-link">
-      Read More <i class="fa fa-arrow-right"></i>
-    </a>
+
+    <div class="article-card-footer">
+      <a [routerLink]="['/blog', article.slug]" class="btn-shopify-outline btn-read-more">
+        Read Article <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
   </div>
 </div>

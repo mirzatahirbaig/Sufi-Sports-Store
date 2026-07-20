@@ -1,35 +1,85 @@
 @import '../../../styles/variables';
 
+.newsletter-strip {
+  background-color: #1a1a1a;
+  color: $color-white;
+  padding: 32px 0;
+  border-top: 3px solid $color-primary-red;
+
+  .newsletter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .newsletter-tag {
+    color: $color-secondary-orange;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .newsletter-title {
+    font-size: 1.3rem;
+    color: $color-white;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 8px;
+    flex-grow: 1;
+    max-width: 500px;
+
+    .newsletter-input {
+      flex-grow: 1;
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      background-color: $color-black;
+      color: $color-white;
+      font-size: 0.95rem;
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary-red;
+      }
+    }
+  }
+}
+
 .footer-wrapper {
-  background-color: #0b0e14;
-  border-top: 1px solid $color-border;
-  padding: 60px 0 0;
-  margin-top: 80px;
+  background-color: $color-black;
+  color: $color-white;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-container {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
-  gap: 48px;
-  max-width: $max-width-container;
-  margin: 0 auto;
-  padding: 0 24px 48px;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 36px;
+  padding-bottom: 48px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
-    gap: 32px;
   }
 }
 
-.footer-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  h3 {
-    color: #fff;
+.footer-col {
+  .col-title {
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: $color-white;
+    text-transform: uppercase;
+    margin-bottom: 20px;
     position: relative;
     padding-bottom: 8px;
 
@@ -38,118 +88,139 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 40px;
+      width: 30px;
       height: 2px;
-      background-color: $color-primary;
+      background-color: $color-primary-red;
     }
-  }
-
-  ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
   }
 }
 
-.brand-section {
+.brand-col {
   .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: $font-family-title;
     font-size: 1.5rem;
     font-weight: 800;
-    display: flex;
-    gap: 2px;
+    margin-bottom: 16px;
+    text-decoration: none;
 
-    .brand-text { color: #fff; }
-    .brand-accent { color: $color-primary; }
+    .brand-badge {
+      background-color: $color-primary-red;
+      color: $color-white;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .brand-text { color: $color-white; }
+    .brand-accent { color: $color-primary-red; }
   }
 
   .brand-desc {
-    color: $color-text-muted;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
     line-height: 1.6;
+    margin-bottom: 20px;
   }
-}
 
-.social-links {
-  display: flex;
-  gap: 12px;
-
-  a {
+  .social-links {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid $color-border;
-    color: $color-text-muted;
-    font-size: 0.9rem;
+    gap: 12px;
 
-    &:hover {
-      background-color: $color-primary;
-      color: #fff;
-      border-color: $color-primary;
-      box-shadow: $shadow-neon-orange;
-      transform: translateY(-2px);
+    a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: $color-white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: $transition-smooth;
+
+      &:hover {
+        background-color: $color-primary-red;
+        color: $color-white;
+      }
     }
   }
 }
 
-.links-section a {
-  color: $color-text-muted;
-  font-size: 0.9rem;
-  
-  &:hover {
-    color: $color-primary;
-    padding-left: 4px;
+.footer-links {
+  list-style: none;
+
+  li {
+    margin-bottom: 10px;
+
+    a {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.9rem;
+      transition: $transition-smooth;
+
+      &:hover {
+        color: $color-secondary-orange;
+        padding-left: 4px;
+      }
+    }
   }
 }
 
-.contact-section {
+.contact-info-list {
+  list-style: none;
+
   li {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    color: $color-text-muted;
+    margin-bottom: 14px;
+    color: rgba(255, 255, 255, 0.75);
     font-size: 0.9rem;
-    line-height: 1.4;
 
-    i {
-      color: $color-primary;
-      margin-top: 3px;
-      width: 16px;
-      text-align: center;
+    .text-red {
+      color: $color-primary-red;
+      font-size: 1rem;
+      margin-top: 2px;
     }
 
-    a:hover {
-      color: $color-primary;
+    a {
+      color: rgba(255, 255, 255, 0.75);
+      &:hover {
+        color: $color-secondary-orange;
+      }
     }
   }
 }
 
 .footer-bottom {
-  border-top: 1px solid $color-border;
-  background-color: #080a0e;
-  padding: 24px 0;
-}
-
-.footer-bottom-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #555c68;
+  background-color: #080808;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 0;
   font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
 
-  @media (max-width: 576px) {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
+  .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  .designer-credit {
-    font-weight: 500;
-    color: rgba($color-primary, 0.6);
+  .trust-icons {
+    display: flex;
+    gap: 16px;
+
+    .trust-badge {
+      color: $color-secondary-orange;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
   }
 }

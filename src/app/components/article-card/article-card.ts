@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Article } from '../../models/models';
+import { resolveImageUrl } from '../../utils/image.utils';
 
 @Component({
   selector: 'app-article-card',
@@ -12,11 +13,8 @@ import { Article } from '../../models/models';
 export class ArticleCardComponent {
   @Input({ required: true }) article!: Article;
 
-  resolveImageUrl(url: string): string {
-    if (!url) {
-      return 'images/blog_fallback.jpg';
-    }
-    return url;
+  resolveImageUrl(url: string | undefined): string {
+    return resolveImageUrl(url, 'images/blog_fallback.jpg');
   }
 
   formatDate(dateString: string): string {

@@ -1,30 +1,78 @@
+<!-- Top Announcement Bar (Shopify Style) -->
+<div class="announcement-bar">
+  <div class="container announcement-container">
+    <span class="announcement-text">
+      <i class="fa-solid fa-phone text-orange"></i>
+      <a [href]="'tel:' + (contactInfo?.phone || '+92521234567')" class="text-white" style="text-decoration: none;">
+        <strong>{{ contactInfo?.phone || '+92 52 1234567' }}</strong>
+      </a>
+      &bull; {{ contactInfo?.address || 'Industrial Area, Sialkot, Pakistan' }}
+    </span>
+    <div class="announcement-right">
+      <!-- Global Theme Preset Swatches -->
+      <div class="theme-swatches" title="Global Accent Theme Presets">
+        <span class="swatch-label">Theme Accent:</span>
+        <button (click)="setGlobalPrimaryColor('#e60000')" class="swatch-btn dot-red" aria-label="Red Theme"></button>
+        <button (click)="setGlobalPrimaryColor('#ff6600')" class="swatch-btn dot-orange" aria-label="Orange Theme"></button>
+        <button (click)="setGlobalPrimaryColor('#2563eb')" class="swatch-btn dot-blue" aria-label="Blue Theme"></button>
+        <button (click)="setGlobalPrimaryColor('#059669')" class="swatch-btn dot-emerald" aria-label="Emerald Theme"></button>
+      </div>
+
+      <div class="announcement-links">
+        <a routerLink="/contact" class="announcement-link">
+          <i class="fa-solid fa-headset"></i> Order Inquiry
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navbar -->
 <nav class="navbar-wrapper">
-  <div class="navbar-container">
+  <div class="container navbar-container">
+    <!-- Brand Logo -->
     <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
+      <span class="brand-badge"><i class="fa-solid fa-shield-halved"></i></span>
       <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
     </a>
 
     <!-- Desktop Navigation Links -->
     <div class="navbar-links">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/products" routerLinkActive="active">Shop Products</a>
       <a routerLink="/blog" routerLinkActive="active">Blog</a>
       <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
     </div>
 
-    <!-- Mobile Menu Toggle Button -->
-    <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation">
-      <i class="fa" [class.fa-bars]="!isMobileMenuOpen" [class.fa-xmark]="isMobileMenuOpen"></i>
-    </button>
+    <!-- Right Actions -->
+    <div class="navbar-actions">
+      <a routerLink="/products" class="action-icon" title="Search Equipment" aria-label="Search Equipment">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </a>
+      <a routerLink="/contact" class="btn-shopify-red btn-header-cta">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>Enquire</span>
+      </a>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation">
+        <i class="fa-solid" [class.fa-bars]="!isMobileMenuOpen" [class.fa-xmark]="isMobileMenuOpen"></i>
+      </button>
+    </div>
   </div>
 
   <!-- Mobile Navigation Menu -->
   @if (isMobileMenuOpen) {
     <div class="mobile-menu">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
-      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Products</a>
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Shop Products</a>
       <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Blog</a>
       <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+      <div class="mobile-menu-footer">
+        <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
+          <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
+        </a>
+      </div>
     </div>
   }
 </nav>

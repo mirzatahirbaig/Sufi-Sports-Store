@@ -1,16 +1,17 @@
 <section class="blog-hero">
-  <div class="container">
-    <h1>FIGHTER BLOG & ARTICLES</h1>
-    <p>Get professional advice, workouts, boxing training drills, and elite equipment breakdowns.</p>
+  <div class="container blog-hero-content">
+    <span class="hero-tag"><i class="fa-solid fa-newspaper"></i> FIGHTER JOURNAL</span>
+    <h1 class="hero-title">TRAINING & GEAR ARTICLES</h1>
+    <p class="hero-subtitle">Insights, gear maintenance, technical glove selection guides, and sports performance analysis.</p>
   </div>
 </section>
 
 <div class="blog-container container">
   @if (isLoading) {
     <div class="loading-grid">
-      <div class="skeleton-card glass-card"></div>
-      <div class="skeleton-card glass-card"></div>
-      <div class="skeleton-card glass-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
     </div>
   } @else {
     @if (articles.length > 0) {
@@ -23,36 +24,26 @@
       <!-- Pagination -->
       @if (totalPages > 1) {
         <div class="pagination-container">
-          <button 
-            class="page-btn" 
-            [disabled]="currentPage === 1" 
-            (click)="onPageChange(currentPage - 1)"
-            aria-label="Previous Page">
-            <i class="fa fa-chevron-left"></i>
+          <button class="page-btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+            <i class="fa-solid fa-chevron-left"></i>
           </button>
 
           @for (dummy of [].constructor(totalPages); track $index; let idx = $index) {
-            <button 
-              class="page-btn" 
-              [class.active]="(idx + 1) === currentPage" 
-              (click)="onPageChange(idx + 1)">
+            <button class="page-btn" [class.active]="(idx + 1) === currentPage" (click)="onPageChange(idx + 1)">
               {{ idx + 1 }}
             </button>
           }
 
-          <button 
-            class="page-btn" 
-            [disabled]="currentPage === totalPages" 
-            (click)="onPageChange(currentPage + 1)"
-            aria-label="Next Page">
-            <i class="fa fa-chevron-right"></i>
+          <button class="page-btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+            <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
       }
     } @else {
-      <div class="empty-state glass-card">
-        <i class="fa fa-newspaper"></i>
-        <p>No published articles found.</p>
+      <div class="empty-state shopify-card">
+        <i class="fa-solid fa-newspaper text-orange"></i>
+        <h3>No Articles Published</h3>
+        <p>Check back soon for latest boxing equipment news and training guides.</p>
       </div>
     }
   }

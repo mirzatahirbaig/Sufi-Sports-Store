@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { BlogService } from '../../services/blog.service';
 import { Article } from '../../models/models';
+import { resolveImageUrl } from '../../utils/image.utils';
 
 @Component({
   selector: 'app-blog-detail',
@@ -53,8 +54,7 @@ export class BlogDetailComponent implements OnInit {
   }
 
   resolveImageUrl(url: string | undefined): string {
-    if (!url) return 'images/blog_fallback.jpg';
-    return url;
+    return resolveImageUrl(url, 'images/blog_fallback.jpg');
   }
 
   formatDate(dateString: string | undefined): string {

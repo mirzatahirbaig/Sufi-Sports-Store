@@ -1,21 +1,98 @@
 <!-- Hero Banner Carousel -->
 <app-banner-carousel></app-banner-carousel>
 
+<!-- Shop By Category Section (Shopify Storefront Pattern) -->
+<section class="section categories-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag-red"><i class="fa-solid fa-layer-group"></i> SHOP BY COLLECTION</span>
+      <h2 class="section-title">Explore Athletic Categories</h2>
+      <p class="section-subtitle">Find high-performance boxing equipment built for serious fighters and academies.</p>
+    </div>
+
+    <div class="categories-grid">
+      <a routerLink="/products" [queryParams]="{category: 'Boxing Gloves'}" class="category-tile shopify-card">
+        <div class="category-icon-box">
+          <i class="fa-solid fa-hand-fist"></i>
+        </div>
+        <div class="category-info">
+          <h3>Boxing Gloves</h3>
+          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a routerLink="/products" [queryParams]="{category: 'Hand Wraps'}" class="category-tile shopify-card">
+        <div class="category-icon-box">
+          <i class="fa-solid fa-bandage"></i>
+        </div>
+        <div class="category-info">
+          <h3>Hand Wraps</h3>
+          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a routerLink="/products" [queryParams]="{category: 'Headgear'}" class="category-tile shopify-card">
+        <div class="category-icon-box">
+          <i class="fa-solid fa-helmet-safety"></i>
+        </div>
+        <div class="category-info">
+          <h3>Headgear</h3>
+          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a routerLink="/products" [queryParams]="{category: 'Punching Bags'}" class="category-tile shopify-card">
+        <div class="category-icon-box">
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+        <div class="category-info">
+          <h3>Punching Bags</h3>
+          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a routerLink="/products" [queryParams]="{category: 'Protective Gear'}" class="category-tile shopify-card">
+        <div class="category-icon-box">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div class="category-info">
+          <h3>Protective Gear</h3>
+          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a routerLink="/products" [queryParams]="{category: 'Apparel'}" class="category-tile shopify-card">
+        <div class="category-icon-box">
+          <i class="fa-solid fa-shirt"></i>
+        </div>
+        <div class="category-info">
+          <h3>Fight Apparel</h3>
+          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- Featured Products Section -->
 <section class="section featured-products-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Curated Gear</span>
-      <h2 class="section-title">Featured Equipment</h2>
-      <p class="section-subtitle">Gear up with our top-performing equipment selected for professional training and match play.</p>
+    <div class="section-header flex-header">
+      <div>
+        <span class="section-tag-red"><i class="fa-solid fa-fire"></i> TOP PICK EQUIPMENT</span>
+        <h2 class="section-title">Featured Pro Products</h2>
+      </div>
+      <a routerLink="/products" class="btn-shopify-outline hidden-mobile">
+        Shop All Gear <i class="fa-solid fa-arrow-right"></i>
+      </a>
     </div>
 
     @if (isLoadingProducts) {
       <div class="loading-grid">
-        <div class="skeleton-card glass-card"></div>
-        <div class="skeleton-card glass-card"></div>
-        <div class="skeleton-card glass-card"></div>
-        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card shopify-card"></div>
+        <div class="skeleton-card shopify-card"></div>
+        <div class="skeleton-card shopify-card"></div>
+        <div class="skeleton-card shopify-card"></div>
       </div>
     } @else {
       @if (featuredProducts.length > 0) {
@@ -25,46 +102,50 @@
           }
         </div>
       } @else {
-        <div class="empty-state glass-card">
-          <i class="fa fa-box-open"></i>
-          <p>No featured products found.</p>
+        <div class="empty-state shopify-card">
+          <i class="fa-solid fa-box-open text-orange"></i>
+          <p>No featured products found right now.</p>
         </div>
       }
     }
 
-    <div class="section-cta">
-      <a routerLink="/products" class="btn-primary">
-        View All Equipment
-        <i class="fa fa-store"></i>
+    <div class="section-cta text-center mobile-only-cta">
+      <a routerLink="/products" class="btn-shopify-red">
+        View Full Shop Collection
+        <i class="fa-solid fa-store"></i>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Promotional / Highlights Section -->
+<!-- Brand Trust & Craftsmanship Bar -->
 <section class="promo-section">
-  <div class="promo-overlay"></div>
-  <div class="container promo-content">
-    <span class="promo-tag">Sialkot Craftsmanship</span>
-    <h2 class="promo-title">HANDCRAFTED. BATTLE TESTED.</h2>
-    <p class="promo-desc">
-      Each product is designed and built to withstand intense athletic use. From the selection of premium materials to the final stitching, we maintain the highest standards of sports engineering.
-    </p>
-    <div class="highlights-grid">
-      <div class="highlight-item">
-        <i class="fa fa-shield-halved"></i>
+  <div class="container promo-container">
+    <div class="promo-text-col">
+      <span class="promo-tag"><i class="fa-solid fa-award"></i> SIALKOT CRAFTSMANSHIP</span>
+      <h2 class="promo-title">HANDCRAFTED. BATTLE TESTED.</h2>
+      <p class="promo-desc">
+        Direct from our manufacturing facility in Sialkot, every product is engineered using genuine full-grain leather, multi-layered padding systems, and reinforced double stitching.
+      </p>
+    </div>
+
+    <div class="trust-cards-grid">
+      <div class="trust-card shopify-card">
+        <i class="fa-solid fa-shield-halved trust-icon"></i>
         <h4>Elite Protection</h4>
-        <p>Advanced high-density padding systems designed to absorb shock and protect joints.</p>
+        <p>Shock-absorbing multi-layer foam padding designed to guard joints and hands.</p>
       </div>
-      <div class="highlight-item">
-        <i class="fa fa-award"></i>
+
+      <div class="trust-card shopify-card">
+        <i class="fa-solid fa-award trust-icon"></i>
         <h4>Match Certified</h4>
-        <p>Equipment crafted according to international match specifications and tournament standards.</p>
+        <p>Built according to international boxing regulation standards and specs.</p>
       </div>
-      <div class="highlight-item">
-        <i class="fa fa-circle-check"></i>
-        <h4>100% Quality</h4>
-        <p>Thoroughly inspected for durability, fit, and performance before leaving the factory.</p>
+
+      <div class="trust-card shopify-card">
+        <i class="fa-solid fa-circle-check trust-icon"></i>
+        <h4>Manufacturer Direct</h4>
+        <p>No middleman markup — premium gear direct from factory to your academy.</p>
       </div>
     </div>
   </div>
@@ -73,17 +154,17 @@
 <!-- Latest Articles Section -->
 <section class="section news-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Fighter Feed</span>
-      <h2 class="section-title">Latest Articles</h2>
-      <p class="section-subtitle">Insights, training guidelines, and expert gear advice to help raise your game.</p>
+    <div class="section-header text-center">
+      <span class="section-tag-red"><i class="fa-solid fa-newspaper"></i> FIGHTER JOURNAL</span>
+      <h2 class="section-title">Latest Articles & Gear Insights</h2>
+      <p class="section-subtitle">Read expert training guides, equipment maintenance tips, and fighter stories.</p>
     </div>
 
     @if (isLoadingArticles) {
       <div class="loading-grid-3">
-        <div class="skeleton-card glass-card"></div>
-        <div class="skeleton-card glass-card"></div>
-        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card shopify-card"></div>
+        <div class="skeleton-card shopify-card"></div>
+        <div class="skeleton-card shopify-card"></div>
       </div>
     } @else {
       @if (recentArticles.length > 0) {
@@ -93,17 +174,17 @@
           }
         </div>
       } @else {
-        <div class="empty-state glass-card">
-          <i class="fa fa-newspaper"></i>
-          <p>No recent articles found.</p>
+        <div class="empty-state shopify-card">
+          <i class="fa-solid fa-newspaper text-orange"></i>
+          <p>No articles published yet.</p>
         </div>
       }
     }
 
-    <div class="section-cta">
-      <a routerLink="/blog" class="btn-primary">
-        Read More Articles
-        <i class="fa fa-book-open"></i>
+    <div class="section-cta text-center">
+      <a routerLink="/blog" class="btn-shopify-black">
+        Read All Journal Articles
+        <i class="fa-solid fa-book-open"></i>
       </a>
     </div>
   </div>

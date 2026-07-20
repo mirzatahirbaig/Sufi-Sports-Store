@@ -1,26 +1,54 @@
-<div class="product-card-inner glass-card">
-  <div class="product-image-container">
-    <img [src]="resolveImageUrl(product.imageUrls)" [alt]="product.name" class="product-image" />
-    
-    <!-- Status Badges -->
-    @if (product.isFeatured) {
-      <span class="badge featured-badge">Featured</span>
-    }
-    @if (isOutOfStock()) {
-      <span class="badge out-of-stock-badge">Out of Stock</span>
-    }
+<div class="shopify-product-card shopify-card">
+  <div class="product-image-box">
+    <a [routerLink]="['/products', product.id]">
+      <img [src]="resolveImageUrl(product.imageUrls)" [alt]="product.name" class="product-image" />
+    </a>
+
+    <!-- Badges Overlay -->
+    <div class="product-badges">
+      @if (product.isFeatured) {
+        <span class="badge-red">FEATURED</span>
+      }
+      @if (isOutOfStock()) {
+        <span class="badge-black">OUT OF STOCK</span>
+      } @else {
+        <span class="badge-orange">IN STOCK</span>
+      }
+    </div>
+
+    <!-- Quick Hover Overlay Action -->
+    <div class="quick-action-overlay">
+      <a [routerLink]="['/products', product.id]" class="btn-shopify-black btn-sm">
+        <i class="fa-solid fa-eye"></i> Quick View
+      </a>
+    </div>
   </div>
 
-  <div class="product-info">
-    <span class="product-category">{{ product.category }}</span>
-    <h3 class="product-name">
+  <div class="product-details">
+    <div class="product-meta">
+      <span class="product-category">{{ product.category || 'Boxing Gear' }}</span>
+      <div class="product-rating">
+        <i class="fa-solid fa-star text-orange"></i>
+        <i class="fa-solid fa-star text-orange"></i>
+        <i class="fa-solid fa-star text-orange"></i>
+        <i class="fa-solid fa-star text-orange"></i>
+        <i class="fa-solid fa-star text-orange"></i>
+      </div>
+    </div>
+
+    <h3 class="product-title">
       <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
     </h3>
-    
-    <div class="product-footer">
-      <span class="product-price">${{ product.price.toFixed(2) }}</span>
-      <a [routerLink]="['/products', product.id]" class="view-details-btn" aria-label="View product details">
-        <i class="fa fa-arrow-right-long"></i>
+
+    <div class="product-card-footer">
+      <div class="price-box">
+        <span class="price-label">Price</span>
+        <span class="price-value">${{ product.price.toFixed(2) }}</span>
+      </div>
+
+      <a [routerLink]="['/products', product.id]" class="btn-shopify-red btn-card-action">
+        <span>Enquire</span>
+        <i class="fa-solid fa-arrow-right"></i>
       </a>
     </div>
   </div>

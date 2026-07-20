@@ -1,4 +1,4 @@
-@import 'styles/variables';
+@import './styles/variables';
 
 * {
   box-sizing: border-box;
@@ -7,17 +7,19 @@
 }
 
 body {
-  background-color: $color-bg-dark;
+  background-color: $color-bg-light;
   color: $color-text-main;
   font-family: $font-family-body;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-title;
   font-weight: 700;
+  color: $color-text-main;
   letter-spacing: -0.02em;
 }
 
@@ -31,75 +33,149 @@ a {
   width: 100%;
   max-width: $max-width-container;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
-.glass-card {
+// Shopify Card Baseline
+.shopify-card {
   background: $color-bg-card;
-  backdrop-filter: $blur-glass;
-  -webkit-backdrop-filter: $blur-glass;
-  border: 1px solid $color-border;
-  border-radius: 16px;
-  box-shadow: $shadow-card;
+  border: 1px solid $color-border-light;
+  border-radius: 12px;
+  box-shadow: $shadow-shopify-card;
   transition: $transition-smooth;
   
   &:hover {
-    border-color: $color-border-hover;
-    box-shadow: $shadow-neon-orange;
+    border-color: rgba(230, 0, 0, 0.4);
+    box-shadow: $shadow-shopify-hover;
   }
 }
 
-.btn-primary {
+// Button Styles (4-Color Baseline)
+.btn-shopify-red {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, $color-primary, #e64a19);
-  color: #fff;
+  background-color: $color-primary-red;
+  color: $color-white;
   font-family: $font-family-title;
   font-weight: 600;
-  padding: 12px 28px;
+  font-size: 0.95rem;
+  padding: 12px 24px;
   border: none;
-  border-radius: 30px;
+  border-radius: 6px;
   cursor: pointer;
   transition: $transition-smooth;
-  box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
   gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 
   &:hover {
+    background-color: $color-secondary-orange;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5), $shadow-neon-orange;
+    box-shadow: 0 6px 16px rgba(255, 102, 0, 0.3);
   }
   
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
     transform: none !important;
     box-shadow: none !important;
   }
 }
 
-.glow-text {
-  background: linear-gradient(135deg, #fff, #9ca3af);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  
-  &.orange {
-    background: linear-gradient(135deg, $color-primary, $color-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.btn-shopify-black {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-black;
+  color: $color-white;
+  font-family: $font-family-title;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border: 1px solid $color-black;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: $transition-smooth;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &:hover {
+    background-color: $color-primary-red;
+    border-color: $color-primary-red;
+    transform: translateY(-2px);
   }
 }
 
+.btn-shopify-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: $color-text-main;
+  font-family: $font-family-title;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 11px 22px;
+  border: 1px solid $color-black;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: $transition-smooth;
+  gap: 8px;
+
+  &:hover {
+    border-color: $color-primary-red;
+    color: $color-primary-red;
+    background-color: rgba(230, 0, 0, 0.04);
+  }
+}
+
+// Badges
+.badge-red {
+  background-color: $color-primary-red;
+  color: $color-white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-orange {
+  background-color: $color-secondary-orange;
+  color: $color-white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-black {
+  background-color: $color-black;
+  color: $color-white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Scrollbars
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: $color-bg-dark;
+  background: $color-bg-light;
 }
 ::-webkit-scrollbar-thumb {
-  background: #232a36;
+  background: #cccccc;
   border-radius: 4px;
   &:hover {
-    background: $color-primary;
+    background: $color-primary-red;
   }
 }

@@ -1,65 +1,101 @@
+<!-- Newsletter Signup Strip (Shopify Style) -->
+<div class="newsletter-strip">
+  <div class="container newsletter-container">
+    <div class="newsletter-info">
+      <span class="newsletter-tag"><i class="fa-solid fa-envelope-open-text"></i> JOIN THE SUFI TEAM</span>
+      <h3 class="newsletter-title">Subscribe for Exclusive Gear Updates & Bulk Discounts</h3>
+    </div>
+    <form class="newsletter-form" (submit)="$event.preventDefault()">
+      <input type="email" placeholder="Enter your email address..." class="newsletter-input" required />
+      <button type="submit" class="btn-shopify-red">Subscribe</button>
+    </form>
+  </div>
+</div>
+
 <footer class="footer-wrapper">
-  <div class="footer-container">
-    <!-- Brand & Description Section -->
-    <div class="footer-section brand-section">
+  <div class="container footer-container">
+    <!-- Column 1: Brand Info -->
+    <div class="footer-col brand-col">
       <a routerLink="/" class="footer-brand">
+        <span class="brand-badge"><i class="fa-solid fa-shield-halved"></i></span>
         <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
       </a>
       <p class="brand-desc">
-        Crafting premium boxing gear and athletic equipment for fighters who demand the best. Train like a pro, fight with passion.
+        Sialkot's premier manufacturer of high-performance boxing gloves, headgear, hand wraps, and competition training equipment.
       </p>
       <div class="social-links">
         <a [href]="contactInfo?.facebookUrl || 'https://facebook.com'" target="_blank" aria-label="Facebook">
-          <i class="fab fa-facebook-f"></i>
+          <i class="fa-brands fa-facebook-f"></i>
         </a>
         <a [href]="contactInfo?.instagramUrl || 'https://instagram.com'" target="_blank" aria-label="Instagram">
-          <i class="fab fa-instagram"></i>
+          <i class="fa-brands fa-instagram"></i>
         </a>
         <a [href]="contactInfo?.twitterUrl || 'https://twitter.com'" target="_blank" aria-label="Twitter">
-          <i class="fab fa-x-twitter"></i>
+          <i class="fa-brands fa-x-twitter"></i>
         </a>
       </div>
     </div>
 
-    <!-- Quick Navigation Section -->
-    <div class="footer-section links-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/products">Products</a></li>
-        <li><a routerLink="/blog">Blog</a></li>
-        <li><a routerLink="/contact">Contact Us</a></li>
+    <!-- Column 2: Equipment Categories -->
+    <div class="footer-col">
+      <h4 class="col-title">Shop Gear</h4>
+      <ul class="footer-links">
+        <li><a routerLink="/products" [queryParams]="{category: 'Boxing Gloves'}">Boxing Gloves</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Hand Wraps'}">Hand Wraps & Gauze</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Headgear'}">Headgear & Guards</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Punching Bags'}">Punching Bags</a></li>
+        <li><a routerLink="/products" [queryParams]="{category: 'Protective Gear'}">Protective Gear</a></li>
       </ul>
     </div>
 
-    <!-- Dynamic Contact Info Section -->
-    <div class="footer-section contact-section">
-      <h3>Get In Touch</h3>
-      <ul>
-        <li>
-          <i class="fa fa-location-dot"></i>
-          <span>{{ contactInfo?.address || '123 Sufi Sports Way, Sialkot, Pakistan' }}</span>
-        </li>
-        <li>
-          <i class="fa fa-phone"></i>
-          <a [href]="'tel:' + (contactInfo?.phone || '+92521234567')">
-            {{ contactInfo?.phone || '+92 52 1234567' }}
-          </a>
-        </li>
-        <li>
-          <i class="fa fa-envelope"></i>
-          <a [href]="'mailto:' + (contactInfo?.email || 'info@sufisports.com')">
-            {{ contactInfo?.email || 'info@sufisports.com' }}
-          </a>
-        </li>
+    <!-- Column 3: Navigation & Support -->
+    <div class="footer-col">
+      <h4 class="col-title">Navigation</h4>
+      <ul class="footer-links">
+        <li><a routerLink="/">Home Page</a></li>
+        <li><a routerLink="/products">All Products</a></li>
+        <li><a routerLink="/blog">Fighter Journal</a></li>
+        <li><a routerLink="/contact">Contact & Orders</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Factory Contact -->
+    <div class="footer-col">
+      <h4 class="col-title">Factory Direct</h4>
+      <ul class="contact-info-list">
+        @if (contactInfo?.address) {
+          <li>
+            <i class="fa-solid fa-location-dot text-red"></i>
+            <span>{{ contactInfo?.address }}</span>
+          </li>
+        }
+        @if (contactInfo?.phone) {
+          <li>
+            <i class="fa-solid fa-phone text-red"></i>
+            <a [href]="'tel:' + contactInfo?.phone">
+              {{ contactInfo?.phone }}
+            </a>
+          </li>
+        }
+        @if (contactInfo?.email) {
+          <li>
+            <i class="fa-solid fa-envelope text-red"></i>
+            <a [href]="'mailto:' + contactInfo?.email">
+              {{ contactInfo?.email }}
+            </a>
+          </li>
+        }
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
     <div class="container footer-bottom-content">
-      <p>&copy; {{ currentYear }} Sufi Sports. All rights reserved.</p>
-      <p class="designer-credit">Elite Performance Gear</p>
+      <p>&copy; {{ currentYear }} Sufi Sports Store. All Rights Reserved.</p>
+      <div class="trust-icons">
+        <span class="trust-badge"><i class="fa-solid fa-truck-fast"></i> Global Shipping</span>
+        <span class="trust-badge"><i class="fa-solid fa-award"></i> Certified Quality</span>
+      </div>
     </div>
   </div>
 </footer>
