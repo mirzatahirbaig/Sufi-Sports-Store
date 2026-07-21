@@ -1,89 +1,137 @@
 <!-- Hero Banner Carousel -->
 <app-banner-carousel></app-banner-carousel>
 
-<!-- Shop By Category Section (Shopify Storefront Pattern) -->
-<section class="section categories-section">
+<!-- 4 Customization Pillars Grid -->
+<section class="section pillars-section">
   <div class="container">
-    <div class="section-header text-center">
-      <span class="section-tag-red"><i class="fa-solid fa-layer-group"></i> SHOP BY COLLECTION</span>
-      <h2 class="section-title">Explore Athletic Categories</h2>
-      <p class="section-subtitle">Find high-performance boxing equipment built for serious fighters and academies.</p>
-    </div>
-
-    <div class="categories-grid">
-      <a routerLink="/products" [queryParams]="{category: 'Boxing Gloves'}" class="category-tile shopify-card">
-        <div class="category-icon-box">
-          <i class="fa-solid fa-hand-fist"></i>
-        </div>
-        <div class="category-info">
-          <h3>Boxing Gloves</h3>
-          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a routerLink="/products" [queryParams]="{category: 'Hand Wraps'}" class="category-tile shopify-card">
-        <div class="category-icon-box">
-          <i class="fa-solid fa-bandage"></i>
-        </div>
-        <div class="category-info">
-          <h3>Hand Wraps</h3>
-          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a routerLink="/products" [queryParams]="{category: 'Headgear'}" class="category-tile shopify-card">
-        <div class="category-icon-box">
-          <i class="fa-solid fa-helmet-safety"></i>
-        </div>
-        <div class="category-info">
-          <h3>Headgear</h3>
-          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a routerLink="/products" [queryParams]="{category: 'Punching Bags'}" class="category-tile shopify-card">
-        <div class="category-icon-box">
-          <i class="fa-solid fa-dumbbell"></i>
-        </div>
-        <div class="category-info">
-          <h3>Punching Bags</h3>
-          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a routerLink="/products" [queryParams]="{category: 'Protective Gear'}" class="category-tile shopify-card">
-        <div class="category-icon-box">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <div class="category-info">
-          <h3>Protective Gear</h3>
-          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a routerLink="/products" [queryParams]="{category: 'Apparel'}" class="category-tile shopify-card">
-        <div class="category-icon-box">
-          <i class="fa-solid fa-shirt"></i>
-        </div>
-        <div class="category-info">
-          <h3>Fight Apparel</h3>
-          <span class="category-link-text">Browse Collection <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
+    <div class="pillars-grid">
+      <div class="pillar-card shopify-card">
+        <div class="pillar-icon"><i class="fa-solid fa-stamp"></i></div>
+        <h3>Custom Branding & Logos</h3>
+        <p>Screen printing, 3D embossing, embroidery, woven patches & custom labels tailored to your brand.</p>
+      </div>
+      <div class="pillar-card shopify-card">
+        <div class="pillar-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Custom Materials & Foam</h3>
+        <p>Genuine cowhide leather, microfiber, PU, and multi-layer shock absorption padding options.</p>
+      </div>
+      <div class="pillar-card shopify-card">
+        <div class="pillar-icon"><i class="fa-solid fa-palette"></i></div>
+        <h3>Custom Colors & Specs</h3>
+        <p>Any custom color combination, tailored oz weight, sizing, and ergonomic fit for your athletes.</p>
+      </div>
+      <div class="pillar-card shopify-card">
+        <div class="pillar-icon"><i class="fa-solid fa-plane-departure"></i></div>
+        <h3>Factory Direct OEM Export</h3>
+        <p>Low MOQs, factory direct pricing, and worldwide export directly from Sialkot, Pakistan.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Featured Products Section -->
+<!-- Shop By Category Showcase Section -->
+<section class="section categories-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag-red"><i class="fa-solid fa-layer-group"></i> CUSTOM MANUFACTURING CATALOG</span>
+      <h2 class="section-title">Explore Custom Product Categories</h2>
+      <p class="section-subtitle">All products are manufactured 100% on-demand according to your brand's specifications and design requirements.</p>
+    </div>
+
+    @if (isLoadingCategories) {
+      <div class="loading-grid">
+        <div class="skeleton-card category-card-skeleton"></div>
+        <div class="skeleton-card category-card-skeleton"></div>
+        <div class="skeleton-card category-card-skeleton"></div>
+      </div>
+    } @else {
+      @if (categories.length > 0) {
+        <div class="categories-grid">
+          @for (cat of categories; track cat.id) {
+            <a routerLink="/products" [queryParams]="{category: cat.name}" class="category-image-card">
+              <div class="category-card-bg" [style.background-image]="'url(' + getCategoryBgImage(cat) + ')'"></div>
+              <div class="category-card-overlay"></div>
+              <div class="category-card-content">
+                <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+                <h3 class="category-card-title">{{ cat.name }}</h3>
+                <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+              </div>
+            </a>
+          }
+        </div>
+      } @else {
+        <!-- Fallback static category cards if backend has no categories yet -->
+        <div class="categories-grid">
+          <a routerLink="/products" [queryParams]="{category: 'Boxing Gloves'}" class="category-image-card">
+            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_boxing_gloves.png') + ')'"></div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+              <h3 class="category-card-title">Boxing Gloves</h3>
+              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+            </div>
+          </a>
+          <a routerLink="/products" [queryParams]="{category: 'Hand Wraps'}" class="category-image-card">
+            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_boxing_gloves.png') + ')'"></div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+              <h3 class="category-card-title">Hand Wraps</h3>
+              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+            </div>
+          </a>
+          <a routerLink="/products" [queryParams]="{category: 'Headgear'}" class="category-image-card">
+            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_headgear.png') + ')'"></div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+              <h3 class="category-card-title">Headgear</h3>
+              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+            </div>
+          </a>
+          <a routerLink="/products" [queryParams]="{category: 'Punching Bags & Stands'}" class="category-image-card">
+            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_punching_bags.png') + ')'"></div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+              <h3 class="category-card-title">Punching Bags & Stands</h3>
+              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+            </div>
+          </a>
+          <a routerLink="/products" [queryParams]="{category: 'Focus Mitts'}" class="category-image-card">
+            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_headgear.png') + ')'"></div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+              <h3 class="category-card-title">Focus Mitts</h3>
+              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+            </div>
+          </a>
+          <a routerLink="/products" [queryParams]="{category: 'Protective Gear'}" class="category-image-card">
+            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_punching_bags.png') + ')'"></div>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
+              <h3 class="category-card-title">Protective Gear</h3>
+              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+            </div>
+          </a>
+        </div>
+      }
+    }
+  </div>
+</section>
+
+<!-- Featured Custom Products Section -->
 <section class="section featured-products-section">
   <div class="container">
     <div class="section-header flex-header">
       <div>
-        <span class="section-tag-red"><i class="fa-solid fa-fire"></i> TOP PICK EQUIPMENT</span>
-        <h2 class="section-title">Featured Pro Products</h2>
+        <span class="section-tag-red"><i class="fa-solid fa-fire"></i> FEATURED OEM DESIGNS</span>
+        <h2 class="section-title">Featured Custom Product Showcase</h2>
       </div>
       <a routerLink="/products" class="btn-shopify-outline hidden-mobile">
-        Shop All Gear <i class="fa-solid fa-arrow-right"></i>
+        Browse Custom Catalog <i class="fa-solid fa-arrow-right"></i>
       </a>
     </div>
 
@@ -102,50 +150,55 @@
           }
         </div>
       } @else {
-        <div class="empty-state shopify-card">
-          <i class="fa-solid fa-box-open text-orange"></i>
-          <p>No featured products found right now.</p>
+        <div class="empty-state shopify-card text-center p-5">
+          <i class="fa-solid fa-box-open text-orange fa-3x mb-3"></i>
+          <h3>No Custom Products Available Right Now</h3>
+          <p>Contact our factory sales team directly for custom product manufacturing inquiries.</p>
+          <a routerLink="/contact" class="btn-shopify-red mt-3">
+            <i class="fa-solid fa-paper-plane me-1"></i> Submit Custom Inquiry
+          </a>
         </div>
       }
     }
 
     <div class="section-cta text-center mobile-only-cta">
       <a routerLink="/products" class="btn-shopify-red">
-        View Full Shop Collection
+        View Custom Catalog Showcase
         <i class="fa-solid fa-store"></i>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Brand Trust & Craftsmanship Bar -->
-<section class="promo-section">
-  <div class="container promo-container">
-    <div class="promo-text-col">
-      <span class="promo-tag"><i class="fa-solid fa-award"></i> SIALKOT CRAFTSMANSHIP</span>
-      <h2 class="promo-title">HANDCRAFTED. BATTLE TESTED.</h2>
-      <p class="promo-desc">
-        Direct from our manufacturing facility in Sialkot, every product is engineered using genuine full-grain leather, multi-layered padding systems, and reinforced double stitching.
-      </p>
+<!-- 4-Step Custom Manufacturing Workflow Section -->
+<section class="section workflow-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag-red"><i class="fa-solid fa-diagram-project"></i> HOW WE MANUFACTURE YOUR ORDER</span>
+      <h2 class="section-title">4-Step Custom Manufacturing Process</h2>
+      <p class="section-subtitle">From initial design consultation to doorstep delivery of your custom branded sports equipment.</p>
     </div>
 
-    <div class="trust-cards-grid">
-      <div class="trust-card shopify-card">
-        <i class="fa-solid fa-shield-halved trust-icon"></i>
-        <h4>Elite Protection</h4>
-        <p>Shock-absorbing multi-layer foam padding designed to guard joints and hands.</p>
+    <div class="workflow-steps-grid">
+      <div class="step-card shopify-card">
+        <div class="step-number">01</div>
+        <h4>Spec & Material Selection</h4>
+        <p>Choose product models, target weight/size, genuine leather/microfiber, and shock absorption foam density.</p>
       </div>
-
-      <div class="trust-card shopify-card">
-        <i class="fa-solid fa-award trust-icon"></i>
-        <h4>Match Certified</h4>
-        <p>Built according to international boxing regulation standards and specs.</p>
+      <div class="step-card shopify-card">
+        <div class="step-number">02</div>
+        <h4>Custom Branding & Mockups</h4>
+        <p>Submit your brand logo and color scheme for detailed 2D/3D digital proofing and placement approval.</p>
       </div>
-
-      <div class="trust-card shopify-card">
-        <i class="fa-solid fa-circle-check trust-icon"></i>
-        <h4>Manufacturer Direct</h4>
-        <p>No middleman markup — premium gear direct from factory to your academy.</p>
+      <div class="step-card shopify-card">
+        <div class="step-number">03</div>
+        <h4>Physical Pre-Production Sample</h4>
+        <p>We craft a physical sample product for your testing and final sign-off before commencing bulk production.</p>
+      </div>
+      <div class="step-card shopify-card">
+        <div class="step-number">04</div>
+        <h4>Bulk Production & Global Export</h4>
+        <p>Handcrafted factory manufacturing in Sialkot with quality control inspection and worldwide shipping.</p>
       </div>
     </div>
   </div>
@@ -155,9 +208,9 @@
 <section class="section news-section">
   <div class="container">
     <div class="section-header text-center">
-      <span class="section-tag-red"><i class="fa-solid fa-newspaper"></i> FIGHTER JOURNAL</span>
-      <h2 class="section-title">Latest Articles & Gear Insights</h2>
-      <p class="section-subtitle">Read expert training guides, equipment maintenance tips, and fighter stories.</p>
+      <span class="section-tag-red"><i class="fa-solid fa-newspaper"></i> FACTORY INSIGHTS & JOURNAL</span>
+      <h2 class="section-title">Latest Articles & Manufacturing News</h2>
+      <p class="section-subtitle">Read expert guides on equipment materials, OEM production trends, and custom private labeling tips.</p>
     </div>
 
     @if (isLoadingArticles) {
@@ -174,8 +227,8 @@
           }
         </div>
       } @else {
-        <div class="empty-state shopify-card">
-          <i class="fa-solid fa-newspaper text-orange"></i>
+        <div class="empty-state shopify-card p-4 text-center">
+          <i class="fa-solid fa-newspaper text-orange fa-2x mb-2"></i>
           <p>No articles published yet.</p>
         </div>
       }
@@ -183,7 +236,7 @@
 
     <div class="section-cta text-center">
       <a routerLink="/blog" class="btn-shopify-black">
-        Read All Journal Articles
+        Read All Factory Articles
         <i class="fa-solid fa-book-open"></i>
       </a>
     </div>

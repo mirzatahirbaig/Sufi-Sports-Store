@@ -50,8 +50,9 @@ export class NavbarComponent implements OnInit {
       return this.contactInfo.announcementText.split('•').map(s => s.trim()).filter(s => s.length > 0);
     }
     return [
-      'FREE SHIPPING ON BULK ORDERS',
-      'Pro-Grade Boxing Gear Direct from Manufacturer'
+      'CUSTOM PRODUCT MANUFACTURER & OEM SUPPLIER',
+      'Custom Branding, Logos & Tailored Specs Available',
+      'Factory Direct Export for Brands, Gyms & Distributors'
     ];
   }
 }

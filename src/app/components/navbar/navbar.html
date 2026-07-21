@@ -1,52 +1,67 @@
-<!-- Top Announcement Bar (Shopify Style - Dynamic Infinite Marquee) -->
+<!-- Top Announcement & Contact Bar -->
 <div class="announcement-bar">
-  <div class="announcement-ticker-track">
-    <div class="ticker-content">
-      @for (point of getTickerPoints(); track $index) {
-      <span class="ticker-item">
-        <i class="fa-solid fa-bolt text-orange me-1"></i>
-        {{ point }}
-      </span>
-      <span class="ticker-bullet">&bull;</span>
+  <div class="container announcement-inner">
+    <div class="announcement-ticker-track">
+      <div class="ticker-content">
+        @for (point of getTickerPoints(); track $index) {
+          <span class="ticker-item">
+            <i class="fa-solid fa-industry text-orange me-1"></i>
+            {{ point }}
+          </span>
+          <span class="ticker-bullet">&bull;</span>
+        }
+        @for (point of getTickerPoints(); track $index) {
+          <span class="ticker-item">
+            <i class="fa-solid fa-industry text-orange me-1"></i>
+            {{ point }}
+          </span>
+          <span class="ticker-bullet">&bull;</span>
+        }
+      </div>
+    </div>
+    <div class="announcement-contact d-none-mobile">
+      @if (contactInfo?.phone) {
+        <a [href]="'https://wa.me/' + contactInfo?.phone" target="_blank" class="contact-link me-3">
+          <i class="fa-brands fa-whatsapp me-1 text-success"></i> {{ contactInfo?.phone }}
+        </a>
       }
-
-      <!-- Duplicate set for seamless continuous looping -->
-      @for (point of getTickerPoints(); track $index) {
-      <span class="ticker-item">
-        <i class="fa-solid fa-bolt text-orange me-1"></i>
-        {{ point }}
-      </span>
-      <span class="ticker-bullet">&bull;</span>
+      @if (contactInfo?.email) {
+        <a [href]="'mailto:' + contactInfo?.email" class="contact-link">
+          <i class="fa-solid fa-envelope me-1"></i> {{ contactInfo?.email }}
+        </a>
       }
     </div>
   </div>
 </div>
 
-<!-- Main Navbar -->
+<!-- Main Header Navbar -->
 <nav class="navbar-wrapper">
   <div class="container navbar-container">
     <!-- Brand Logo -->
     <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
       <img src="logo.png" alt="Sufi Sports Logo" class="brand-logo-img" />
-      <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
+      <div class="brand-titles">
+        <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
+        <span class="brand-tagline">CUSTOM GEAR MANUFACTURER</span>
+      </div>
     </a>
 
     <!-- Desktop Navigation Links -->
     <div class="navbar-links">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a routerLink="/products" routerLinkActive="active">Shop Products</a>
-      <a routerLink="/blog" routerLinkActive="active">Blog</a>
-      <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
+      <a routerLink="/products" routerLinkActive="active">Custom Products</a>
+      <a routerLink="/blog" routerLinkActive="active">Factory Insights</a>
+      <a routerLink="/contact" routerLinkActive="active">Request Quote</a>
     </div>
 
     <!-- Right Actions -->
     <div class="navbar-actions">
-      <a routerLink="/products" class="action-icon" title="Search Equipment" aria-label="Search Equipment">
+      <a routerLink="/products" class="action-icon" title="Search Custom Catalog" aria-label="Search Catalog">
         <i class="fa-solid fa-magnifying-glass"></i>
       </a>
       <a routerLink="/contact" class="btn-shopify-red btn-header-cta">
-        <i class="fa-solid fa-paper-plane"></i>
-        <span>Enquire</span>
+        <i class="fa-solid fa-pen-ruler me-1"></i>
+        <span>Custom Quote</span>
       </a>
 
       <!-- Mobile Menu Toggle Button -->
@@ -58,17 +73,16 @@
 
   <!-- Mobile Navigation Menu -->
   @if (isMobileMenuOpen) {
-  <div class="mobile-menu">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-      (click)="closeMobileMenu()">Home</a>
-    <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Shop Products</a>
-    <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Blog</a>
-    <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
-    <div class="mobile-menu-footer">
-      <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
-        <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
-      </a>
+    <div class="mobile-menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Custom Products</a>
+      <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Factory Insights</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+      <div class="mobile-menu-footer">
+        <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
+          <i class="fa-solid fa-pen-ruler me-1"></i> Request Custom Quote
+        </a>
+      </div>
     </div>
-  </div>
   }
 </nav>

@@ -34,13 +34,6 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
   private handleResponse(res: any): void {
     if (res.success && res.data?.length > 0) {
       this.banners = res.data.sort((a: Banner, b: Banner) => a.displayOrder - b.displayOrder);
-      if (this.banners.length === 1) {
-        // Append additional slides to guarantee infinite auto-slide experience
-        this.banners.push(
-          { id: 901, imageUrl: 'images/banner2.jpg', targetUrl: '/products?category=Boxing%20Gloves', callToAction: 'Explore Boxing Gear', displayOrder: 2, startDate: '', endDate: '', isEnabled: true },
-          { id: 902, imageUrl: 'images/banner3.jpg', targetUrl: '/contact', callToAction: 'Request Factory Quote', displayOrder: 3, startDate: '', endDate: '', isEnabled: true }
-        );
-      }
     } else {
       this.useFallback();
     }
@@ -50,14 +43,35 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
 
   private useFallback(): void {
     this.banners = [
-      { id: 900, imageUrl: 'images/banner1.jpg', targetUrl: '/products', callToAction: 'Shop Pro Collection', displayOrder: 1, startDate: '', endDate: '', isEnabled: true },
-      { id: 901, imageUrl: 'images/banner2.jpg', targetUrl: '/products?category=Boxing%20Gloves', callToAction: 'Explore Boxing Gear', displayOrder: 2, startDate: '', endDate: '', isEnabled: true },
-      { id: 902, imageUrl: 'images/banner3.jpg', targetUrl: '/contact', callToAction: 'Request Factory Quote', displayOrder: 3, startDate: '', endDate: '', isEnabled: true }
+      {
+        id: 901,
+        title: '100% CUSTOM PRODUCT MANUFACTURING',
+        subtitle: 'Pro-grade boxing & sports equipment crafted exactly to your brand\'s specifications — custom logos, custom colors, specialized padding & premium materials.',
+        imageUrl: '/uploads/custom_boxing_gear_banner.png',
+        targetUrl: '/products',
+        callToAction: 'Explore Custom Catalog',
+        displayOrder: 1,
+        startDate: '',
+        endDate: '',
+        isEnabled: true
+      },
+      {
+        id: 902,
+        title: 'OEM & PRIVATE LABELING FOR BRANDS',
+        subtitle: 'Add your brand logo, select custom genuine leather, choose shock absorption foam density, and order custom colorways with low minimum quantities.',
+        imageUrl: '/uploads/oem_factory_manufacturing_banner.png',
+        targetUrl: '/contact',
+        callToAction: 'Request Factory Quote',
+        displayOrder: 2,
+        startDate: '',
+        endDate: '',
+        isEnabled: true
+      }
     ];
   }
 
   resolveImageUrl(url: string | undefined): string {
-    return resolveImageUrl(url, 'images/banner1.jpg');
+    return resolveImageUrl(url, '/uploads/custom_boxing_gear_banner.png');
   }
 
   startAutoPlay(): void {
@@ -65,7 +79,7 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
     if (this.banners.length > 1) {
       this.autoPlayInterval = setInterval(() => {
         this.nextSlide();
-      }, 2000);
+      }, 5000); // 5 seconds per slide
     }
   }
 

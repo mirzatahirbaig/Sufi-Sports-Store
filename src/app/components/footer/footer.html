@@ -1,14 +1,15 @@
-<!-- Newsletter Signup Strip (Shopify Style) -->
+<!-- Custom OEM Quote Strip -->
 <div class="newsletter-strip">
   <div class="container newsletter-container">
     <div class="newsletter-info">
-      <span class="newsletter-tag"><i class="fa-solid fa-envelope-open-text"></i> JOIN THE SUFI TEAM</span>
-      <h3 class="newsletter-title">Subscribe for Exclusive Gear Updates & Bulk Discounts</h3>
+      <span class="newsletter-tag"><i class="fa-solid fa-industry"></i> CUSTOM OEM & PRIVATE LABELING</span>
+      <h3 class="newsletter-title">Looking for Custom Branded Products & Wholesale OEM Manufacturing?</h3>
     </div>
-    <form class="newsletter-form" (submit)="$event.preventDefault()">
-      <input type="email" placeholder="Enter your email address..." class="newsletter-input" required />
-      <button type="submit" class="btn-shopify-red">Subscribe</button>
-    </form>
+    <div class="newsletter-actions">
+      <a routerLink="/contact" class="btn-shopify-red">
+        <i class="fa-solid fa-pen-ruler me-1"></i> Request Custom Factory Quote
+      </a>
+    </div>
   </div>
 </div>
 
@@ -21,7 +22,7 @@
         <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
       </a>
       <p class="brand-desc">
-        Sialkot's premier manufacturer of high-performance boxing gloves, headgear, hand wraps, and competition training equipment.
+        Sialkot's premier manufacturer & OEM exporter of 100% custom boxing gloves, headgear, protective equipment, and sports gear engineered to client specifications.
       </p>
       <div class="social-links">
         <a [href]="contactInfo?.facebookUrl || 'https://facebook.com'" target="_blank" aria-label="Facebook">
@@ -36,32 +37,32 @@
       </div>
     </div>
 
-    <!-- Column 2: Equipment Categories -->
+    <!-- Column 2: Custom Services -->
     <div class="footer-col">
-      <h4 class="col-title">Shop Gear</h4>
+      <h4 class="col-title">Custom OEM Services</h4>
       <ul class="footer-links">
-        <li><a routerLink="/products" [queryParams]="{category: 'Boxing Gloves'}">Boxing Gloves</a></li>
-        <li><a routerLink="/products" [queryParams]="{category: 'Hand Wraps'}">Hand Wraps & Gauze</a></li>
-        <li><a routerLink="/products" [queryParams]="{category: 'Headgear'}">Headgear & Guards</a></li>
-        <li><a routerLink="/products" [queryParams]="{category: 'Punching Bags'}">Punching Bags</a></li>
-        <li><a routerLink="/products" [queryParams]="{category: 'Protective Gear'}">Protective Gear</a></li>
+        <li><a routerLink="/contact">Private Label Manufacturing</a></li>
+        <li><a routerLink="/contact">Custom Logo Printing & Embossing</a></li>
+        <li><a routerLink="/contact">Tailored Material & Padding Selection</a></li>
+        <li><a routerLink="/contact">Custom Colorways & Sizing</a></li>
+        <li><a routerLink="/contact">Pre-Production Sample Crafting</a></li>
       </ul>
     </div>
 
-    <!-- Column 3: Navigation & Support -->
+    <!-- Column 3: Navigation -->
     <div class="footer-col">
       <h4 class="col-title">Navigation</h4>
       <ul class="footer-links">
         <li><a routerLink="/">Home Page</a></li>
-        <li><a routerLink="/products">All Products</a></li>
-        <li><a routerLink="/blog">Fighter Journal</a></li>
-        <li><a routerLink="/contact">Contact & Orders</a></li>
+        <li><a routerLink="/products">Custom Catalog</a></li>
+        <li><a routerLink="/blog">Factory Journal</a></li>
+        <li><a routerLink="/contact">Request Custom Quote</a></li>
       </ul>
     </div>
 
     <!-- Column 4: Factory Contact -->
     <div class="footer-col">
-      <h4 class="col-title">Factory Direct</h4>
+      <h4 class="col-title">Sialkot Headquarters</h4>
       <ul class="contact-info-list">
         @if (contactInfo?.address) {
           <li>
@@ -91,10 +92,10 @@
 
   <div class="footer-bottom">
     <div class="container footer-bottom-content">
-      <p>&copy; {{ currentYear }} Sufi Sports Store. All Rights Reserved.</p>
+      <p>&copy; {{ currentYear }} Sufi Sports. All Rights Reserved. Custom Product Manufacturer & OEM Exporter.</p>
       <div class="trust-icons">
-        <span class="trust-badge"><i class="fa-solid fa-truck-fast"></i> Global Shipping</span>
-        <span class="trust-badge"><i class="fa-solid fa-award"></i> Certified Quality</span>
+        <span class="trust-badge"><i class="fa-solid fa-plane-departure"></i> Global OEM Export</span>
+        <span class="trust-badge"><i class="fa-solid fa-award"></i> 100% Made to Order</span>
       </div>
     </div>
   </div>

@@ -2,7 +2,9 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { BlogService } from '../../services/blog.service';
-import { Product, Article } from '../../models/models';
+import { CategoryService } from '../../services/category.service';
+import { Product, Article, Category } from '../../models/models';
+import { resolveImageUrl } from '../../utils/image.utils';
 import { BannerCarouselComponent } from '../../components/banner-carousel/banner-carousel';
 import { ProductCardComponent } from '../../components/product-card/product-card';
 import { ArticleCardComponent } from '../../components/article-card/article-card';
@@ -22,20 +24,59 @@ import { ArticleCardComponent } from '../../components/article-card/article-card
 export class HomeComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly blogService = inject(BlogService);
+  private readonly categoryService = inject(CategoryService);
   private readonly cdr = inject(ChangeDetectorRef);
 
   featuredProducts: Product[] = [];
   recentArticles: Article[] = [];
+  categories: Category[] = [];
+
   isLoadingProducts = true;
   isLoadingArticles = true;
+  isLoadingCategories = true;
 
   ngOnInit(): void {
+    this.loadCategories();
     this.loadFeaturedProducts();
     this.loadRecentArticles();
   }
 
+  resolveCategoryImageUrl(url: string | undefined): string {
+    return resolveImageUrl(url, '');
+  }
+
+  getCategoryBgImage(cat: Category): string {
+    if (cat.imageUrl) {
+      return this.resolveCategoryImageUrl(cat.imageUrl);
+    }
+    const name = (cat.name || '').toLowerCase();
+    if (name.includes('head') || name.includes('mitt')) {
+      return this.resolveCategoryImageUrl('/uploads/category_headgear.png');
+    }
+    if (name.includes('bag') || name.includes('protect')) {
+      return this.resolveCategoryImageUrl('/uploads/category_punching_bags.png');
+    }
+    return this.resolveCategoryImageUrl('/uploads/category_boxing_gloves.png');
+  }
+
+  private loadCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (response) => {
+        if (response.success && response.data) {
+          this.categories = response.data;
+        }
+        this.isLoadingCategories = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.isLoadingCategories = false;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
   private loadFeaturedProducts(): void {
-    this.productService.getProducts({ isFeatured: true, pageSize: 4, isActive: true }).subscribe({
+    this.productService.getProducts({ isFeatured: true, pageSize: 6, isActive: true }).subscribe({
       next: (response) => {
         if (response.success && response.data?.items) {
           this.featuredProducts = response.data.items;

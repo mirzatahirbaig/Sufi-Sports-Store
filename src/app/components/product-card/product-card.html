@@ -4,22 +4,18 @@
       <img [src]="resolveImageUrl(product.imageUrls)" [alt]="product.name" class="product-image" />
     </a>
 
-    <!-- Badges Overlay -->
+    <!-- Custom Manufacturing Badges Overlay (No In-Stock/Out-of-Stock) -->
     <div class="product-badges">
       @if (product.isFeatured) {
-        <span class="badge-red">FEATURED</span>
+        <span class="badge-red">FEATURED DESIGN</span>
       }
-      @if (isOutOfStock()) {
-        <span class="badge-black">OUT OF STOCK</span>
-      } @else {
-        <span class="badge-orange">IN STOCK</span>
-      }
+      <span class="badge-orange">100% MADE TO ORDER</span>
     </div>
 
     <!-- Quick Hover Overlay Action -->
     <div class="quick-action-overlay">
       <a [routerLink]="['/products', product.id]" class="btn-shopify-black btn-sm">
-        <i class="fa-solid fa-eye"></i> Quick View
+        <i class="fa-solid fa-eye me-1"></i> View Specifications
       </a>
     </div>
   </div>
@@ -27,13 +23,7 @@
   <div class="product-details">
     <div class="product-meta">
       <span class="product-category">{{ product.category || 'Boxing Gear' }}</span>
-      <div class="product-rating">
-        <i class="fa-solid fa-star text-orange"></i>
-        <i class="fa-solid fa-star text-orange"></i>
-        <i class="fa-solid fa-star text-orange"></i>
-        <i class="fa-solid fa-star text-orange"></i>
-        <i class="fa-solid fa-star text-orange"></i>
-      </div>
+      <span class="custom-pill"><i class="fa-solid fa-stamp me-1"></i> Custom Branding Ready</span>
     </div>
 
     <h3 class="product-title">
@@ -42,13 +32,13 @@
 
     <div class="product-card-footer">
       <div class="price-box">
-        <span class="price-label">Price</span>
+        <span class="price-label">Unit Price</span>
         <span class="price-value">${{ product.price.toFixed(2) }}</span>
       </div>
 
-      <a [routerLink]="['/products', product.id]" class="btn-shopify-red btn-card-action">
-        <span>Enquire</span>
-        <i class="fa-solid fa-arrow-right"></i>
+      <a routerLink="/contact" [queryParams]="{product: product.name, id: product.id}" class="btn-shopify-red btn-card-action">
+        <span>Request Quote</span>
+        <i class="fa-solid fa-pen-ruler"></i>
       </a>
     </div>
   </div>

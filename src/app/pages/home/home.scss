@@ -48,6 +48,52 @@
   margin: 0 auto;
 }
 
+// Pillars Grid
+.pillars-section {
+  padding: 40px 0;
+  background-color: $color-bg-light;
+  border-bottom: 1px solid $color-border-light;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillar-card {
+  padding: 24px 20px;
+  border-radius: 8px;
+  background-color: $color-bg-card;
+
+  .pillar-icon {
+    font-size: 1.8rem;
+    color: $color-primary-red;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $color-black;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: $color-text-muted;
+    line-height: 1.4;
+  }
+}
+
 // Category Tiles
 .categories-section {
   background-color: $color-bg-section;
@@ -56,58 +102,168 @@
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 550px) {
+    grid-template-columns: 1fr;
   }
 }
 
-.category-tile {
-  padding: 24px 16px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+.category-image-card {
+  position: relative;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 
-  .category-icon-box {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background-color: rgba(230, 0, 0, 0.08);
-    color: $color-primary-red;
+  .category-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .category-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(10, 10, 10, 0.92) 100%);
+    transition: background 0.3s ease;
+    z-index: 1;
+  }
+
+  .category-card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 24px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    transition: $transition-smooth;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
-  h3 {
-    font-size: 0.95rem;
+  .custom-badge-white {
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: $color-black;
-  }
-
-  .category-link-text {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: $color-secondary-orange;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .category-card-title {
+    color: #ffffff !important;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+
+  .category-card-cta {
+    color: #ff7700;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.25s ease;
+
+    i {
+      transition: transform 0.25s ease;
+    }
   }
 
   &:hover {
-    .category-icon-box {
-      background-color: $color-primary-red;
-      color: $color-white;
-      transform: scale(1.1);
+    .category-card-bg {
+      transform: scale(1.08);
     }
+
+    .category-card-overlay {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.65) 50%, rgba(10, 10, 10, 0.96) 100%);
+    }
+
+    .category-card-cta {
+      color: #ffffff;
+
+      i {
+        transform: translateX(5px);
+      }
+    }
+  }
+}
+
+// 4-Step Process Section
+.workflow-section {
+  background-color: $color-bg-section;
+  border-top: 1px solid $color-border-light;
+  border-bottom: 1px solid $color-border-light;
+}
+
+.workflow-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.step-card {
+  padding: 28px 20px;
+  position: relative;
+
+  .step-number {
+    font-family: $font-family-title;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: $color-primary-red;
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $color-black;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: $color-text-muted;
+    line-height: 1.4;
   }
 }
 

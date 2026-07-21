@@ -2,24 +2,26 @@
   @for (banner of banners; track banner.id; let idx = $index) {
     <div class="carousel-slide" [class.active]="idx === currentIndex">
       <div class="slide-image-wrapper">
-        <img [src]="resolveImageUrl(banner.imageUrl)" alt="Sufi Sports Banner" class="slide-image" />
+        <img [src]="resolveImageUrl(banner.imageUrl)" [alt]="banner.title || 'Custom Sports Manufacturing Banner'" class="slide-image" />
         <div class="slide-overlay"></div>
       </div>
 
       <div class="container slide-content-wrapper">
         <div class="slide-content">
-          <span class="slide-tag"><i class="fa-solid fa-bolt"></i> PRO GEAR COLLECTION</span>
-          <h1 class="slide-title">ENGINEERED FOR CHAMPIONS</h1>
-          <p class="slide-desc">
-            Equip yourself with handcrafted boxing gloves, competition protective gear, and fight training equipment built to international match standards.
-          </p>
+          <span class="slide-tag"><i class="fa-solid fa-industry"></i> 100% CUSTOM PRODUCT MANUFACTURER</span>
+          
+          @if (banner.title) {
+            <h1 class="slide-title">{{ banner.title }}</h1>
+          }
+          
+          @if (banner.subtitle) {
+            <p class="slide-desc">{{ banner.subtitle }}</p>
+          }
+          
           <div class="slide-actions">
             <a [routerLink]="banner.targetUrl || '/products'" class="btn-shopify-red">
-              {{ banner.callToAction || 'Shop Collection' }}
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            <a routerLink="/contact" class="btn-shopify-black">
-              Bulk Order Inquiry
+              <i class="fa-solid fa-arrow-right-long me-1"></i>
+              {{ banner.callToAction || 'Explore Catalog' }}
             </a>
           </div>
         </div>

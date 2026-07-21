@@ -36,7 +36,7 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       if (params['product']) {
-        this.formModel.message = `Hello Sufi Sports Team,\n\nI would like to request a bulk order quotation and specifications for the product: "${params['product']}".\n\nPlease send me pricing and availability.`;
+        this.formModel.message = `Hello Sufi Sports Factory Team,\n\nI am interested in requesting a custom product quotation for: "${params['product']}".\n\nCustomization Details:\n- Required Quantity:\n- Brand Logo & Printing Needs:\n- Color Scheme Preferences:\n- Target Material & Specs:\n\nPlease contact me with custom pricing, production timeline, and mockups.`;
       }
     });
 

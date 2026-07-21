@@ -86,9 +86,11 @@
     letter-spacing: 0.5px;
   }
 
-  .text-orange {
-    color: $color-secondary-orange;
-    font-size: 0.75rem;
+  .custom-pill {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: $color-primary-red;
+    text-transform: uppercase;
   }
 }
 

@@ -1,13 +1,13 @@
 <section class="catalog-hero">
   <div class="container catalog-hero-content">
-    <span class="hero-tag"><i class="fa-solid fa-store"></i> SUFI STOREFRONT</span>
-    <h1 class="hero-title">EQUIPMENT & GEAR CATALOG</h1>
-    <p class="hero-subtitle">Explore our full line of competition-certified boxing gloves, protective gear, and training equipment.</p>
+    <span class="hero-tag"><i class="fa-solid fa-industry"></i> 100% CUSTOM PRODUCT MANUFACTURER</span>
+    <h1 class="hero-title">CUSTOM PRODUCT SHOWCASE CATALOG</h1>
+    <p class="hero-subtitle">All products in our showcase are fully customizable. We manufacture equipment tailored to your brand, logo, color preferences, and technical specifications.</p>
   </div>
 </section>
 
 <div class="container catalog-layout">
-  <!-- Horizontal Category Pills Bar (Shopify Storefront Pattern) -->
+  <!-- Horizontal Category Pills Bar -->
   <div class="category-pills-bar">
     <span class="filter-label"><i class="fa-solid fa-filter"></i> Categories:</span>
     <div class="pills-scroll">
@@ -23,18 +23,18 @@
   <div class="toolbar-box shopify-card">
     <div class="search-box">
       <i class="fa-solid fa-magnifying-glass search-icon text-muted"></i>
-      <input type="text" placeholder="Search equipment by name or keyword..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" class="search-input" />
+      <input type="text" placeholder="Search custom product designs by name or keyword..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" class="search-input" />
       <button (click)="onSearch()" class="btn-shopify-red btn-search">Search</button>
     </div>
 
     <div class="toolbar-meta">
-      <span class="results-count">Showing <strong>{{ products.length }}</strong> products</span>
+      <span class="results-count">Showing <strong>{{ products.length }}</strong> custom product designs</span>
       <div class="sort-box">
         <label for="sort-select"><i class="fa-solid fa-sort"></i> Sort By:</label>
         <select id="sort-select" [(ngModel)]="sortBy" (change)="onSortChange()" class="sort-select">
           <option value="name-asc">Alphabetical (A-Z)</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
+          <option value="price-asc">Unit Price: Low to High</option>
+          <option value="price-desc">Unit Price: High to Low</option>
         </select>
       </div>
     </div>
@@ -75,13 +75,18 @@
         </div>
       }
     } @else {
-      <div class="empty-state shopify-card">
-        <i class="fa-solid fa-box-open text-orange"></i>
-        <h3>No Products Found</h3>
-        <p>Try resetting your search term or select another category filter.</p>
-        <button class="btn-shopify-red" (click)="setCategory('All'); searchTerm = ''; onSearch();">
-          Reset Filters
-        </button>
+      <div class="empty-state shopify-card p-5 text-center">
+        <i class="fa-solid fa-box-open text-orange fa-3x mb-3"></i>
+        <h3>No Custom Products Found</h3>
+        <p>Try resetting your search filter or request a custom product quote directly from our factory team.</p>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+          <button class="btn-shopify-red" (click)="setCategory('All'); searchTerm = ''; onSearch();">
+            Reset Filters
+          </button>
+          <a routerLink="/contact" class="btn-shopify-black">
+            <i class="fa-solid fa-paper-plane me-1"></i> Request Custom Quote
+          </a>
+        </div>
       </div>
     }
   }

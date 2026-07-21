@@ -27,8 +27,18 @@ export interface Product {
   specifications?: Record<string, string>;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+  icon?: string;
+  imageUrl?: string;
+  isActive: boolean;
+}
+
 export interface Banner {
   id: number;
+  title?: string;
+  subtitle?: string;
   imageUrl: string;
   targetUrl: string;
   callToAction: string;

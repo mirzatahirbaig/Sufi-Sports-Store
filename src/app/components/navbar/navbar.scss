@@ -9,8 +9,15 @@
   overflow: hidden;
   position: relative;
 
+  .announcement-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
   .announcement-ticker-track {
-    width: 100%;
+    flex: 1;
     overflow: hidden;
     white-space: nowrap;
   }
@@ -31,11 +38,7 @@
     align-items: center;
     padding: 0 20px;
     color: rgba(255, 255, 255, 0.95);
-
-    strong {
-      color: $color-secondary-orange;
-      margin-left: 4px;
-    }
+    font-weight: 500;
   }
 
   .ticker-bullet {
@@ -45,8 +48,31 @@
     opacity: 0.8;
   }
 
+  .announcement-contact {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    font-family: $font-family-title;
+    font-weight: 600;
+
+    .contact-link {
+      color: rgba(255, 255, 255, 0.9);
+      transition: $transition-smooth;
+      &:hover {
+        color: $color-secondary-orange;
+      }
+    }
+  }
+
   .text-orange {
     color: $color-secondary-orange;
+  }
+}
+
+@media (max-width: 900px) {
+  .d-none-mobile {
+    display: none !important;
   }
 }
 
@@ -111,12 +137,26 @@
     }
   }
 
+  .brand-titles {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
   .brand-text {
     color: $color-black;
   }
 
   .brand-accent {
     color: $color-primary-red;
+  }
+
+  .brand-tagline {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: $color-text-muted;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
   }
 }
 

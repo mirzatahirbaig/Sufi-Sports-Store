@@ -3,7 +3,7 @@
   <nav class="breadcrumb-nav">
     <a routerLink="/">Home</a>
     <i class="fa-solid fa-chevron-right separator"></i>
-    <a routerLink="/products">Shop</a>
+    <a routerLink="/products">Custom Catalog</a>
     <i class="fa-solid fa-chevron-right separator"></i>
     <span>{{ product?.category || 'Equipment' }}</span>
   </nav>
@@ -11,23 +11,23 @@
   @if (isLoading) {
     <div class="loader-container shopify-card">
       <i class="fa-solid fa-circle-notch fa-spin loader-icon text-red"></i>
-      <p>Loading product details...</p>
+      <p>Loading custom product details...</p>
     </div>
   } @else if (errorMsg) {
-    <div class="error-container shopify-card">
-      <i class="fa-solid fa-circle-exclamation error-icon text-red"></i>
-      <h3>Product Not Found</h3>
+    <div class="error-container shopify-card text-center p-5">
+      <i class="fa-solid fa-circle-exclamation error-icon text-red fa-3x mb-3"></i>
+      <h3>Custom Product Design Not Found</h3>
       <p>{{ errorMsg }}</p>
-      <a routerLink="/products" class="btn-shopify-red">Back to Storefront</a>
+      <a routerLink="/products" class="btn-shopify-red mt-3">Back to Custom Catalog</a>
     </div>
   } @else if (product) {
     <div class="product-detail-grid">
-      <!-- Gallery Column (Shopify Style) -->
+      <!-- Gallery Column -->
       <div class="gallery-wrapper">
         <div class="main-image-box shopify-card">
           <img [src]="selectedImage" [alt]="product.name" class="main-image" />
           @if (product.isFeatured) {
-            <span class="badge-red featured-tag">FEATURED</span>
+            <span class="badge-red featured-tag">FEATURED DESIGN</span>
           }
           @if (product.imageUrls && product.imageUrls.length > 1) {
             <div class="gallery-nav">
@@ -59,52 +59,52 @@
       <!-- Info Details Column -->
       <div class="info-wrapper shopify-card">
         <div class="meta-row">
-          <span class="badge-black">{{ product.category }}</span>
-          <div class="product-rating">
-            <i class="fa-solid fa-star text-orange"></i>
-            <i class="fa-solid fa-star text-orange"></i>
-            <i class="fa-solid fa-star text-orange"></i>
-            <i class="fa-solid fa-star text-orange"></i>
-            <i class="fa-solid fa-star text-orange"></i>
-            <span class="rating-count">(4.9 / 5.0)</span>
-          </div>
+          <span class="badge-black">{{ product.category || 'Boxing Gear' }}</span>
+          <span class="custom-status-pill"><i class="fa-solid fa-stamp me-1"></i> Custom Branding Ready</span>
         </div>
 
         <h1 class="product-title">{{ product.name }}</h1>
         
         <div class="price-stock-box">
           <div class="price-display">
-            <span class="currency-label">Price:</span>
+            <span class="currency-label">Unit Base Price:</span>
             <span class="price-amount">${{ product.price.toFixed(2) }}</span>
           </div>
           
-          @if (product.stockQuantity > 0) {
-            <span class="stock-badge instock">
-              <i class="fa-solid fa-circle-check"></i> In Stock ({{ product.stockQuantity }} units ready)
-            </span>
-          } @else {
-            <span class="stock-badge outstock">
-              <i class="fa-solid fa-circle-xmark"></i> Out of Stock
-            </span>
-          }
+          <!-- Custom Made to Order Badge (No Stock Indicators) -->
+          <span class="stock-badge custom-made-badge">
+            <i class="fa-solid fa-pen-ruler"></i> 100% Made to Order
+          </span>
         </div>
 
         <div class="divider"></div>
 
         <div class="action-box">
-          <a routerLink="/contact" [queryParams]="{product: product.name}" class="btn-shopify-red btn-enquire-lg">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>Enquire / Request Bulk Quote</span>
+          <a routerLink="/contact" [queryParams]="{product: product.name, id: product.id}" class="btn-shopify-red btn-enquire-lg">
+            <i class="fa-solid fa-pen-ruler me-1"></i>
+            <span>Submit Custom Inquiry / Request Quote</span>
           </a>
-          <p class="order-note"><i class="fa-solid fa-shield"></i> Direct Factory Inquiry — No obligation quote</p>
+          <p class="order-note"><i class="fa-solid fa-shield-halved"></i> Direct Factory Manufacturing • Tailored Logo, Color & Material Specs</p>
         </div>
 
         <div class="divider"></div>
 
-        <!-- Specifications Grid -->
+        <!-- Custom Manufacturing Specifications Table -->
         <div class="specs-box">
-          <h3 class="specs-title"><i class="fa-solid fa-sliders text-red"></i> Specifications</h3>
+          <h3 class="specs-title"><i class="fa-solid fa-sliders text-red"></i> Customization Specifications</h3>
           <div class="specs-grid">
+            <div class="spec-card">
+              <span class="spec-name">Manufacturing</span>
+              <span class="spec-value">Custom OEM & Private Label</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-name">Branding</span>
+              <span class="spec-value">Logo Printing, Embroidery, Embossing</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-name">Material Options</span>
+              <span class="spec-value">Genuine Leather, Microfiber, PU</span>
+            </div>
             @for (spec of getSpecs(); track spec.name) {
               <div class="spec-card">
                 <span class="spec-name">{{ spec.name }}</span>
@@ -119,7 +119,7 @@
         <!-- Product Description -->
         @if (product.description) {
           <div class="description-box">
-            <h3>Description</h3>
+            <h3>Product Overview</h3>
             <div class="description-content" [innerHTML]="safeDescription || product.description"></div>
           </div>
         }
@@ -127,16 +127,16 @@
         <!-- Storefront Trust Highlights -->
         <div class="detail-trust-row">
           <div class="detail-trust-item">
-            <i class="fa-solid fa-truck-fast text-red"></i>
-            <span>Worldwide Shipping</span>
+            <i class="fa-solid fa-plane-departure text-red"></i>
+            <span>Global OEM Export</span>
           </div>
           <div class="detail-trust-item">
             <i class="fa-solid fa-award text-red"></i>
-            <span>Sialkot Factory Quality</span>
+            <span>Sialkot Handcrafted Quality</span>
           </div>
           <div class="detail-trust-item">
             <i class="fa-solid fa-headset text-red"></i>
-            <span>24/7 Bulk Support</span>
+            <span>Direct Factory Consultation</span>
           </div>
         </div>
       </div>
