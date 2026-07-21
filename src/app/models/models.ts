@@ -46,6 +46,9 @@ export interface ContactInfo {
   facebookUrl?: string;
   instagramUrl?: string;
   twitterUrl?: string;
+  themePrimaryColor?: string;
+  announcementText?: string;
+  announcementItems?: string[];
   latitude: number;
   longitude: number;
 }

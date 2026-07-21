@@ -22,8 +22,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.contactService.getContactInfo().subscribe({
       next: (res) => {
-        if (res.success) {
+        if (res.success && res.data) {
           this.contactInfo = res.data;
+          if (res.data.themePrimaryColor) {
+            this.themeService.setPrimaryColor(res.data.themePrimaryColor);
+          }
           this.cdr.markForCheck();
         }
       },
@@ -39,7 +42,16 @@ export class NavbarComponent implements OnInit {
     this.isMobileMenuOpen = false;
   }
 
-  setGlobalPrimaryColor(color: string): void {
-    this.themeService.setPrimaryColor(color);
+  getTickerPoints(): string[] {
+    if (this.contactInfo?.announcementItems && this.contactInfo.announcementItems.length > 0) {
+      return this.contactInfo.announcementItems;
+    }
+    if (this.contactInfo?.announcementText) {
+      return this.contactInfo.announcementText.split('•').map(s => s.trim()).filter(s => s.length > 0);
+    }
+    return [
+      'FREE SHIPPING ON BULK ORDERS',
+      'Pro-Grade Boxing Gear Direct from Manufacturer'
+    ];
   }
 }

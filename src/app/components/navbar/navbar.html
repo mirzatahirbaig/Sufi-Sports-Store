@@ -1,28 +1,23 @@
-<!-- Top Announcement Bar (Shopify Style) -->
+<!-- Top Announcement Bar (Shopify Style - Dynamic Infinite Marquee) -->
 <div class="announcement-bar">
-  <div class="container announcement-container">
-    <span class="announcement-text">
-      <i class="fa-solid fa-phone text-orange"></i>
-      <a [href]="'tel:' + (contactInfo?.phone || '+92521234567')" class="text-white" style="text-decoration: none;">
-        <strong>{{ contactInfo?.phone || '+92 52 1234567' }}</strong>
-      </a>
-      &bull; {{ contactInfo?.address || 'Industrial Area, Sialkot, Pakistan' }}
-    </span>
-    <div class="announcement-right">
-      <!-- Global Theme Preset Swatches -->
-      <div class="theme-swatches" title="Global Accent Theme Presets">
-        <span class="swatch-label">Theme Accent:</span>
-        <button (click)="setGlobalPrimaryColor('#e60000')" class="swatch-btn dot-red" aria-label="Red Theme"></button>
-        <button (click)="setGlobalPrimaryColor('#ff6600')" class="swatch-btn dot-orange" aria-label="Orange Theme"></button>
-        <button (click)="setGlobalPrimaryColor('#2563eb')" class="swatch-btn dot-blue" aria-label="Blue Theme"></button>
-        <button (click)="setGlobalPrimaryColor('#059669')" class="swatch-btn dot-emerald" aria-label="Emerald Theme"></button>
-      </div>
+  <div class="announcement-ticker-track">
+    <div class="ticker-content">
+      @for (point of getTickerPoints(); track $index) {
+      <span class="ticker-item">
+        <i class="fa-solid fa-bolt text-orange me-1"></i>
+        {{ point }}
+      </span>
+      <span class="ticker-bullet">&bull;</span>
+      }
 
-      <div class="announcement-links">
-        <a routerLink="/contact" class="announcement-link">
-          <i class="fa-solid fa-headset"></i> Order Inquiry
-        </a>
-      </div>
+      <!-- Duplicate set for seamless continuous looping -->
+      @for (point of getTickerPoints(); track $index) {
+      <span class="ticker-item">
+        <i class="fa-solid fa-bolt text-orange me-1"></i>
+        {{ point }}
+      </span>
+      <span class="ticker-bullet">&bull;</span>
+      }
     </div>
   </div>
 </div>
@@ -32,7 +27,7 @@
   <div class="container navbar-container">
     <!-- Brand Logo -->
     <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
-      <span class="brand-badge"><i class="fa-solid fa-shield-halved"></i></span>
+      <img src="logo.png" alt="Sufi Sports Logo" class="brand-logo-img" />
       <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
     </a>
 
@@ -63,16 +58,17 @@
 
   <!-- Mobile Navigation Menu -->
   @if (isMobileMenuOpen) {
-    <div class="mobile-menu">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
-      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Shop Products</a>
-      <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Blog</a>
-      <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
-      <div class="mobile-menu-footer">
-        <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
-          <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
-        </a>
-      </div>
+  <div class="mobile-menu">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      (click)="closeMobileMenu()">Home</a>
+    <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Shop Products</a>
+    <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Blog</a>
+    <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+    <div class="mobile-menu-footer">
+      <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
+        <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
+      </a>
     </div>
+  </div>
   }
 </nav>

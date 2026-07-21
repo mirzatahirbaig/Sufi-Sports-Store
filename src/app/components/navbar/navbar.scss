@@ -3,85 +3,63 @@
 .announcement-bar {
   background-color: $color-black;
   color: $color-white;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
 
-  .announcement-container {
-    display: flex;
-    justify-content: space-between;
+  .announcement-ticker-track {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-content {
+    display: inline-flex;
     align-items: center;
+    white-space: nowrap;
+    animation: marqueeTicker 25s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 20px;
+    color: rgba(255, 255, 255, 0.95);
+
+    strong {
+      color: $color-secondary-orange;
+      margin-left: 4px;
+    }
+  }
+
+  .ticker-bullet {
+    color: $color-secondary-orange;
+    font-size: 0.9rem;
+    padding: 0 5px;
+    opacity: 0.8;
   }
 
   .text-orange {
     color: $color-secondary-orange;
-    margin-right: 6px;
-  }
-
-  .announcement-text strong {
-    color: $color-secondary-orange;
-  }
-
-  .announcement-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .theme-swatches {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    .swatch-label {
-      font-size: 0.72rem;
-      color: rgba(255, 255, 255, 0.7);
-      text-transform: uppercase;
-      margin-right: 2px;
-    }
-
-    .swatch-btn {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      cursor: pointer;
-      transition: transform 0.2s ease;
-
-      &:hover {
-        transform: scale(1.25);
-      }
-
-      &.dot-red { background-color: #e60000; }
-      &.dot-orange { background-color: #ff6600; }
-      &.dot-blue { background-color: #2563eb; }
-      &.dot-emerald { background-color: #059669; }
-    }
-  }
-
-  .announcement-links {
-    display: flex;
-    gap: 16px;
-
-    .announcement-link {
-      color: $color-white;
-      font-weight: 500;
-      &:hover {
-        color: $color-secondary-orange;
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    .announcement-links, .theme-swatches {
-      display: none;
-    }
-    .announcement-container {
-      justify-content: center;
-      text-align: center;
-    }
   }
 }
+
+@keyframes marqueeTicker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+
 
 .navbar-wrapper {
   position: sticky;
@@ -119,6 +97,18 @@
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
+  }
+
+  .brand-logo-img {
+    height: 42px;
+    width: 42px;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
   }
 
   .brand-text {
