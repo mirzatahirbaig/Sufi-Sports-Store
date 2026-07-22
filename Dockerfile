@@ -2,9 +2,9 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 
-# Install dependencies based on package-lock.json
-COPY package.json package-lock.json ./
-RUN npm ci
+# Install dependencies
+COPY package*.json ./
+RUN npm install
 
 # Copy source files and build production bundle
 COPY . .
