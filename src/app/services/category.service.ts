@@ -10,6 +10,6 @@ export class CategoryService {
   private readonly apiService = inject(ApiService);
 
   getCategories(): Observable<ApiResponse<Category[]>> {
-    return this.apiService.get<ApiResponse<Category[]>>('/categories');
+    return this.apiService.get<ApiResponse<Category[]>>('/api/v1/categories');
   }
 }

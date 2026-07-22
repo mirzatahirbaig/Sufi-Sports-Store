@@ -60,62 +60,10 @@
           }
         </div>
       } @else {
-        <!-- Fallback static category cards if backend has no categories yet -->
-        <div class="categories-grid">
-          <a routerLink="/products" [queryParams]="{category: 'Boxing Gloves'}" class="category-image-card">
-            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_boxing_gloves.png') + ')'"></div>
-            <div class="category-card-overlay"></div>
-            <div class="category-card-content">
-              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-              <h3 class="category-card-title">Boxing Gloves</h3>
-              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-            </div>
-          </a>
-          <a routerLink="/products" [queryParams]="{category: 'Hand Wraps'}" class="category-image-card">
-            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_boxing_gloves.png') + ')'"></div>
-            <div class="category-card-overlay"></div>
-            <div class="category-card-content">
-              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-              <h3 class="category-card-title">Hand Wraps</h3>
-              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-            </div>
-          </a>
-          <a routerLink="/products" [queryParams]="{category: 'Headgear'}" class="category-image-card">
-            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_headgear.png') + ')'"></div>
-            <div class="category-card-overlay"></div>
-            <div class="category-card-content">
-              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-              <h3 class="category-card-title">Headgear</h3>
-              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-            </div>
-          </a>
-          <a routerLink="/products" [queryParams]="{category: 'Punching Bags & Stands'}" class="category-image-card">
-            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_punching_bags.png') + ')'"></div>
-            <div class="category-card-overlay"></div>
-            <div class="category-card-content">
-              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-              <h3 class="category-card-title">Punching Bags & Stands</h3>
-              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-            </div>
-          </a>
-          <a routerLink="/products" [queryParams]="{category: 'Focus Mitts'}" class="category-image-card">
-            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_headgear.png') + ')'"></div>
-            <div class="category-card-overlay"></div>
-            <div class="category-card-content">
-              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-              <h3 class="category-card-title">Focus Mitts</h3>
-              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-            </div>
-          </a>
-          <a routerLink="/products" [queryParams]="{category: 'Protective Gear'}" class="category-image-card">
-            <div class="category-card-bg" [style.background-image]="'url(' + resolveCategoryImageUrl('/uploads/category_punching_bags.png') + ')'"></div>
-            <div class="category-card-overlay"></div>
-            <div class="category-card-content">
-              <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-              <h3 class="category-card-title">Protective Gear</h3>
-              <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-            </div>
-          </a>
+        <div class="empty-state shopify-card text-center p-5">
+          <i class="fa-solid fa-layer-group text-orange empty-state-icon"></i>
+          <h3>No Custom Categories Available</h3>
+          <p>Product categories managed in the Admin Portal will be displayed here dynamically.</p>
         </div>
       }
     }
@@ -154,9 +102,11 @@
           <i class="fa-solid fa-box-open text-orange fa-3x mb-3"></i>
           <h3>No Custom Products Available Right Now</h3>
           <p>Contact our factory sales team directly for custom product manufacturing inquiries.</p>
-          <a routerLink="/contact" class="btn-shopify-red mt-3">
-            <i class="fa-solid fa-paper-plane me-1"></i> Submit Custom Inquiry
-          </a>
+          <div class="empty-state-actions">
+            <a routerLink="/contact" class="btn-shopify-red">
+              <i class="fa-solid fa-paper-plane me-1"></i> Submit Custom Inquiry
+            </a>
+          </div>
         </div>
       }
     }

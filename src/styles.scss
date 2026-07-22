@@ -179,3 +179,101 @@ a {
     background: $color-primary-red;
   }
 }
+
+// Layout & Utility Helper Classes
+.d-flex { display: flex !important; }
+.flex-column { flex-direction: column !important; }
+.justify-content-center { justify-content: center !important; }
+.align-items-center { align-items: center !important; }
+.gap-1 { gap: 4px !important; }
+.gap-2 { gap: 8px !important; }
+.gap-3 { gap: 16px !important; }
+
+.mt-1 { margin-top: 4px !important; }
+.mt-2 { margin-top: 8px !important; }
+.mt-3 { margin-top: 16px !important; }
+.mt-4 { margin-top: 24px !important; }
+
+.mb-1 { margin-bottom: 4px !important; }
+.mb-2 { margin-bottom: 8px !important; }
+.mb-3 { margin-bottom: 16px !important; }
+.mb-4 { margin-bottom: 24px !important; }
+
+.me-1 { margin-right: 4px !important; }
+.me-2 { margin-right: 8px !important; }
+.ms-1 { margin-left: 4px !important; }
+.ms-2 { margin-left: 8px !important; }
+
+.p-4 { padding: 24px !important; }
+.p-5 { padding: 40px !important; }
+
+.text-center { text-align: center !important; }
+.text-muted { color: $color-text-muted !important; }
+.text-orange { color: $color-secondary-orange !important; }
+.fa-3x { font-size: 3em !important; }
+.fa-2x { font-size: 2em !important; }
+
+.w-full { width: 100% !important; }
+
+// Universal Empty State Styling Baseline
+.empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  > i, .empty-state-icon {
+    font-size: 2.5rem;
+    margin-bottom: 4px;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    color: $color-black;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: $color-text-muted;
+    max-width: 520px;
+    font-size: 0.95rem;
+    margin: 0 auto 8px auto;
+  }
+
+  .empty-state-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .btn-shopify-red,
+  .btn-shopify-black,
+  .btn-shopify-outline,
+  a.btn-shopify-red,
+  a.btn-shopify-black,
+  button.btn-shopify-red {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    max-width: fit-content !important;
+    padding: 10px 22px !important;
+    font-size: 0.88rem !important;
+    align-self: center !important;
+    gap: 8px !important;
+
+    i {
+      font-size: 0.9rem !important;
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
+  }
+}
+

@@ -387,13 +387,61 @@
 }
 
 .empty-state {
-  padding: 48px;
+  padding: 48px 24px;
   text-align: center;
   color: $color-text-muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 
-  i {
+  > i, .empty-state-icon {
     font-size: 2.5rem;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    color: $color-black;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: $color-text-muted;
+    max-width: 520px;
+    font-size: 0.95rem;
+    margin: 0 auto 8px auto;
+  }
+
+  .empty-state-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .btn-shopify-red,
+  .btn-shopify-black,
+  a.btn-shopify-red,
+  a.btn-shopify-black {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: fit-content;
+    padding: 10px 22px;
+    font-size: 0.88rem;
+    align-self: center;
+    gap: 8px;
+
+    i {
+      font-size: 0.9rem !important;
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
   }
 }
 
