@@ -1,3 +1,5 @@
+name: sufi-sports
+
 services:
   customer-web:
     build:
@@ -5,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: sufisports-customer-web
     ports:
-      - "80:80"
+      - "4200:80"
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/ > /dev/null || exit 1"]
