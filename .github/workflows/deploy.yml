@@ -1,0 +1,33 @@
+name: Deploy Angular Storefront to DigitalOcean
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    name: Deploy to Droplet
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH and Redeploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          port: ${{ secrets.DROPLET_PORT || 22 }}
+          script: |
+            # Navigate to project folder on droplet
+            cd ${{ secrets.DROPLET_PROJECT_PATH || '/root/Sufi-Sports-Store' }}
+            
+            # Pull latest changes from production branch
+            git fetch origin production
+            git reset --hard origin/production
+            
+            # Rebuild and restart Angular customer web container
+            docker compose up -d --build customer-web
+            
+            # Cleanup unused docker images to save space
+            docker image prune -f

@@ -1,5 +1,6 @@
 # Node & Build artifacts
 node_modules/
+dist/
 .angular/
 .npm/
 
