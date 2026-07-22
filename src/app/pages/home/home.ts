@@ -31,6 +31,13 @@ export class HomeComponent implements OnInit {
   recentArticles: Article[] = [];
   categories: Category[] = [];
 
+  get tickerCategories(): Category[] {
+    if (this.categories.length > 3) {
+      return [...this.categories, ...this.categories, ...this.categories];
+    }
+    return this.categories;
+  }
+
   isLoadingProducts = true;
   isLoadingArticles = true;
   isLoadingCategories = true;

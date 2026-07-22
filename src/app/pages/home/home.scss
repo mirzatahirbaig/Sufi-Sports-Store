@@ -114,6 +114,72 @@
   }
 }
 
+// Infinite Category Sliding Ticker
+.categories-ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 8px 0;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, $color-bg-section, transparent);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, $color-bg-section, transparent);
+  }
+}
+
+.categories-ticker-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+
+  &.animated {
+    animation: categoriesMarquee 25s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+}
+
+.category-ticker-item {
+  width: 360px;
+  flex: 0 0 360px;
+
+  @media (max-width: 1200px) {
+    width: 310px;
+    flex: 0 0 310px;
+  }
+
+  @media (max-width: 768px) {
+    width: 270px;
+    flex: 0 0 270px;
+  }
+}
+
+@keyframes categoriesMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
 .category-image-card {
   position: relative;
   height: 240px;
