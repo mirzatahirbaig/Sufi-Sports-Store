@@ -1,11 +1,7 @@
 name: Deploy Angular Storefront to DigitalOcean
 
 on:
-  push:
-    branches:
-      - Production
-      - production
-      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -25,9 +21,9 @@ jobs:
             # Navigate to project folder on droplet
             cd ${{ secrets.DROPLET_PROJECT_PATH || '/root/Sufi-Sports-Store' }}
             
-            # Pull latest changes from active branch
-            git fetch --all
-            git reset --hard origin/Production || git reset --hard origin/production || git reset --hard origin/main
+            # Pull latest changes from production branch
+            git fetch origin production
+            git reset --hard origin/production
             
             # Rebuild and restart Angular customer web container
             docker compose up -d --build customer-web
