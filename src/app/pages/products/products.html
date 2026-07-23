@@ -10,12 +10,20 @@
   <!-- Horizontal Category Pills Bar -->
   <div class="category-pills-bar">
     <span class="filter-label"><i class="fa-solid fa-filter"></i> Categories:</span>
-    <div class="pills-scroll">
-      @for (cat of categories; track cat) {
-        <button class="pill-btn" [class.active]="cat === selectedCategory" (click)="setCategory(cat)">
-          {{ cat }}
-        </button>
-      }
+    <div class="pills-slider-wrapper">
+      <button type="button" class="pills-scroll-btn prev-btn" (click)="scrollPills(pillsTrack, 'left')" aria-label="Scroll left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div #pillsTrack class="pills-scroll">
+        @for (cat of categories; track cat) {
+          <button class="pill-btn" [class.active]="cat === selectedCategory" (click)="setCategory(cat)">
+            {{ cat }}
+          </button>
+        }
+      </div>
+      <button type="button" class="pills-scroll-btn next-btn" (click)="scrollPills(pillsTrack, 'right')" aria-label="Scroll right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 

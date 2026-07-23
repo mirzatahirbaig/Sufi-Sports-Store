@@ -34,24 +34,25 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
     this.route.queryParams.subscribe(params => {
-      if (params['category']) {
-        this.selectedCategory = params['category'];
-      }
+      if (params['category']) this.selectedCategory = params['category'];
       this.loadProducts();
     });
+  }
+
+  scrollPills(element: HTMLDivElement, direction: 'left' | 'right'): void {
+    const scrollAmount = direction === 'left' ? -220 : 220;
+    element.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 
   loadCategories(): void {
     this.categoryService.getCategories().subscribe({
       next: (res) => {
-        if (res.success && res.data && res.data.length > 0) {
+        if (res.success && res.data?.length) {
           this.categories = ['All', ...res.data.map(c => c.name)];
         }
         this.cdr.markForCheck();
       },
-      error: () => {
-        this.cdr.markForCheck();
-      }
+      error: () => this.cdr.markForCheck()
     });
   }
 
