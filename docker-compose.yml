@@ -8,6 +8,10 @@ services:
     container_name: sufisports-customer-web
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.crt:/etc/nginx/certs/nginx.crt:ro
+      - ./nginx.key:/etc/nginx/certs/nginx.key:ro
     restart: unless-stopped
     healthcheck:
       test: [ "CMD-SHELL", "wget -qO- http://127.0.0.1/ > /dev/null || exit 1" ]
