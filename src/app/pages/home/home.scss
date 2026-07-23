@@ -114,8 +114,8 @@
   }
 }
 
-// Category Slider with Left and Right Controls
-.categories-slider-wrapper {
+// Category Slider with Left and Right Controls & Auto-Scroll
+.categories-ticker-wrapper {
   position: relative;
   width: 100%;
   display: flex;
@@ -179,7 +179,7 @@
   }
 }
 
-.category-slider-item {
+.category-ticker-item {
   width: 340px;
   flex: 0 0 340px;
 
