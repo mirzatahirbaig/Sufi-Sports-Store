@@ -21,7 +21,7 @@
     </div>
     <div class="announcement-contact d-none-mobile">
       @if (contactInfo?.phone) {
-        <a [href]="'https://wa.me/' + contactInfo?.phone" target="_blank" class="contact-link me-3">
+        <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer" class="contact-link me-3">
           <i class="fa-brands fa-whatsapp me-1 text-success"></i> {{ contactInfo?.phone }}
         </a>
       }

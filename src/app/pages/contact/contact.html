@@ -25,10 +25,10 @@
         }
         @if (contactInfo?.phone) {
           <li>
-            <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+            <div class="icon-box"><i class="fa-brands fa-whatsapp text-success"></i></div>
             <div class="info-text">
               <h4>Phone / WhatsApp</h4>
-              <a [href]="'tel:' + contactInfo?.phone">
+              <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer">
                 {{ contactInfo?.phone }}
               </a>
             </div>

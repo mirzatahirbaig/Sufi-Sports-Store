@@ -5,6 +5,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ContactService } from '../../services/contact.service';
 import { ContactInfo, SubmitContactMessageCommand } from '../../models/models';
 
+import { formatWhatsAppUrl } from '../../utils/contact.utils';
+
 @Component({
   selector: 'app-contact',
   standalone: true,
@@ -20,6 +22,10 @@ export class ContactComponent implements OnInit {
 
   contactInfo: ContactInfo | null = null;
   formModel: SubmitContactMessageCommand = { name: '', email: '', phone: '', message: '' };
+
+  getWhatsAppUrl(phone?: string | null): string {
+    return formatWhatsAppUrl(phone);
+  }
 
   get mapUrl(): SafeResourceUrl {
     const lat = this.contactInfo?.latitude || 32.4972;
