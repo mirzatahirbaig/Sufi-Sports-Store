@@ -4,31 +4,32 @@
     <div class="announcement-ticker-track">
       <div class="ticker-content">
         @for (point of getTickerPoints(); track $index) {
-          <span class="ticker-item">
-            <i class="fa-solid fa-industry text-orange me-1"></i>
-            {{ point }}
-          </span>
-          <span class="ticker-bullet">&bull;</span>
+        <span class="ticker-item">
+          <span class="text-orange me-1">&bull;</span>
+          {{ point }}
+        </span>
+        <!-- <span class="ticker-bullet">&bull;</span> -->
         }
         @for (point of getTickerPoints(); track $index) {
-          <span class="ticker-item">
-            <i class="fa-solid fa-industry text-orange me-1"></i>
-            {{ point }}
-          </span>
-          <span class="ticker-bullet">&bull;</span>
+        <span class="ticker-item">
+          <span class="text-orange me-1">&bull;</span>
+          {{ point }}
+        </span>
+        <!-- <span class="ticker-bullet">&bull;</span> -->
         }
       </div>
     </div>
     <div class="announcement-contact d-none-mobile">
       @if (contactInfo?.phone) {
-        <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer" class="contact-link me-3">
-          <i class="fa-brands fa-whatsapp me-1 text-success"></i> {{ contactInfo?.phone }}
-        </a>
+      <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer"
+        class="contact-link me-3">
+        <i class="fa-brands fa-whatsapp me-1 text-success"></i> {{ contactInfo?.phone }}
+      </a>
       }
       @if (contactInfo?.email) {
-        <a [href]="'mailto:' + contactInfo?.email" class="contact-link">
-          <i class="fa-solid fa-envelope me-1"></i> {{ contactInfo?.email }}
-        </a>
+      <a [href]="'mailto:' + contactInfo?.email" class="contact-link">
+        <i class="fa-solid fa-envelope me-1"></i> {{ contactInfo?.email }}
+      </a>
       }
     </div>
   </div>
@@ -73,16 +74,17 @@
 
   <!-- Mobile Navigation Menu -->
   @if (isMobileMenuOpen) {
-    <div class="mobile-menu">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
-      <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Custom Products</a>
-      <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Factory Insights</a>
-      <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
-      <div class="mobile-menu-footer">
-        <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
-          <i class="fa-solid fa-pen-ruler me-1"></i> Request Custom Quote
-        </a>
-      </div>
+  <div class="mobile-menu">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      (click)="closeMobileMenu()">Home</a>
+    <a routerLink="/products" routerLinkActive="active" (click)="closeMobileMenu()">Custom Products</a>
+    <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Factory Insights</a>
+    <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+    <div class="mobile-menu-footer">
+      <a routerLink="/contact" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
+        <i class="fa-solid fa-pen-ruler me-1"></i> Request Custom Quote
+      </a>
     </div>
+  </div>
   }
 </nav>
