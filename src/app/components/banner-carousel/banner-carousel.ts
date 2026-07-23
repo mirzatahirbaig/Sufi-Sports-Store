@@ -45,7 +45,7 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
     this.banners = [
       {
         id: 901,
-        title: '100% CUSTOM PRODUCT MANUFACTURING',
+        title: 'PRO-GRADE BOXING & SPORTS EQUIPMENT',
         subtitle: 'Pro-grade boxing & sports equipment crafted exactly to your brand\'s specifications — custom logos, custom colors, specialized padding & premium materials.',
         imageUrl: '/uploads/custom_boxing_gear_banner.png',
         targetUrl: '/products',
