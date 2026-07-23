@@ -1,0 +1,164 @@
+.whatsapp-float-container {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+
+  // Entrance zoom-in animation
+  animation: zoomInEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.whatsapp-float-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    .whatsapp-icon-btn {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.65);
+    }
+
+    .whatsapp-badge {
+      transform: translateX(-4px) scale(1.02);
+      border-color: #25d366;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+}
+
+.whatsapp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+
+  .badge-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #25d366;
+    box-shadow: 0 0 8px #25d366;
+    animation: dotPulse 1.8s infinite;
+  }
+
+  .badge-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.2px;
+  }
+}
+
+.whatsapp-icon-btn {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  
+  // Continuous zoom pulse animation factor
+  animation: zoomPulseFactor 3s ease-in-out infinite;
+
+  .whatsapp-svg {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  }
+
+  .pulse-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(37, 211, 102, 0.6);
+    animation: ringExpand 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    pointer-events: none;
+  }
+}
+
+// Keyframes
+@keyframes zoomInEntry {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes zoomPulseFactor {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes ringExpand {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 576px) {
+  .whatsapp-float-container {
+    bottom: 20px;
+    right: 16px;
+  }
+
+  .whatsapp-badge {
+    padding: 8px 12px;
+    .badge-text {
+      font-size: 0.78rem;
+    }
+  }
+
+  .whatsapp-icon-btn {
+    width: 50px;
+    height: 50px;
+
+    .whatsapp-svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+}
