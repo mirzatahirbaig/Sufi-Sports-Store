@@ -23,6 +23,18 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+@media (max-width: 768px) {
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.15rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.45rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.05rem; }
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -34,6 +46,14 @@ a {
   max-width: $max-width-container;
   margin: 0 auto;
   padding: 0 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 14px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 12px;
+  }
 }
 
 // Shopify Card Baseline

@@ -101,6 +101,11 @@
   align-items: center;
   justify-content: space-between;
   height: $navbar-height;
+
+  @media (max-width: 768px) {
+    height: 64px;
+    padding: 0 14px;
+  }
 }
 
 .navbar-brand {
@@ -112,6 +117,16 @@
   font-weight: 800;
   letter-spacing: -0.5px;
   text-decoration: none;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    gap: 6px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 
   .brand-badge {
     background-color: $color-primary-red;
@@ -123,6 +138,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
+    flex-shrink: 0;
   }
 
   .brand-logo-img {
@@ -131,6 +147,12 @@
     object-fit: contain;
     border-radius: 50%;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      height: 34px;
+      width: 34px;
+    }
 
     &:hover {
       transform: scale(1.08);
@@ -141,6 +163,7 @@
     display: flex;
     flex-direction: column;
     line-height: 1.1;
+    flex-shrink: 0;
   }
 
   .brand-text {
@@ -157,6 +180,10 @@
     color: $color-text-muted;
     letter-spacing: 0.5px;
     margin-top: 1px;
+
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
 }
 
@@ -199,11 +226,19 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
+
+  @media (max-width: 600px) {
+    gap: 8px;
+  }
 
   .action-icon {
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 50%;
+    aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,6 +246,15 @@
     font-size: 1.1rem;
     border: 1px solid $color-border-light;
     transition: $transition-smooth;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      font-size: 0.95rem;
+    }
 
     &:hover {
       border-color: $color-primary-red;
@@ -222,6 +266,19 @@
   .btn-header-cta {
     padding: 8px 18px;
     font-size: 0.85rem;
+    flex-shrink: 0;
+
+    @media (max-width: 600px) {
+      padding: 6px 12px;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 440px) {
+      padding: 7px 10px;
+      span {
+        display: none;
+      }
+    }
   }
 }
 
@@ -235,11 +292,18 @@
   font-size: 1.2rem;
   color: $color-black;
   cursor: pointer;
+  flex-shrink: 0;
 
   @media (max-width: 900px) {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
 }
 
