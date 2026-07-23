@@ -12,12 +12,7 @@ import { ArticleCardComponent } from '../../components/article-card/article-card
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    RouterLink,
-    BannerCarouselComponent,
-    ProductCardComponent,
-    ArticleCardComponent
-  ],
+  imports: [RouterLink, BannerCarouselComponent, ProductCardComponent, ArticleCardComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -31,13 +26,6 @@ export class HomeComponent implements OnInit {
   recentArticles: Article[] = [];
   categories: Category[] = [];
 
-  get tickerCategories(): Category[] {
-    if (this.categories.length > 3) {
-      return [...this.categories, ...this.categories, ...this.categories];
-    }
-    return this.categories;
-  }
-
   isLoadingProducts = true;
   isLoadingArticles = true;
   isLoadingCategories = true;
@@ -48,14 +36,17 @@ export class HomeComponent implements OnInit {
     this.loadRecentArticles();
   }
 
+  scrollCategories(element: HTMLDivElement, direction: 'left' | 'right'): void {
+    const scrollAmount = direction === 'left' ? -380 : 380;
+    element.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+
   resolveCategoryImageUrl(url: string | undefined): string {
     return resolveImageUrl(url, '');
   }
 
   getCategoryBgImage(cat: Category): string {
-    if (cat.imageUrl) {
-      return this.resolveCategoryImageUrl(cat.imageUrl);
-    }
+    if (cat.imageUrl) return this.resolveCategoryImageUrl(cat.imageUrl);
     const name = (cat.name || '').toLowerCase();
     if (name.includes('head') || name.includes('mitt')) {
       return this.resolveCategoryImageUrl('/uploads/category_headgear.png');
@@ -68,10 +59,8 @@ export class HomeComponent implements OnInit {
 
   private loadCategories(): void {
     this.categoryService.getCategories().subscribe({
-      next: (response) => {
-        if (response.success && response.data) {
-          this.categories = response.data;
-        }
+      next: (res) => {
+        if (res.success && res.data) this.categories = res.data;
         this.isLoadingCategories = false;
         this.cdr.markForCheck();
       },
@@ -84,14 +73,12 @@ export class HomeComponent implements OnInit {
 
   private loadFeaturedProducts(): void {
     this.productService.getProducts({ isFeatured: true, pageSize: 6, isActive: true }).subscribe({
-      next: (response) => {
-        if (response.success && response.data?.items) {
-          this.featuredProducts = response.data.items;
-        }
+      next: (res) => {
+        if (res.success && res.data?.items) this.featuredProducts = res.data.items;
         this.isLoadingProducts = false;
         this.cdr.markForCheck();
       },
-      error: () => { 
+      error: () => {
         this.isLoadingProducts = false;
         this.cdr.markForCheck();
       }
@@ -100,14 +87,12 @@ export class HomeComponent implements OnInit {
 
   private loadRecentArticles(): void {
     this.blogService.getArticles(1, 3).subscribe({
-      next: (response) => {
-        if (response.success && response.data?.items) {
-          this.recentArticles = response.data.items;
-        }
+      next: (res) => {
+        if (res.success && res.data?.items) this.recentArticles = res.data.items;
         this.isLoadingArticles = false;
         this.cdr.markForCheck();
       },
-      error: () => { 
+      error: () => {
         this.isLoadingArticles = false;
         this.cdr.markForCheck();
       }

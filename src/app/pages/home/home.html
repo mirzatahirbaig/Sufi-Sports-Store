@@ -46,26 +46,14 @@
       </div>
     } @else {
       @if (categories.length > 0) {
-        @if (categories.length > 3) {
-          <div class="categories-ticker-wrapper">
-            <div class="categories-ticker-track animated">
-              @for (cat of tickerCategories; track $index) {
-                <a routerLink="/products" [queryParams]="{category: cat.name}" class="category-image-card category-ticker-item">
-                  <div class="category-card-bg" [style.background-image]="'url(' + getCategoryBgImage(cat) + ')'"></div>
-                  <div class="category-card-overlay"></div>
-                  <div class="category-card-content">
-                    <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-                    <h3 class="category-card-title">{{ cat.name }}</h3>
-                    <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-                  </div>
-                </a>
-              }
-            </div>
-          </div>
-        } @else {
-          <div class="categories-grid">
+        <div class="categories-slider-wrapper">
+          <button type="button" class="category-slider-btn prev-btn" (click)="scrollCategories(catTrack, 'left')" aria-label="Previous categories">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          
+          <div #catTrack class="categories-scroll-track">
             @for (cat of categories; track cat.id) {
-              <a routerLink="/products" [queryParams]="{category: cat.name}" class="category-image-card">
+              <a routerLink="/products" [queryParams]="{category: cat.name}" class="category-image-card category-slider-item">
                 <div class="category-card-bg" [style.background-image]="'url(' + getCategoryBgImage(cat) + ')'"></div>
                 <div class="category-card-overlay"></div>
                 <div class="category-card-content">
@@ -76,7 +64,11 @@
               </a>
             }
           </div>
-        }
+
+          <button type="button" class="category-slider-btn next-btn" (click)="scrollCategories(catTrack, 'right')" aria-label="Next categories">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       } @else {
         <div class="empty-state shopify-card text-center p-5">
           <i class="fa-solid fa-layer-group text-orange empty-state-icon"></i>
