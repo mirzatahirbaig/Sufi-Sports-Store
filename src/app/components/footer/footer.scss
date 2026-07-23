@@ -106,6 +106,19 @@
     margin-bottom: 16px;
     text-decoration: none;
 
+    .brand-logo-img {
+      height: 38px;
+      width: 38px;
+      object-fit: contain;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+
     .brand-badge {
       background-color: $color-primary-red;
       color: $color-white;

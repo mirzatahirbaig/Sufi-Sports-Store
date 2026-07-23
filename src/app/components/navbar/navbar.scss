@@ -85,8 +85,6 @@
   }
 }
 
-
-
 .navbar-wrapper {
   position: sticky;
   top: 0;
@@ -189,7 +187,8 @@
 
 .navbar-links {
   display: flex;
-  gap: 32px;
+  align-items: center;
+  gap: 28px;
 
   a {
     font-family: $font-family-title;
@@ -200,6 +199,7 @@
     letter-spacing: 0.5px;
     padding: 8px 0;
     position: relative;
+    text-decoration: none;
 
     &:hover, &.active {
       color: $color-primary-red;
@@ -213,6 +213,111 @@
         height: 2px;
         background-color: $color-primary-red;
         border-radius: 2px;
+      }
+    }
+  }
+
+  /* Dropdown styling for Boxing nav item */
+  .nav-item-dropdown {
+    position: relative;
+    padding: 8px 0;
+
+    .dropdown-trigger {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .caret-icon {
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+      }
+    }
+
+    &:hover {
+      .dropdown-trigger .caret-icon {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -12px;
+      min-width: 250px;
+      background: $color-white;
+      border: 1px solid $color-border-light;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      padding: 8px 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1050;
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 18px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: $color-black;
+        text-transform: none;
+        letter-spacing: 0;
+        transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+        border-bottom: none;
+
+        &::after {
+          display: none !important;
+        }
+
+        .arrow-icon {
+          font-size: 0.75rem;
+          color: $color-text-muted;
+          transition: color 0.15s ease, transform 0.15s ease;
+        }
+
+        &:hover {
+          background-color: rgba(230, 0, 0, 0.06);
+          color: $color-primary-red;
+          padding-left: 22px;
+
+          .arrow-icon {
+            color: $color-primary-red;
+            transform: translateX(2px);
+          }
+        }
+
+        &.all-item {
+          color: $color-primary-red;
+          font-weight: 700;
+          background: rgba(230, 0, 0, 0.05);
+
+          i {
+            color: $color-primary-red;
+          }
+
+          &:hover {
+            background: $color-primary-red;
+            color: $color-white;
+
+            i {
+              color: $color-white;
+            }
+          }
+        }
+      }
+
+      .dropdown-divider {
+        height: 1px;
+        background: $color-border-light;
+        margin: 6px 0;
       }
     }
   }
@@ -322,10 +427,70 @@
     color: $color-black;
     padding: 10px 0;
     border-bottom: 1px dashed $color-border-light;
+    text-decoration: none;
 
     &.active {
       color: $color-primary-red;
       font-weight: 700;
+    }
+  }
+
+  .mobile-dropdown-wrapper {
+    border-bottom: 1px dashed $color-border-light;
+
+    .mobile-dropdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        padding: 10px 0;
+        font-family: $font-family-title;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $color-black;
+        cursor: pointer;
+        flex: 1;
+
+        &.active {
+          color: $color-primary-red;
+          font-weight: 700;
+        }
+      }
+
+      .accordion-btn {
+        background: none;
+        border: none;
+        padding: 8px 12px;
+        color: #555;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+    }
+
+    .mobile-sub-menu {
+      display: flex;
+      flex-direction: column;
+      background: #f9f9f9;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-bottom: 10px;
+
+      .mobile-sub-item {
+        font-size: 0.875rem;
+        color: #444;
+        padding: 8px 6px;
+        border-bottom: 1px solid #eeeeee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover, &.active {
+          color: $color-primary-red;
+          font-weight: 600;
+        }
+      }
     }
   }
 

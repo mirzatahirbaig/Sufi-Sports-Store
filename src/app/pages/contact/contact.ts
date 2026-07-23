@@ -1,27 +1,32 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ContactService } from '../../services/contact.service';
-import { ContactInfo, SubmitContactMessageCommand } from '../../models/models';
-
+import { ContactInfo } from '../../models/models';
 import { formatWhatsAppUrl } from '../../utils/contact.utils';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './contact.html',
   styleUrl: './contact.scss'
 })
 export class ContactComponent implements OnInit {
   private readonly contactService = inject(ContactService);
-  private readonly route = inject(ActivatedRoute);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly cdr = inject(ChangeDetectorRef);
 
   contactInfo: ContactInfo | null = null;
-  formModel: SubmitContactMessageCommand = { name: '', email: '', phone: '', message: '' };
+
+  ngOnInit(): void {
+    this.contactService.getContactInfo().subscribe({
+      next: (res) => {
+        if (res.success) this.contactInfo = res.data;
+        this.cdr.markForCheck();
+      },
+      error: () => this.cdr.markForCheck()
+    });
+  }
 
   getWhatsAppUrl(phone?: string | null): string {
     return formatWhatsAppUrl(phone);
@@ -33,49 +38,5 @@ export class ContactComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`
     );
-  }
-
-  isSubmitting = false;
-  submitSuccess = false;
-  submitError = '';
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      if (params['product']) {
-        this.formModel.message = `Hello Sufi Sports Factory Team,\n\nI am interested in requesting a custom product quotation for: "${params['product']}".\n\nCustomization Details:\n- Required Quantity:\n- Brand Logo & Printing Needs:\n- Color Scheme Preferences:\n- Target Material & Specs:\n\nPlease contact me with custom pricing, production timeline, and mockups.`;
-      }
-    });
-
-    this.contactService.getContactInfo().subscribe({
-      next: (res) => {
-        if (res.success) this.contactInfo = res.data;
-        this.cdr.markForCheck();
-      },
-      error: () => this.cdr.markForCheck()
-    });
-  }
-
-  onSubmit(): void {
-    this.isSubmitting = true;
-    this.submitSuccess = false;
-    this.submitError = '';
-
-    this.contactService.submitMessage(this.formModel).subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.submitSuccess = true;
-          this.formModel = { name: '', email: '', phone: '', message: '' };
-        } else {
-          this.submitError = res.message || 'Submission failed. Please try again.';
-        }
-        this.isSubmitting = false;
-        this.cdr.markForCheck();
-      },
-      error: (err) => {
-        this.submitError = err.status === 429 ? 'Rate limit exceeded. Please wait a moment.' : 'Failed to send message. Please try again.';
-        this.isSubmitting = false;
-        this.cdr.markForCheck();
-      }
-    });
   }
 }

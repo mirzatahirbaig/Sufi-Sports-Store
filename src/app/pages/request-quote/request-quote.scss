@@ -1,0 +1,207 @@
+@import '../../../styles/variables';
+
+.quote-hero {
+  background-color: $color-black;
+  color: $color-white;
+  padding: 3.5rem 1rem;
+  border-bottom: 3px solid $color-primary-red;
+  text-align: center;
+
+  .quote-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: $color-secondary-orange;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: $color-white;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.quote-container {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.oem-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+
+  .oem-feature-card {
+    background-color: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    box-shadow: $shadow-shopify-card;
+    transition: $transition-smooth;
+
+    &:hover {
+      border-color: rgba(230, 0, 0, 0.3);
+      box-shadow: $shadow-shopify-hover;
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(230, 0, 0, 0.08);
+      color: $color-primary-red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: $color-black;
+      margin: 0 0 0.25rem 0;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: $color-text-muted;
+      margin: 0;
+      line-height: 1.45;
+    }
+  }
+}
+
+.quote-form-card {
+  background-color: $color-white;
+  border: 1px solid $color-border-light;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: $shadow-shopify-card;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-black;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  color: $color-text-muted;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.feedback-banner {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  i { font-size: 1.25rem; margin-top: 0.15rem; }
+  h4 { font-size: 0.95rem; margin: 0 0 0.25rem 0; }
+  p { font-size: 0.85rem; margin: 0; }
+
+  &.success-banner {
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+  }
+
+  &.error-banner {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $color-black;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: 6px;
+    color: $color-black;
+    font-family: $font-family-body;
+    font-size: 0.95rem;
+    transition: $transition-smooth;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary-red;
+      box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
+    }
+
+    &.invalid {
+      border-color: $color-primary-red;
+      background-color: rgba(230, 0, 0, 0.02);
+    }
+  }
+
+  .field-error {
+    display: block;
+    font-size: 0.8rem;
+    color: $color-primary-red;
+    font-weight: 600;
+    margin-top: 0.35rem;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}

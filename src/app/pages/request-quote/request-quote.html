@@ -1,0 +1,132 @@
+<section class="quote-hero">
+  <div class="container quote-hero-content">
+    <span class="hero-tag"><i class="fa-solid fa-pen-ruler"></i> OEM & CUSTOM GEAR MANUFACTURING</span>
+    <h1 class="hero-title">REQUEST A CUSTOM QUOTE</h1>
+    <p class="hero-subtitle">Get direct manufacturer pricing for custom boxing gloves, protective gear, and academy equipment customized with your brand logo.</p>
+  </div>
+</section>
+
+<div class="quote-container container">
+  <!-- Value Highlights Bar -->
+  <div class="oem-features-grid">
+    <div class="oem-feature-card">
+      <i class="fa-solid fa-shield-halved feature-icon"></i>
+      <div>
+        <h4>Pro-Grade Craftsmanship</h4>
+        <p>100% Genuine leather & high-density foam padding engineered to global safety standards.</p>
+      </div>
+    </div>
+    <div class="oem-feature-card">
+      <i class="fa-solid fa-print feature-icon"></i>
+      <div>
+        <h4>Custom Branding</h4>
+        <p>Screen printing, embossing, custom woven labels & tailored colorways available.</p>
+      </div>
+    </div>
+    <div class="oem-feature-card">
+      <i class="fa-solid fa-truck-fast feature-icon"></i>
+      <div>
+        <h4>Global OEM Export</h4>
+        <p>Fast worldwide shipping for gyms, fight brands, distributors, and academies.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote Form Wrapper (Full Width Clean Layout) -->
+  <div class="quote-form-card shopify-card">
+    <h2 class="form-title">Custom Equipment Inquiry Form</h2>
+    <p class="form-subtitle">Fill out the specifications for your order below. Our OEM production specialists will prepare a custom quote and design proof within 24 hours.</p>
+
+    @if (submitSuccess) {
+      <div class="feedback-banner success-banner">
+        <i class="fa-solid fa-circle-check"></i>
+        <div>
+          <h4>Quote Request Sent Successfully!</h4>
+          <p>Thank you for contacting Sufi Sports. Our OEM export team will review your specs and respond shortly.</p>
+        </div>
+      </div>
+    }
+
+    @if (submitError) {
+      <div class="feedback-banner error-banner">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <div>
+          <h4>Submission Error</h4>
+          <p>{{ submitError }}</p>
+        </div>
+      </div>
+    }
+
+    <form (ngSubmit)="quoteForm.form.valid && onSubmit()" #quoteForm="ngForm" class="quote-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="quote-name">Full Name *</label>
+          <input 
+            type="text" 
+            id="quote-name" 
+            name="name" 
+            required 
+            [(ngModel)]="formModel.name" 
+            #nameInput="ngModel"
+            [class.invalid]="nameInput.invalid && (nameInput.dirty || nameInput.touched || quoteForm.submitted)"
+            placeholder="e.g. Alex Rivera" />
+          @if (nameInput.invalid && (nameInput.dirty || nameInput.touched || quoteForm.submitted)) {
+            <span class="field-error">Full name is required.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="quote-email">Email Address *</label>
+          <input 
+            type="email" 
+            id="quote-email" 
+            name="email" 
+            required 
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [(ngModel)]="formModel.email" 
+            #emailInput="ngModel"
+            [class.invalid]="emailInput.invalid && (emailInput.dirty || emailInput.touched || quoteForm.submitted)"
+            placeholder="e.g. alex@fightacademy.com" />
+          @if (emailInput.invalid && (emailInput.dirty || emailInput.touched || quoteForm.submitted)) {
+            <span class="field-error">Please enter a valid email address.</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="quote-phone">Phone / WhatsApp Number (Optional)</label>
+        <input 
+          type="tel" 
+          id="quote-phone" 
+          name="phone" 
+          [(ngModel)]="formModel.phone" 
+          placeholder="e.g. +1 (555) 019-2834" />
+      </div>
+
+      <div class="form-group">
+        <label for="quote-message">Custom Specifications & Quantity *</label>
+        <textarea 
+          id="quote-message" 
+          name="message" 
+          required 
+          minlength="10"
+          [(ngModel)]="formModel.message" 
+          #messageInput="ngModel"
+          [class.invalid]="messageInput.invalid && (messageInput.dirty || messageInput.touched || quoteForm.submitted)"
+          rows="6" 
+          placeholder="Specify product types (e.g. 16oz Pro Gloves, Headgear), required quantities, logo details, and color preferences..."></textarea>
+        @if (messageInput.invalid && (messageInput.dirty || messageInput.touched || quoteForm.submitted)) {
+          <span class="field-error">Please provide at least 10 characters detailing your request.</span>
+        }
+      </div>
+
+      <button type="submit" class="btn-shopify-red submit-btn" [disabled]="isSubmitting">
+        @if (isSubmitting) {
+          <i class="fa-solid fa-spinner fa-spin"></i> Submitting Quote Request...
+        } @else {
+          <i class="fa-solid fa-paper-plane me-1"></i> Submit Custom Quote Request
+        }
+      </button>
+    </form>
+  </div>
+</div>
