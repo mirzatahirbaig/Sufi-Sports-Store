@@ -5,6 +5,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail';
 import { BlogComponent } from './pages/blog/blog';
 import { BlogDetailComponent } from './pages/blog-detail/blog-detail';
 import { ContactComponent } from './pages/contact/contact';
+import { RequestQuoteComponent } from './pages/request-quote/request-quote';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,5 +14,7 @@ export const routes: Routes = [
   { path: 'blog', component: BlogComponent },
   { path: 'blog/:slug', component: BlogDetailComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'request-quote', component: RequestQuoteComponent },
   { path: '**', redirectTo: '' }
 ];
+

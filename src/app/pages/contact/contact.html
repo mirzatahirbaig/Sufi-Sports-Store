@@ -1,14 +1,14 @@
 <section class="contact-hero">
   <div class="container contact-hero-content">
     <span class="hero-tag"><i class="fa-solid fa-headset"></i> DIRECT CONTACT</span>
-    <h1 class="hero-title">ORDER & FACTORY INQUIRIES</h1>
-    <p class="hero-subtitle">Get in touch with our team for bulk quotes, custom gear specifications, or academy partnerships.</p>
+    <h1 class="hero-title">CONTACT US & FACTORY SHOWROOM</h1>
+    <p class="hero-subtitle">Get in touch with our team for factory showroom visits, customer support, or general inquiries.</p>
   </div>
 </section>
 
 <div class="contact-container container">
-  <!-- Contact Info Column -->
-  <div class="contact-info-wrapper">
+  <!-- Contact Info & Map Row -->
+  <div class="contact-info-grid">
     <div class="info-card shopify-card">
       <h2 class="card-title">Factory & Support Direct</h2>
       <p class="card-subtitle">Reach out through any channel or visit our manufacturing showroom in Sialkot.</p>
@@ -50,10 +50,11 @@
 
     <!-- Embedded Google Map -->
     <div class="map-card shopify-card">
+      <h2 class="card-title mb-3">Showroom Location</h2>
       <iframe 
         [src]="mapUrl" 
         width="100%" 
-        height="260" 
+        height="320" 
         style="border:0; border-radius: 8px;" 
         allowfullscreen="" 
         loading="lazy" 
@@ -61,102 +62,5 @@
         title="Sufi Sports Store Location">
       </iframe>
     </div>
-  </div>
-
-  <!-- Contact Form Column -->
-  <div class="contact-form-wrapper shopify-card">
-    <h2 class="form-title">Send Us an Inquiry</h2>
-    <p class="form-subtitle">Fill out the form below and our equipment specialists will respond within 24 hours.</p>
-
-    <!-- Feedback Banners -->
-    @if (submitSuccess) {
-      <div class="feedback-banner success-banner">
-        <i class="fa-solid fa-circle-check"></i>
-        <div>
-          <h4>Inquiry Sent Successfully!</h4>
-          <p>Thank you. Our team will review your inquiry and get back to you shortly.</p>
-        </div>
-      </div>
-    }
-
-    @if (submitError) {
-      <div class="feedback-banner error-banner">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <div>
-          <h4>Submission Error</h4>
-          <p>{{ submitError }}</p>
-        </div>
-      </div>
-    }
-
-    <form (ngSubmit)="contactForm.form.valid && onSubmit()" #contactForm="ngForm" class="contact-form" novalidate>
-      <div class="form-group">
-        <label for="name">Full Name *</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          required 
-          [(ngModel)]="formModel.name" 
-          #nameInput="ngModel"
-          [class.invalid]="nameInput.invalid && (nameInput.dirty || nameInput.touched || contactForm.submitted)"
-          placeholder="e.g. John Doe" />
-        @if (nameInput.invalid && (nameInput.dirty || nameInput.touched || contactForm.submitted)) {
-          <span class="field-error">Full name is required.</span>
-        }
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          required 
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-          [(ngModel)]="formModel.email" 
-          #emailInput="ngModel"
-          [class.invalid]="emailInput.invalid && (emailInput.dirty || emailInput.touched || contactForm.submitted)"
-          placeholder="e.g. john@example.com" />
-        @if (emailInput.invalid && (emailInput.dirty || emailInput.touched || contactForm.submitted)) {
-          <span class="field-error">Please enter a valid email address.</span>
-        }
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone / WhatsApp Number (Optional)</label>
-        <input 
-          type="tel" 
-          id="phone" 
-          name="phone" 
-          [(ngModel)]="formModel.phone" 
-          placeholder="e.g. +92 52 1234567" />
-      </div>
-
-      <div class="form-group">
-        <label for="message">Inquiry / Equipment Details *</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          required 
-          minlength="10"
-          [(ngModel)]="formModel.message" 
-          #messageInput="ngModel"
-          [class.invalid]="messageInput.invalid && (messageInput.dirty || messageInput.touched || contactForm.submitted)"
-          rows="5" 
-          placeholder="Please provide details about your order inquiry or custom request..."></textarea>
-        @if (messageInput.invalid && (messageInput.dirty || messageInput.touched || contactForm.submitted)) {
-          <span class="field-error">Message must be at least 10 characters long.</span>
-        }
-      </div>
-
-      <button type="submit" class="btn-shopify-red submit-btn" [disabled]="isSubmitting">
-        @if (isSubmitting) {
-          <i class="fa-solid fa-spinner fa-spin"></i> Sending Inquiry...
-        } @else {
-          <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
-        }
-      </button>
-    </form>
   </div>
 </div>

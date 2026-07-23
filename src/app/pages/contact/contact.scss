@@ -35,24 +35,24 @@
 
 .contact-container {
   padding: 48px 20px 64px;
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 36px;
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.contact-info-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .info-card {
   padding: 32px;
   background-color: $color-white;
+  height: 100%;
 
   .card-title {
     font-size: 1.4rem;
@@ -69,12 +69,13 @@
 
 .info-details {
   list-style: none;
+  padding: 0;
 
   li {
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 
     .icon-box {
       width: 44px;
@@ -99,6 +100,7 @@
       p, a {
         font-size: 0.9rem;
         color: $color-text-muted;
+        text-decoration: none;
       }
 
       a:hover {
@@ -109,105 +111,13 @@
 }
 
 .map-card {
-  padding: 12px;
-  background-color: $color-white;
-}
-
-.contact-form-wrapper {
   padding: 32px;
   background-color: $color-white;
+  height: 100%;
 
-  .form-title {
+  .card-title {
     font-size: 1.4rem;
     color: $color-black;
-    margin-bottom: 8px;
-  }
-
-  .form-subtitle {
-    font-size: 0.9rem;
-    color: $color-text-muted;
-    margin-bottom: 24px;
-  }
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-
-  label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: $color-black;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  input, textarea {
-    padding: 12px 16px;
-    border: 1px solid $color-border-light;
-    border-radius: 6px;
-    background-color: $color-white;
-    color: $color-black;
-    font-family: $font-family-body;
-    font-size: 0.95rem;
-    transition: $transition-smooth;
-
-    &:focus {
-      outline: none;
-      border-color: $color-primary-red;
-      box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.1);
-    }
-
-    &.invalid {
-      border-color: $color-primary-red;
-      background-color: rgba(230, 0, 0, 0.02);
-    }
-  }
-
-  .field-error {
-    font-size: 0.8rem;
-    color: $color-primary-red;
-    font-weight: 600;
-  }
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 14px;
-  font-size: 1rem;
-  margin-top: 8px;
-}
-
-.feedback-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 24px;
-
-  i { font-size: 1.4rem; }
-  h4 { font-size: 0.95rem; margin-bottom: 2px; }
-  p { font-size: 0.85rem; }
-
-  &.success-banner {
-    background-color: rgba(16, 185, 129, 0.1);
-    border: 1px solid #10b981;
-    color: #065f46;
-    i { color: #10b981; }
-  }
-
-  &.error-banner {
-    background-color: rgba(230, 0, 0, 0.1);
-    border: 1px solid $color-primary-red;
-    color: #991b1b;
-    i { color: $color-primary-red; }
+    margin-bottom: 16px;
   }
 }
