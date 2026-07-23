@@ -35,47 +35,49 @@
     <div class="section-header text-center">
       <span class="section-tag-red"><i class="fa-solid fa-layer-group"></i> CUSTOM MANUFACTURING CATALOG</span>
       <h2 class="section-title">Explore Custom Product Categories</h2>
-      <p class="section-subtitle">All products are manufactured 100% on-demand according to your brand's specifications and design requirements.</p>
+      <p class="section-subtitle">All products are manufactured 100% on-demand according to your brand's specifications
+        and design requirements.</p>
     </div>
 
     @if (isLoadingCategories) {
-      <div class="loading-grid">
-        <div class="skeleton-card category-card-skeleton"></div>
-        <div class="skeleton-card category-card-skeleton"></div>
-        <div class="skeleton-card category-card-skeleton"></div>
-      </div>
+    <div class="loading-grid">
+      <div class="skeleton-card category-card-skeleton"></div>
+      <div class="skeleton-card category-card-skeleton"></div>
+      <div class="skeleton-card category-card-skeleton"></div>
+    </div>
     } @else {
-      @if (categories.length > 0) {
-        <div class="categories-ticker-wrapper" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
-          <button type="button" class="category-slider-btn prev-btn" (click)="scrollCategories('left')" aria-label="Previous categories">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          
-          <div #tickerTrack class="categories-scroll-track">
-            @for (cat of tickerCategories; track $index) {
-              <a routerLink="/products" [queryParams]="{category: cat.name}" class="category-image-card category-ticker-item">
-                <div class="category-card-bg" [style.background-image]="'url(' + getCategoryBgImage(cat) + ')'"></div>
-                <div class="category-card-overlay"></div>
-                <div class="category-card-content">
-                  <span class="custom-badge-white"><i class="fa-solid fa-pen-ruler me-1"></i> 100% MADE TO ORDER</span>
-                  <h3 class="category-card-title">{{ cat.name }}</h3>
-                  <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
-                </div>
-              </a>
-            }
-          </div>
+    @if (categories.length > 0) {
+    <div class="categories-ticker-wrapper" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+      <button type="button" class="category-slider-btn prev-btn" (click)="scrollCategories('left')"
+        aria-label="Previous categories">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
 
-          <button type="button" class="category-slider-btn next-btn" (click)="scrollCategories('right')" aria-label="Next categories">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-      } @else {
-        <div class="empty-state shopify-card text-center p-5">
-          <i class="fa-solid fa-layer-group text-orange empty-state-icon"></i>
-          <h3>No Custom Categories Available</h3>
-          <p>Product categories managed in the Admin Portal will be displayed here dynamically.</p>
-        </div>
-      }
+      <div #tickerTrack class="categories-scroll-track">
+        @for (cat of tickerCategories; track $index) {
+        <a routerLink="/products" [queryParams]="{category: cat.name}" class="category-image-card category-ticker-item">
+          <div class="category-card-bg" [style.background-image]="'url(' + getCategoryBgImage(cat) + ')'"></div>
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <h3 class="category-card-title">{{ cat.name }}</h3>
+            <span class="category-card-cta">Explore Catalog <i class="fa-solid fa-arrow-right-long ms-1"></i></span>
+          </div>
+        </a>
+        }
+      </div>
+
+      <button type="button" class="category-slider-btn next-btn" (click)="scrollCategories('right')"
+        aria-label="Next categories">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+    } @else {
+    <div class="empty-state shopify-card text-center p-5">
+      <i class="fa-solid fa-layer-group text-orange empty-state-icon"></i>
+      <h3>No Custom Categories Available</h3>
+      <p>Product categories managed in the Admin Portal will be displayed here dynamically.</p>
+    </div>
+    }
     }
   </div>
 </section>
@@ -94,31 +96,31 @@
     </div>
 
     @if (isLoadingProducts) {
-      <div class="loading-grid">
-        <div class="skeleton-card shopify-card"></div>
-        <div class="skeleton-card shopify-card"></div>
-        <div class="skeleton-card shopify-card"></div>
-        <div class="skeleton-card shopify-card"></div>
-      </div>
+    <div class="loading-grid">
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+    </div>
     } @else {
-      @if (featuredProducts.length > 0) {
-        <div class="products-grid">
-          @for (product of featuredProducts; track product.id) {
-            <app-product-card [product]="product"></app-product-card>
-          }
-        </div>
-      } @else {
-        <div class="empty-state shopify-card text-center p-5">
-          <i class="fa-solid fa-box-open text-orange fa-3x mb-3"></i>
-          <h3>No Custom Products Available Right Now</h3>
-          <p>Contact our factory sales team directly for custom product manufacturing inquiries.</p>
-          <div class="empty-state-actions">
-            <a routerLink="/contact" class="btn-shopify-red">
-              <i class="fa-solid fa-paper-plane me-1"></i> Submit Custom Inquiry
-            </a>
-          </div>
-        </div>
+    @if (featuredProducts.length > 0) {
+    <div class="products-grid">
+      @for (product of featuredProducts; track product.id) {
+      <app-product-card [product]="product"></app-product-card>
       }
+    </div>
+    } @else {
+    <div class="empty-state shopify-card text-center p-5">
+      <i class="fa-solid fa-box-open text-orange fa-3x mb-3"></i>
+      <h3>No Custom Products Available Right Now</h3>
+      <p>Contact our factory sales team directly for custom product manufacturing inquiries.</p>
+      <div class="empty-state-actions">
+        <a routerLink="/contact" class="btn-shopify-red">
+          <i class="fa-solid fa-paper-plane me-1"></i> Submit Custom Inquiry
+        </a>
+      </div>
+    </div>
+    }
     }
 
     <div class="section-cta text-center mobile-only-cta">
@@ -136,7 +138,8 @@
     <div class="section-header text-center">
       <span class="section-tag-red"><i class="fa-solid fa-diagram-project"></i> HOW WE MANUFACTURE YOUR ORDER</span>
       <h2 class="section-title">4-Step Custom Manufacturing Process</h2>
-      <p class="section-subtitle">From initial design consultation to doorstep delivery of your custom branded sports equipment.</p>
+      <p class="section-subtitle">From initial design consultation to doorstep delivery of your custom branded sports
+        equipment.</p>
     </div>
 
     <div class="workflow-steps-grid">
@@ -170,28 +173,29 @@
     <div class="section-header text-center">
       <span class="section-tag-red"><i class="fa-solid fa-newspaper"></i> FACTORY INSIGHTS & JOURNAL</span>
       <h2 class="section-title">Latest Articles & Manufacturing News</h2>
-      <p class="section-subtitle">Read expert guides on equipment materials, OEM production trends, and custom private labeling tips.</p>
+      <p class="section-subtitle">Read expert guides on equipment materials, OEM production trends, and custom private
+        labeling tips.</p>
     </div>
 
     @if (isLoadingArticles) {
-      <div class="loading-grid-3">
-        <div class="skeleton-card shopify-card"></div>
-        <div class="skeleton-card shopify-card"></div>
-        <div class="skeleton-card shopify-card"></div>
-      </div>
+    <div class="loading-grid-3">
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+      <div class="skeleton-card shopify-card"></div>
+    </div>
     } @else {
-      @if (recentArticles.length > 0) {
-        <div class="articles-grid">
-          @for (article of recentArticles; track article.id) {
-            <app-article-card [article]="article"></app-article-card>
-          }
-        </div>
-      } @else {
-        <div class="empty-state shopify-card p-4 text-center">
-          <i class="fa-solid fa-newspaper text-orange fa-2x mb-2"></i>
-          <p>No articles published yet.</p>
-        </div>
+    @if (recentArticles.length > 0) {
+    <div class="articles-grid">
+      @for (article of recentArticles; track article.id) {
+      <app-article-card [article]="article"></app-article-card>
       }
+    </div>
+    } @else {
+    <div class="empty-state shopify-card p-4 text-center">
+      <i class="fa-solid fa-newspaper text-orange fa-2x mb-2"></i>
+      <p>No articles published yet.</p>
+    </div>
+    }
     }
 
     <div class="section-cta text-center">
