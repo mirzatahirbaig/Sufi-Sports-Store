@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 import { ContactInfo } from '../../models/models';
 
+import { formatWhatsAppUrl } from '../../utils/contact.utils';
+
 @Component({
   selector: 'app-footer',
   standalone: true,
@@ -16,6 +18,10 @@ export class FooterComponent implements OnInit {
 
   contactInfo: ContactInfo | null = null;
   currentYear: number = new Date().getFullYear();
+
+  getWhatsAppUrl(phone?: string | null): string {
+    return formatWhatsAppUrl(phone);
+  }
 
   ngOnInit(): void {
     this.contactService.getContactInfo().subscribe({

@@ -66,22 +66,22 @@
       <ul class="contact-info-list">
         @if (contactInfo?.address) {
           <li>
-            <i class="fa-solid fa-location-dot text-red"></i>
-            <span>{{ contactInfo?.address }}</span>
+            <span class="info-icon-badge"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="info-text">{{ contactInfo?.address }}</span>
           </li>
         }
         @if (contactInfo?.phone) {
           <li>
-            <i class="fa-solid fa-phone text-red"></i>
-            <a [href]="'tel:' + contactInfo?.phone">
+            <span class="info-icon-badge whatsapp-badge"><i class="fa-brands fa-whatsapp"></i></span>
+            <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer" class="info-text">
               {{ contactInfo?.phone }}
             </a>
           </li>
         }
         @if (contactInfo?.email) {
           <li>
-            <i class="fa-solid fa-envelope text-red"></i>
-            <a [href]="'mailto:' + contactInfo?.email">
+            <span class="info-icon-badge"><i class="fa-solid fa-envelope"></i></span>
+            <a [href]="'mailto:' + contactInfo?.email" class="info-text">
               {{ contactInfo?.email }}
             </a>
           </li>

@@ -4,6 +4,8 @@ import { ThemeService } from '../../services/theme.service';
 import { ContactService } from '../../services/contact.service';
 import { ContactInfo } from '../../models/models';
 
+import { formatWhatsAppUrl } from '../../utils/contact.utils';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -32,6 +34,10 @@ export class NavbarComponent implements OnInit {
       },
       error: () => this.cdr.markForCheck()
     });
+  }
+
+  getWhatsAppUrl(phone?: string | null): string {
+    return formatWhatsAppUrl(phone);
   }
 
   toggleMobileMenu(): void {
