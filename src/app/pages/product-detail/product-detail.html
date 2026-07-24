@@ -9,137 +9,129 @@
   </nav>
 
   @if (isLoading) {
-    <div class="loader-container shopify-card">
-      <i class="fa-solid fa-circle-notch fa-spin loader-icon text-red"></i>
-      <p>Loading custom product details...</p>
-    </div>
+  <div class="loader-container shopify-card">
+    <i class="fa-solid fa-circle-notch fa-spin loader-icon text-red"></i>
+    <p>Loading custom product details...</p>
+  </div>
   } @else if (errorMsg) {
-    <div class="error-container shopify-card text-center p-5">
-      <i class="fa-solid fa-circle-exclamation error-icon text-red fa-3x mb-3"></i>
-      <h3>Custom Product Design Not Found</h3>
-      <p>{{ errorMsg }}</p>
-      <a routerLink="/products" class="btn-shopify-red mt-3">Back to Custom Catalog</a>
-    </div>
+  <div class="error-container shopify-card text-center p-5">
+    <i class="fa-solid fa-circle-exclamation error-icon text-red fa-3x mb-3"></i>
+    <h3>Custom Product Design Not Found</h3>
+    <p>{{ errorMsg }}</p>
+    <a routerLink="/products" class="btn-shopify-red mt-3">Back to Custom Catalog</a>
+  </div>
   } @else if (product) {
-    <div class="product-detail-grid">
-      <!-- Gallery Column -->
-      <div class="gallery-wrapper">
-        <div class="main-image-box shopify-card">
-          <img [src]="selectedImage" [alt]="product.name" class="main-image" />
-          @if (product.isFeatured) {
-            <span class="badge-red featured-tag">FEATURED DESIGN</span>
-          }
-          @if (product.imageUrls && product.imageUrls.length > 1) {
-            <div class="gallery-nav">
-              <button class="nav-btn prev-btn" (click)="prevImage()" aria-label="Previous Image">
-                <i class="fa-solid fa-chevron-left"></i>
-              </button>
-              <span class="image-counter">{{ selectedImageIndex + 1 }} / {{ product.imageUrls.length }}</span>
-              <button class="nav-btn next-btn" (click)="nextImage()" aria-label="Next Image">
-                <i class="fa-solid fa-chevron-right"></i>
-              </button>
-            </div>
-          }
+  <div class="product-detail-grid">
+    <!-- Gallery Column -->
+    <div class="gallery-wrapper">
+      <div class="main-image-box shopify-card">
+        <img [src]="selectedImage" [alt]="product.name" class="main-image" />
+        @if (product.isFeatured) {
+        <span class="badge-red featured-tag">FEATURED DESIGN</span>
+        }
+        @if (product.imageUrls && product.imageUrls.length > 1) {
+        <div class="gallery-nav">
+          <button class="nav-btn prev-btn" (click)="prevImage()" aria-label="Previous Image">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span class="image-counter">{{ selectedImageIndex + 1 }} / {{ product.imageUrls.length }}</span>
+          <button class="nav-btn next-btn" (click)="nextImage()" aria-label="Next Image">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
-        
-        @if (product.imageUrls && product.imageUrls.length > 0) {
-          <div class="thumbnails-row">
-            @for (img of product.imageUrls; track $index) {
-              <button 
-                class="thumbnail-btn shopify-card" 
-                [class.active]="$index === selectedImageIndex" 
-                (click)="selectImageIndex($index)">
-                <img [src]="resolveImageUrl(img)" [alt]="'Product thumbnail ' + ($index + 1)" />
-              </button>
-            }
-          </div>
         }
       </div>
 
-      <!-- Info Details Column -->
-      <div class="info-wrapper shopify-card">
-        <div class="meta-row">
-          <span class="badge-black">{{ product.category || 'Boxing Gear' }}</span>
-          <span class="custom-status-pill"><i class="fa-solid fa-stamp me-1"></i> Custom Branding Ready</span>
-        </div>
-
-        <h1 class="product-title">{{ product.name }}</h1>
-        
-        <div class="price-stock-box">
-          <div class="price-display">
-            <span class="currency-label">Unit Base Price:</span>
-            <span class="price-amount">${{ product.price.toFixed(2) }}</span>
-          </div>
-          
-          <!-- Custom Made to Order Badge (No Stock Indicators) -->
-          <span class="stock-badge custom-made-badge">
-            <i class="fa-solid fa-pen-ruler"></i> 100% Made to Order
-          </span>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="action-box">
-          <a routerLink="/request-quote" [queryParams]="{product: product.name, id: product.id}" class="btn-shopify-red btn-enquire-lg">
-            <i class="fa-solid fa-pen-ruler me-1"></i>
-            <span>Submit Custom Inquiry / Request Quote</span>
-          </a>
-          <p class="order-note"><i class="fa-solid fa-shield-halved"></i> Direct Factory Manufacturing • Tailored Logo, Color & Material Specs</p>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Custom Manufacturing Specifications Table -->
-        <div class="specs-box">
-          <h3 class="specs-title"><i class="fa-solid fa-sliders text-red"></i> Customization Specifications</h3>
-          <div class="specs-grid">
-            <div class="spec-card">
-              <span class="spec-name">Manufacturing</span>
-              <span class="spec-value">Custom OEM & Private Label</span>
-            </div>
-            <div class="spec-card">
-              <span class="spec-name">Branding</span>
-              <span class="spec-value">Logo Printing, Embroidery, Embossing</span>
-            </div>
-            <div class="spec-card">
-              <span class="spec-name">Material Options</span>
-              <span class="spec-value">Genuine Leather, Microfiber, PU</span>
-            </div>
-            @for (spec of getSpecs(); track spec.name) {
-              <div class="spec-card">
-                <span class="spec-name">{{ spec.name }}</span>
-                <span class="spec-value">{{ spec.value }}</span>
-              </div>
-            }
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Product Description -->
-        @if (product.description) {
-          <div class="description-box">
-            <h3>Product Overview</h3>
-            <div class="description-content" [innerHTML]="safeDescription || product.description"></div>
-          </div>
+      @if (product.imageUrls && product.imageUrls.length > 0) {
+      <div class="thumbnails-row">
+        @for (img of product.imageUrls; track $index) {
+        <button class="thumbnail-btn shopify-card" [class.active]="$index === selectedImageIndex"
+          (click)="selectImageIndex($index)">
+          <img [src]="resolveImageUrl(img)" [alt]="'Product thumbnail ' + ($index + 1)" />
+        </button>
         }
+      </div>
+      }
+    </div>
 
-        <!-- Storefront Trust Highlights -->
-        <div class="detail-trust-row">
-          <div class="detail-trust-item">
-            <i class="fa-solid fa-plane-departure text-red"></i>
-            <span>Global OEM Export</span>
+    <!-- Info Details Column -->
+    <div class="info-wrapper shopify-card">
+      <div class="meta-row">
+        <span class="badge-black">{{ product.category || 'Boxing Gear' }}</span>
+        @if (product.productCode) {
+        <span class="badge-black sku-badge"><i class="fa-solid fa-barcode me-1"></i> SKU: {{ product.productCode
+          }}</span>
+        }
+        <span class="custom-status-pill"><i class="fa-solid fa-stamp me-1"></i> Custom Branding Ready</span>
+      </div>
+
+      <h1 class="product-title">{{ product.name }}</h1>
+
+      <div class="price-stock-box">
+        <div class="price-display">
+          <span class="currency-label">Unit Base Price:</span>
+          <span class="price-amount">${{ product.price.toFixed(2) }}</span>
+        </div>
+
+        <!-- Custom Made to Order Badge (No Stock Indicators) -->
+        <span class="stock-badge custom-made-badge">
+          <i class="fa-solid fa-pen-ruler"></i> 100% Made to Order
+        </span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="action-box">
+        <a routerLink="/request-quote" [queryParams]="{product: product.name, id: product.id}"
+          class="btn-shopify-red btn-enquire-lg">
+          <i class="fa-solid fa-pen-ruler me-1"></i>
+          <span>Submit Custom Inquiry / Request Quote</span>
+        </a>
+        <p class="order-note"><i class="fa-solid fa-shield-halved"></i> Direct Factory Manufacturing • Tailored Logo,
+          Color & Material Specs</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Custom Manufacturing Specifications Table -->
+      <div class="specs-box">
+        <h3 class="specs-title"><i class="fa-solid fa-sliders text-red"></i> Customization Specifications</h3>
+        <div class="specs-grid">
+          @for (spec of getSpecs(); track spec.name) {
+          <div class="spec-card">
+            <span class="spec-name">{{ spec.name }}</span>
+            <span class="spec-value">{{ spec.value }}</span>
           </div>
-          <div class="detail-trust-item">
-            <i class="fa-solid fa-award text-red"></i>
-            <span>Sialkot Handcrafted Quality</span>
-          </div>
-          <div class="detail-trust-item">
-            <i class="fa-solid fa-headset text-red"></i>
-            <span>Direct Factory Consultation</span>
-          </div>
+          }
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Product Description -->
+      @if (product.description) {
+      <div class="description-box">
+        <h3>Product Overview</h3>
+        <div class="description-content" [innerHTML]="safeDescription || product.description"></div>
+      </div>
+      }
+
+      <!-- Storefront Trust Highlights -->
+      <div class="detail-trust-row">
+        <div class="detail-trust-item">
+          <i class="fa-solid fa-plane-departure text-red"></i>
+          <span>Global OEM Export</span>
+        </div>
+        <div class="detail-trust-item">
+          <i class="fa-solid fa-award text-red"></i>
+          <span>Sialkot Handcrafted Quality</span>
+        </div>
+        <div class="detail-trust-item">
+          <i class="fa-solid fa-headset text-red"></i>
+          <span>Direct Factory Consultation</span>
         </div>
       </div>
     </div>
+  </div>
   }
 </div>

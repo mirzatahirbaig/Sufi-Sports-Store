@@ -91,7 +91,7 @@
   z-index: 1000;
 
   /* Transparent at top over banner */
-  &:not(.scrolled) {
+  &:not(.scrolled):not(.black-navbar) {
     .announcement-bar {
       background-color: $color-black;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -129,8 +129,8 @@
     }
   }
 
-  /* Solid White when Scrolled past banner */
-  &.scrolled {
+  /* Solid White when Scrolled past banner or forced on product/article detail pages */
+  &.scrolled, &.black-navbar {
     .announcement-bar {
       background-color: $color-black;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -138,10 +138,6 @@
     }
 
     .navbar-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
       background-color: $color-white;
       border-bottom: 1px solid $color-border-light;
       box-shadow: $shadow-shopify-header;

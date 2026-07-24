@@ -15,7 +15,10 @@
   a {
     color: $color-black;
     font-weight: 600;
-    &:hover { color: $color-primary-red; }
+
+    &:hover {
+      color: $color-primary-red;
+    }
   }
 
   .separator {
@@ -28,6 +31,7 @@
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 36px;
+  align-items: start;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
@@ -38,13 +42,17 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-width: 500px;
+  width: 100%;
 
   .main-image-box {
     position: relative;
     width: 100%;
     padding-top: 100%;
     overflow: hidden;
-    background-color: #f4f5f7;
+    background-color: #fafafa;
+    border-radius: 16px;
+    border: 1px solid $color-border-light;
 
     .main-image {
       position: absolute;
@@ -75,29 +83,29 @@
 
       .nav-btn {
         pointer-events: auto;
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: rgba(255, 255, 255, 0.95);
         border: 1px solid rgba(0, 0, 0, 0.1);
         color: $color-black;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         transition: transform 0.2s ease, background-color 0.2s ease;
 
         &:hover {
           background-color: $color-white;
-          transform: scale(1.1);
+          transform: scale(1.08);
           color: $color-primary-red;
         }
       }
 
       .image-counter {
         pointer-events: auto;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.75);
         color: $color-white;
         font-size: 0.75rem;
         font-weight: 700;
@@ -110,24 +118,48 @@
 
   .thumbnails-row {
     display: flex;
-    gap: 12px;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 10px;
+
+      &:hover {
+        background: $color-secondary-orange;
+      }
+    }
 
     .thumbnail-btn {
-      width: 76px;
-      height: 76px;
+      width: 68px;
+      height: 68px;
       flex-shrink: 0;
-      padding: 0;
+      padding: 4px;
       cursor: pointer;
       overflow: hidden;
+      border-radius: 12px;
       border: 2px solid transparent;
+      background-color: #fafafa;
       transition: border-color 0.2s ease, transform 0.2s ease;
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        border-radius: 8px;
       }
 
       &:hover {
@@ -135,8 +167,8 @@
       }
 
       &.active {
-        border-color: $color-primary-red;
-        box-shadow: 0 0 0 2px rgba(230, 0, 0, 0.2);
+        border-color: $color-secondary-orange;
+        box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
       }
     }
   }
@@ -278,12 +310,14 @@
       margin-bottom: 8px;
     }
 
-    p, .description-content {
+    p,
+    .description-content {
       color: $color-text-muted;
       line-height: 1.6;
       font-size: 0.95rem;
 
-      ul, ol {
+      ul,
+      ol {
         padding-left: 20px;
         margin-top: 8px;
         margin-bottom: 8px;
@@ -293,7 +327,8 @@
         }
       }
 
-      strong, b {
+      strong,
+      b {
         color: $color-black;
         font-weight: 700;
       }
@@ -316,17 +351,21 @@
       font-weight: 600;
       color: $color-black;
 
-      .text-red { color: $color-primary-red; }
+      .text-red {
+        color: $color-primary-red;
+      }
     }
   }
 }
 
-.loader-container, .error-container {
+.loader-container,
+.error-container {
   padding: 60px;
   text-align: center;
   color: $color-text-muted;
 
-  .loader-icon, .error-icon {
+  .loader-icon,
+  .error-icon {
     font-size: 2.5rem;
     margin-bottom: 12px;
   }

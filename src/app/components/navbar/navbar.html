@@ -1,4 +1,4 @@
-<header class="header-main" [class.scrolled]="isScrolled">
+<header class="header-main" [class.scrolled]="isScrolled" [class.black-navbar]="isBlackNavbar">
   <!-- Top Announcement & Contact Bar -->
   <div class="announcement-bar">
     <div class="container announcement-inner">
@@ -75,12 +75,13 @@
 
       <!-- Right Actions -->
       <div class="navbar-actions">
-        <a routerLink="/products" class="action-icon" title="Search Custom Catalog" aria-label="Search Catalog">
+        <a routerLink="/products" class="action-icon" title="Search Catalog" aria-label="Search Catalog">
           <i class="fa-solid fa-magnifying-glass"></i>
         </a>
-        <a href="/docs/SUFI SPORTS Catalogue.pdf" target="_blank" rel="noopener noreferrer" class="btn-shopify-red btn-header-cta">
+        <a href="/docs/SUFI SPORTS Catalogue.pdf" target="_blank" rel="noopener noreferrer"
+          class="btn-shopify-red btn-header-cta">
           <i class="fa-solid fa-file-pdf me-1"></i>
-          <span>Custom Catalog</span>
+          <span>Sports Catalog</span>
         </a>
 
         <!-- Mobile Menu Toggle Button -->
@@ -126,8 +127,9 @@
       <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
 
       <div class="mobile-menu-footer">
-        <a href="/docs/SUFI SPORTS Catalogue.pdf" target="_blank" rel="noopener noreferrer" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
-          <i class="fa-solid fa-file-pdf me-1"></i> Custom Catalog
+        <a href="/docs/SUFI SPORTS Catalogue.pdf" target="_blank" rel="noopener noreferrer"
+          class="btn-shopify-red w-full" (click)="closeMobileMenu()">
+          <i class="fa-solid fa-file-pdf me-1"></i> Sports Catalog
         </a>
       </div>
     </div>

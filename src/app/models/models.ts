@@ -16,6 +16,7 @@ export interface PagedList<T> {
 
 export interface Product {
   id: number;
+  productCode?: string;
   name: string;
   description: string;
   price: number;
