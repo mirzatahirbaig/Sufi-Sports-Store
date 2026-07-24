@@ -2,14 +2,14 @@
   <div class="product-image-box">
     <a [routerLink]="['/products', product.id]">
       <img [src]="resolveImageUrl(product.imageUrls)" [alt]="product.name" class="product-image" />
+      <div class="category-card-overlay"></div>
     </a>
 
     <!-- Custom Manufacturing Badges Overlay (No In-Stock/Out-of-Stock) -->
     <div class="product-badges">
       @if (product.isFeatured) {
-        <span class="badge-red">FEATURED DESIGN</span>
+      <span class="badge-red">FEATURED DESIGN</span>
       }
-      <span class="badge-orange">100% MADE TO ORDER</span>
     </div>
 
     <!-- Quick Hover Overlay Action -->
@@ -36,7 +36,8 @@
         <span class="price-value">${{ product.price.toFixed(2) }}</span>
       </div>
 
-      <a routerLink="/contact" [queryParams]="{product: product.name, id: product.id}" class="btn-shopify-red btn-card-action">
+      <a routerLink="/contact" [queryParams]="{product: product.name, id: product.id}"
+        class="btn-shopify-red btn-card-action">
         <span>Request Quote</span>
         <i class="fa-solid fa-pen-ruler"></i>
       </a>
