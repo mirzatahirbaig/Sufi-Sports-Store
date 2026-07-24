@@ -2,12 +2,13 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ProductService } from '../../services/product.service';
+import { SeoService } from '../../services/seo.service';
 import { Product } from '../../models/models';
 import { resolveImageUrl } from '../../utils/image.utils';
 
 const DEFAULT_SPECS = [
-  { name: 'Material', value: 'Premium Grade Materials' },
-  { name: 'Durability', value: 'Reinforced seams and stitching' },
+  { name: 'Material', value: 'Premium Grade Leather / Synthetics' },
+  { name: 'Durability', value: 'Reinforced seams and triple-stitching' },
   { name: 'Origin', value: 'Sialkot, Pakistan' },
   { name: 'Warranty', value: '1 Year factory guarantee' }
 ];
@@ -22,6 +23,7 @@ const DEFAULT_SPECS = [
 export class ProductDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly productService = inject(ProductService);
+  private readonly seoService = inject(SeoService);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -51,9 +53,41 @@ export class ProductDetailComponent implements OnInit {
       const desc = this.product.description;
       this.safeDescription = desc ? this.sanitizer.bypassSecurityTrustHtml(desc) : '';
       this.initializeGallery();
+      this.applyProductSeo(this.product);
     } else this.errorMsg = res.message || 'Product not found';
     this.isLoading = false;
     this.cdr.markForCheck();
+  }
+
+  private applyProductSeo(product: Product): void {
+    const cleanDesc = (product.description || '').replace(/<[^>]*>?/gm, '').slice(0, 160) || `Buy ${product.name} - Pro Boxing Gear by Sufi Sports.`;
+    const image = this.resolveImageUrl(product.imageUrls?.[0]);
+    const inStock = product.stockQuantity > 0 || product.isActive;
+    
+    this.seoService.updateSeo({
+      title: `${product.name} - Pro Boxing ${product.category || 'Equipment'}`,
+      description: cleanDesc,
+      keywords: `${product.name}, ${product.category}, pro boxing gear, boxing gloves USA, Sufi Sports`,
+      ogImage: image,
+      type: 'product'
+    });
+
+    this.seoService.setJsonLdSchema({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      'name': product.name,
+      'image': [image],
+      'description': cleanDesc,
+      'sku': `SUFI-${product.id}`,
+      'category': product.category || 'Boxing Gear',
+      'offers': {
+        '@type': 'Offer',
+        'priceCurrency': 'USD',
+        'price': product.price,
+        'availability': inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'itemCondition': 'https://schema.org/NewCondition'
+      }
+    });
   }
 
   private initializeGallery(): void {
@@ -87,4 +121,3 @@ export class ProductDetailComponent implements OnInit {
     return s && Object.keys(s).length ? Object.entries(s).map(([name, value]) => ({ name, value })) : DEFAULT_SPECS;
   }
 }
-

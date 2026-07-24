@@ -2,6 +2,7 @@ import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
+import { SeoService } from '../../services/seo.service';
 import { SubmitContactMessageCommand } from '../../models/models';
 
 @Component({
@@ -13,6 +14,7 @@ import { SubmitContactMessageCommand } from '../../models/models';
 })
 export class RequestQuoteComponent implements OnInit {
   private readonly contactService = inject(ContactService);
+  private readonly seoService = inject(SeoService);
   private readonly route = inject(ActivatedRoute);
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -22,6 +24,11 @@ export class RequestQuoteComponent implements OnInit {
   submitError = '';
 
   ngOnInit(): void {
+    this.seoService.updateSeo({
+      title: 'Request Custom Quotation | Wholesale Boxing Gear | Sufi Sports',
+      description: 'Request a wholesale or custom branding quotation for pro boxing gloves, heavy bags, headgear, and athletic equipment directly from Sufi Sports factory.',
+      keywords: 'custom boxing gloves quote, wholesale boxing equipment quotation, bulk boxing gear US'
+    });
     this.route.queryParams.subscribe(params => {
       if (params['product']) {
         this.formModel.message = `Hello Sufi Sports Factory Team,\n\nI would like to request a custom quotation for product: "${params['product']}".\n\nCustomization Details:\n- Estimated Quantity:\n- Custom Branding & Printing:\n- Preferred Colors & Specs:\n\nPlease send custom pricing, production lead time, and sample details.`;

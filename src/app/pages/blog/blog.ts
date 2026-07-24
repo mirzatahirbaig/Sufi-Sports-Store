@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
+import { SeoService } from '../../services/seo.service';
 import { Article } from '../../models/models';
 import { ArticleCardComponent } from '../../components/article-card/article-card';
 
@@ -12,6 +13,7 @@ import { ArticleCardComponent } from '../../components/article-card/article-card
 })
 export class BlogComponent implements OnInit {
   private readonly blogService = inject(BlogService);
+  private readonly seoService = inject(SeoService);
   private readonly cdr = inject(ChangeDetectorRef);
 
   articles: Article[] = [];
@@ -22,6 +24,11 @@ export class BlogComponent implements OnInit {
   isLoading = true;
 
   ngOnInit(): void {
+    this.seoService.updateSeo({
+      title: 'Boxing Insights, Training Guides & Equipment News | Sufi Sports',
+      description: 'Read the latest guides, equipment reviews, training tips, and boxing gear manufacturing standards from Sufi Sports experts.',
+      keywords: 'boxing blog, boxing gloves guide, sparring tips, boxing equipment reviews, fight gear manufacturing'
+    });
     this.loadArticles();
   }
 

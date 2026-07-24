@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { BlogService } from '../../services/blog.service';
 import { CategoryService } from '../../services/category.service';
+import { SeoService } from '../../services/seo.service';
 import { Product, Article, Category } from '../../models/models';
 import { resolveImageUrl } from '../../utils/image.utils';
 import { BannerCarouselComponent } from '../../components/banner-carousel/banner-carousel';
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly productService = inject(ProductService);
   private readonly blogService = inject(BlogService);
   private readonly categoryService = inject(CategoryService);
+  private readonly seoService = inject(SeoService);
   private readonly cdr = inject(ChangeDetectorRef);
 
   @ViewChild('tickerTrack') tickerTrack?: ElementRef<HTMLDivElement>;
@@ -42,6 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.initSeo();
     this.loadCategories();
     this.loadFeaturedProducts();
     this.loadRecentArticles();
@@ -52,6 +55,35 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.animId) cancelAnimationFrame(this.animId);
     if (this.processTimer) clearInterval(this.processTimer);
+  }
+
+  private initSeo(): void {
+    this.seoService.updateSeo({
+      title: 'Sufi Sports | Pro Boxing Gear & Equipment Manufacturer USA',
+      description: 'Premier manufacturer of pro boxing gear in USA. Premium leather boxing gloves, headgear, punching bags, hand wraps & custom gym equipment.',
+      keywords: 'boxing gear, pro boxing gloves, heavy bags, headgear, focus mitts, boxing equipment USA, wholesale boxing gear',
+      ogImage: '/images/hero_boxing.png'
+    });
+    this.seoService.setJsonLdSchema({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://sufisports.com/#organization',
+          'name': 'Sufi Sports',
+          'url': 'https://sufisports.com',
+          'logo': 'https://sufisports.com/logo.png',
+          'description': 'Manufacturer of professional boxing gear, gloves, headgear, and athletic equipment.'
+        },
+        {
+          '@type': 'WebSite',
+          '@id': 'https://sufisports.com/#website',
+          'url': 'https://sufisports.com',
+          'name': 'Sufi Sports USA',
+          'publisher': { '@id': 'https://sufisports.com/#organization' }
+        }
+      ]
+    });
   }
 
   nextProcessSlide(): void {

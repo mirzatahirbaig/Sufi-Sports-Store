@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
+import { SeoService } from '../../services/seo.service';
 import { Product } from '../../models/models';
 import { ProductCardComponent } from '../../components/product-card/product-card';
 
@@ -16,6 +17,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 export class ProductsComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly categoryService = inject(CategoryService);
+  private readonly seoService = inject(SeoService);
   private readonly route = inject(ActivatedRoute);
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -32,6 +34,7 @@ export class ProductsComponent implements OnInit {
   isLoading = true;
 
   ngOnInit(): void {
+    this.updateCategorySeo('All');
     this.loadCategories();
     this.route.queryParams.subscribe(params => {
       if (params['category']) this.selectedCategory = params['category'];
@@ -39,17 +42,23 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  private updateCategorySeo(category: string): void {
+    const catName = category === 'All' ? 'Boxing Gear & Equipment' : category;
+    this.seoService.updateSeo({
+      title: `Shop Pro ${catName} | Sufi Sports USA`,
+      description: `Explore our premium collection of pro-grade ${catName.toLowerCase()} manufactured for durability, comfort, and max athletic performance. Bulk & wholesale available in the USA.`,
+      keywords: `${catName}, pro boxing gear, boxing gloves, heavy bags, headgear, focus mitts, boxing equipment USA`
+    });
+  }
+
   scrollPills(element: HTMLDivElement, direction: 'left' | 'right'): void {
-    const scrollAmount = direction === 'left' ? -220 : 220;
-    element.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    element.scrollBy({ left: direction === 'left' ? -220 : 220, behavior: 'smooth' });
   }
 
   loadCategories(): void {
     this.categoryService.getCategories().subscribe({
       next: (res) => {
-        if (res.success && res.data?.length) {
-          this.categories = ['All', ...res.data.map(c => c.name)];
-        }
+        if (res.success && res.data?.length) this.categories = ['All', ...res.data.map(c => c.name)];
         this.cdr.markForCheck();
       },
       error: () => this.cdr.markForCheck()
@@ -59,11 +68,9 @@ export class ProductsComponent implements OnInit {
   loadProducts(): void {
     this.isLoading = true;
     this.productService.getProducts({
-      pageNumber: this.currentPage,
-      pageSize: this.pageSize,
+      pageNumber: this.currentPage, pageSize: this.pageSize,
       searchTerm: this.searchTerm || undefined,
-      category: this.selectedCategory !== 'All' ? this.selectedCategory : undefined,
-      isActive: true
+      category: this.selectedCategory !== 'All' ? this.selectedCategory : undefined, isActive: true
     }).subscribe({
       next: (res) => {
         if (res.success && res.data) {
@@ -75,33 +82,21 @@ export class ProductsComponent implements OnInit {
         this.isLoading = false;
         this.cdr.markForCheck();
       },
-      error: () => {
-        this.isLoading = false;
-        this.cdr.markForCheck();
-      }
+      error: () => { this.isLoading = false; this.cdr.markForCheck(); }
     });
   }
 
   setCategory(category: string): void {
     this.selectedCategory = category;
     this.currentPage = 1;
+    this.updateCategorySeo(category);
     this.loadProducts();
   }
 
-  onSearch(): void {
-    this.currentPage = 1;
-    this.loadProducts();
-  }
-
-  onSortChange(): void {
-    this.filterAndSort();
-  }
-
+  onSearch(): void { this.currentPage = 1; this.loadProducts(); }
+  onSortChange(): void { this.filterAndSort(); }
   onPageChange(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.loadProducts();
-    }
+    if (page >= 1 && page <= this.totalPages) { this.currentPage = page; this.loadProducts(); }
   }
 
   private filterAndSort(): void {
