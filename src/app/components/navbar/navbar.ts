@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { ContactService } from '../../services/contact.service';
@@ -7,14 +7,10 @@ import { ContactInfo, Category } from '../../models/models';
 import { formatWhatsAppUrl } from '../../utils/contact.utils';
 
 const DEFAULT_CATEGORIES: Category[] = [
-  { id: 1, name: 'Boxing Gloves', isActive: true },
-  { id: 2, name: 'Hand Wraps', isActive: true },
-  { id: 3, name: 'Headgear', isActive: true },
-  { id: 4, name: 'Punching Bags', isActive: true },
-  { id: 5, name: 'Focus Mitts', isActive: true },
-  { id: 6, name: 'Protective Gear', isActive: true },
-  { id: 7, name: 'Apparel', isActive: true },
-  { id: 8, name: 'Accessories', isActive: true }
+  { id: 1, name: 'Boxing Gloves', isActive: true }, { id: 2, name: 'Hand Wraps', isActive: true },
+  { id: 3, name: 'Headgear', isActive: true }, { id: 4, name: 'Punching Bags', isActive: true },
+  { id: 5, name: 'Focus Mitts', isActive: true }, { id: 6, name: 'Protective Gear', isActive: true },
+  { id: 7, name: 'Apparel', isActive: true }, { id: 8, name: 'Accessories', isActive: true }
 ];
 
 @Component({
@@ -34,6 +30,14 @@ export class NavbarComponent implements OnInit {
   categories: Category[] = DEFAULT_CATEGORIES;
   isMobileMenuOpen = false;
   isMobileCategoryOpen = false;
+  isScrolled = false;
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    const scrollPos = window.pageYOffset || document.documentElement.scrollTop || 0;
+    this.isScrolled = scrollPos > 40;
+    this.cdr.markForCheck();
+  }
 
   ngOnInit(): void {
     this.loadContactInfo();
@@ -76,9 +80,7 @@ export class NavbarComponent implements OnInit {
       next: (res) => {
         if (res.success && res.data) {
           this.contactInfo = res.data;
-          if (res.data.themePrimaryColor) {
-            this.themeService.setPrimaryColor(res.data.themePrimaryColor);
-          }
+          if (res.data.themePrimaryColor) this.themeService.setPrimaryColor(res.data.themePrimaryColor);
           this.cdr.markForCheck();
         }
       },
@@ -89,9 +91,7 @@ export class NavbarComponent implements OnInit {
   private loadCategories(): void {
     this.categoryService.getCategories().subscribe({
       next: (res) => {
-        if (res.success && res.data?.length) {
-          this.categories = res.data.filter(c => c.isActive);
-        }
+        if (res.success && res.data?.length) this.categories = res.data.filter(c => c.isActive);
         this.cdr.markForCheck();
       },
       error: () => this.cdr.markForCheck()

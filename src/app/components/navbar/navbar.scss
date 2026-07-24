@@ -85,13 +85,88 @@
   }
 }
 
-.navbar-wrapper {
-  position: sticky;
-  top: 0;
+.header-main {
+  position: relative;
+  width: 100%;
   z-index: 1000;
-  background-color: $color-white;
-  border-bottom: 1px solid $color-border-light;
-  box-shadow: $shadow-shopify-header;
+
+  /* Transparent at top over banner */
+  &:not(.scrolled) {
+    .announcement-bar {
+      background-color: $color-black;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      .ticker-item, .contact-link { color: rgba(255, 255, 255, 0.95); }
+    }
+
+    .navbar-wrapper {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: transparent;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: none;
+      z-index: 1000;
+    }
+
+    .brand-text { color: $color-white; }
+    .brand-tagline { color: rgba(255, 255, 255, 0.8); }
+    .navbar-links a, .dropdown-trigger, .caret-icon { color: $color-white; }
+    .action-icon, .mobile-toggle { color: $color-white; border-color: rgba(255, 255, 255, 0.35); }
+
+    .dropdown-menu {
+      background: rgba(17, 17, 17, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+
+      .dropdown-item {
+        color: $color-white;
+        .arrow-icon { color: rgba(255, 255, 255, 0.7); }
+        &:hover { background-color: rgba(230, 0, 0, 0.25); color: $color-white; }
+        &.all-item { color: #ff6666; background: rgba(230, 0, 0, 0.18); i { color: #ff6666; } }
+      }
+      .dropdown-divider { background: rgba(255, 255, 255, 0.15); }
+    }
+  }
+
+  /* Solid White when Scrolled past banner */
+  &.scrolled {
+    .announcement-bar {
+      background-color: $color-black;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      .ticker-item, .contact-link { color: rgba(255, 255, 255, 0.95); }
+    }
+
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: $color-white;
+      border-bottom: 1px solid $color-border-light;
+      box-shadow: $shadow-shopify-header;
+      z-index: 1000;
+    }
+
+    .brand-text { color: $color-black; }
+    .brand-tagline { color: $color-text-muted; }
+    .navbar-links a, .dropdown-trigger, .caret-icon { color: $color-black; }
+    .action-icon, .mobile-toggle { color: $color-black; border-color: $color-border-light; }
+
+    .dropdown-menu {
+      background: $color-white;
+      border: 1px solid $color-border-light;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+      .dropdown-item {
+        color: $color-black;
+        .arrow-icon { color: $color-text-muted; }
+        &:hover { background-color: rgba(230, 0, 0, 0.06); color: $color-primary-red; }
+        &.all-item { color: $color-primary-red; background: rgba(230, 0, 0, 0.05); i { color: $color-primary-red; } }
+      }
+      .dropdown-divider { background: $color-border-light; }
+    }
+  }
 }
 
 .navbar-container {

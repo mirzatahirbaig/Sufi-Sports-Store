@@ -1,7 +1,7 @@
 <!-- Hero Banner Carousel -->
 <app-banner-carousel></app-banner-carousel>
 
-<!-- 4 Customization Pillars Grid -->
+<!-- 4 Customization Pillars Grid
 <section class="section pillars-section">
   <div class="container">
     <div class="pillars-grid">
@@ -28,6 +28,7 @@
     </div>
   </div>
 </section>
+-->
 
 <!-- Shop By Category Showcase Section -->
 <section class="section categories-section">
@@ -131,7 +132,7 @@
   </div>
 </section>
 
-<!-- 4-Step Custom Manufacturing Workflow Section -->
+<!-- 4-Step Custom Manufacturing Workflow Section (Commented Out)
 <section class="section workflow-section">
   <div class="container">
     <div class="section-header text-center">
@@ -161,6 +162,50 @@
         <div class="step-number">04</div>
         <h4>Bulk Production & Global Export</h4>
         <p>Handcrafted factory manufacturing in Sialkot with quality control inspection and worldwide shipping.</p>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- 4-Step Custom Manufacturing Image Slider Section -->
+<section class="section process-slider-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-tag-red"><i class="fa-solid fa-diagram-project"></i> HOW WE MANUFACTURE YOUR ORDER</span>
+      <h2 class="section-title">4-Step Custom Manufacturing Process</h2>
+      <p class="section-subtitle">Explore our step-by-step custom craftsmanship and manufacturing workflow in action.
+      </p>
+    </div>
+
+    <div class="process-slider-wrapper">
+      <button type="button" class="process-slider-btn prev-btn" (click)="prevProcessSlide()" aria-label="Previous step">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="process-slider-viewport">
+        @for (imgSrc of processImages; track imgSrc; let idx = $index) {
+        <div class="process-slide-item" [class.active]="idx === currentProcessIndex">
+          <div class="process-card shopify-card">
+            <div class="process-img-wrapper">
+              <img [src]="imgSrc" [alt]="'Custom Manufacturing Step ' + (idx + 1)" class="process-img" />
+              <div class="step-badge">Step 0{{ idx + 1 }}</div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <button type="button" class="process-slider-btn next-btn" (click)="nextProcessSlide()" aria-label="Next step">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Dots Indicators -->
+      <div class="process-slider-indicators">
+        @for (imgSrc of processImages; track imgSrc; let idx = $index) {
+        <button class="indicator-dot" [class.active]="idx === currentProcessIndex" (click)="setProcessSlide(idx)"
+          [aria-label]="'Go to step ' + (idx + 1)"></button>
+        }
       </div>
     </div>
   </div>

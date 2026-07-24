@@ -1,129 +1,131 @@
-<!-- Top Announcement & Contact Bar -->
-<div class="announcement-bar">
-  <div class="container announcement-inner">
-    <div class="announcement-ticker-track">
-      <div class="ticker-content">
-        @for (point of getTickerPoints(); track $index) {
-          <span class="ticker-item">
-            <span class="text-orange me-1">&bull;</span>
-            {{ point }}
-          </span>
-        }
-        @for (point of getTickerPoints(); track $index) {
-          <span class="ticker-item">
-            <span class="text-orange me-1">&bull;</span>
-            {{ point }}
-          </span>
-        }
-      </div>
-    </div>
-    <div class="announcement-contact d-none-mobile">
-      @if (contactInfo?.phone) {
-        <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer" class="contact-link me-3">
-          <i class="fa-brands fa-whatsapp me-1 text-success"></i> {{ contactInfo?.phone }}
-        </a>
-      }
-      @if (contactInfo?.email) {
-        <a [href]="'mailto:' + contactInfo?.email" class="contact-link">
-          <i class="fa-solid fa-envelope me-1"></i> {{ contactInfo?.email }}
-        </a>
-      }
-    </div>
-  </div>
-</div>
-
-<!-- Main Header Navbar -->
-<nav class="navbar-wrapper">
-  <div class="container navbar-container">
-    <!-- Brand Logo -->
-    <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
-      <img src="logo.png" alt="Sufi Sports Logo" class="brand-logo-img" />
-      <div class="brand-titles">
-        <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
-        <span class="brand-tagline">CUSTOM GEAR MANUFACTURER</span>
-      </div>
-    </a>
-
-    <!-- Desktop Navigation Links -->
-    <div class="navbar-links">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      
-      <!-- Boxing with Sub-Menu -->
-      <div class="nav-item-dropdown">
-        <a routerLink="/products" routerLinkActive="active" class="dropdown-trigger">
-          Boxing <i class="fa-solid fa-chevron-down ms-1 caret-icon"></i>
-        </a>
-        <div class="dropdown-menu">
-          <a routerLink="/products" [queryParams]="{}" class="dropdown-item all-item">
-            <i class="fa-solid fa-grid-2 me-2"></i> All Boxing Gear
-          </a>
-          <div class="dropdown-divider"></div>
-          @for (cat of categories; track cat.id) {
-            <a routerLink="/products" [queryParams]="{ category: cat.name }" class="dropdown-item">
-              <i class="fa-solid fa-angle-right me-2 arrow-icon"></i> {{ cat.name }}
-            </a>
+<header class="header-main" [class.scrolled]="isScrolled">
+  <!-- Top Announcement & Contact Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-ticker-track">
+        <div class="ticker-content">
+          @for (point of getTickerPoints(); track $index) {
+            <span class="ticker-item">
+              <span class="text-orange me-1">&bull;</span>
+              {{ point }}
+            </span>
+          }
+          @for (point of getTickerPoints(); track $index) {
+            <span class="ticker-item">
+              <span class="text-orange me-1">&bull;</span>
+              {{ point }}
+            </span>
           }
         </div>
       </div>
-
-      <a routerLink="/blog" routerLinkActive="active">Factory Insights</a>
-      <a routerLink="/request-quote" routerLinkActive="active">Request Quote</a>
-      <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
-    </div>
-
-    <!-- Right Actions -->
-    <div class="navbar-actions">
-      <a routerLink="/products" class="action-icon" title="Search Custom Catalog" aria-label="Search Catalog">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </a>
-      <a routerLink="/request-quote" class="btn-shopify-red btn-header-cta">
-        <i class="fa-solid fa-pen-ruler me-1"></i>
-        <span>Custom Quote</span>
-      </a>
-
-      <!-- Mobile Menu Toggle Button -->
-      <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation">
-        <i class="fa-solid" [class.fa-bars]="!isMobileMenuOpen" [class.fa-xmark]="isMobileMenuOpen"></i>
-      </button>
+      <div class="announcement-contact d-none-mobile">
+        @if (contactInfo?.phone) {
+          <a [href]="getWhatsAppUrl(contactInfo?.phone)" target="_blank" rel="noopener noreferrer" class="contact-link me-3">
+            <i class="fa-brands fa-whatsapp me-1 text-success"></i> {{ contactInfo?.phone }}
+          </a>
+        }
+        @if (contactInfo?.email) {
+          <a [href]="'mailto:' + contactInfo?.email" class="contact-link">
+            <i class="fa-solid fa-envelope me-1"></i> {{ contactInfo?.email }}
+          </a>
+        }
+      </div>
     </div>
   </div>
 
-  <!-- Mobile Navigation Menu -->
-  @if (isMobileMenuOpen) {
-    <div class="mobile-menu">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
-      
-      <!-- Mobile Boxing Accordion -->
-      <div class="mobile-dropdown-wrapper">
-        <div class="mobile-dropdown-header" (click)="toggleMobileCategory()">
-          <span routerLink="/products" routerLinkActive="active" (click)="$event.stopPropagation(); closeMobileMenu()">Boxing</span>
-          <button class="accordion-btn" aria-label="Expand Categories">
-            <i class="fa-solid" [class.fa-chevron-down]="!isMobileCategoryOpen" [class.fa-chevron-up]="isMobileCategoryOpen"></i>
-          </button>
+  <!-- Main Header Navbar -->
+  <nav class="navbar-wrapper">
+    <div class="container navbar-container">
+      <!-- Brand Logo -->
+      <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
+        <img src="logo.png" alt="Sufi Sports Logo" class="brand-logo-img" />
+        <div class="brand-titles">
+          <span class="brand-text">SUFI</span><span class="brand-accent">SPORTS</span>
+          <span class="brand-tagline">CUSTOM GEAR MANUFACTURER</span>
         </div>
-        @if (isMobileCategoryOpen) {
-          <div class="mobile-sub-menu">
-            <a routerLink="/products" [queryParams]="{}" (click)="closeMobileMenu()" class="mobile-sub-item">
-              All Boxing Categories
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="navbar-links">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        
+        <!-- Boxing with Sub-Menu -->
+        <div class="nav-item-dropdown">
+          <a routerLink="/products" routerLinkActive="active" class="dropdown-trigger">
+            Boxing <i class="fa-solid fa-chevron-down ms-1 caret-icon"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a routerLink="/products" [queryParams]="{}" class="dropdown-item all-item">
+              <i class="fa-solid fa-grid-2 me-2"></i> All Boxing Gear
             </a>
+            <div class="dropdown-divider"></div>
             @for (cat of categories; track cat.id) {
-              <a routerLink="/products" [queryParams]="{ category: cat.name }" (click)="closeMobileMenu()" class="mobile-sub-item">
-                {{ cat.name }}
+              <a routerLink="/products" [queryParams]="{ category: cat.name }" class="dropdown-item">
+                <i class="fa-solid fa-angle-right me-2 arrow-icon"></i> {{ cat.name }}
               </a>
             }
           </div>
-        }
+        </div>
+
+        <a routerLink="/blog" routerLinkActive="active">Factory Insights</a>
+        <a routerLink="/request-quote" routerLinkActive="active">Request Quote</a>
+        <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
       </div>
 
-      <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Factory Insights</a>
-      <a routerLink="/request-quote" routerLinkActive="active" (click)="closeMobileMenu()">Request Quote</a>
-      <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
-
-      <div class="mobile-menu-footer">
-        <a routerLink="/request-quote" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
-          <i class="fa-solid fa-pen-ruler me-1"></i> Request Custom Quote
+      <!-- Right Actions -->
+      <div class="navbar-actions">
+        <a routerLink="/products" class="action-icon" title="Search Custom Catalog" aria-label="Search Catalog">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </a>
+        <a routerLink="/request-quote" class="btn-shopify-red btn-header-cta">
+          <i class="fa-solid fa-pen-ruler me-1"></i>
+          <span>Custom Quote</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation">
+          <i class="fa-solid" [class.fa-bars]="!isMobileMenuOpen" [class.fa-xmark]="isMobileMenuOpen"></i>
+        </button>
       </div>
     </div>
-  }
-</nav>
+
+    <!-- Mobile Navigation Menu -->
+    @if (isMobileMenuOpen) {
+      <div class="mobile-menu">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a>
+        
+        <!-- Mobile Boxing Accordion -->
+        <div class="mobile-dropdown-wrapper">
+          <div class="mobile-dropdown-header" (click)="toggleMobileCategory()">
+            <span routerLink="/products" routerLinkActive="active" (click)="$event.stopPropagation(); closeMobileMenu()">Boxing</span>
+            <button class="accordion-btn" aria-label="Expand Categories">
+              <i class="fa-solid" [class.fa-chevron-down]="!isMobileCategoryOpen" [class.fa-chevron-up]="isMobileCategoryOpen"></i>
+            </button>
+          </div>
+          @if (isMobileCategoryOpen) {
+            <div class="mobile-sub-menu">
+              <a routerLink="/products" [queryParams]="{}" (click)="closeMobileMenu()" class="mobile-sub-item">
+                All Boxing Categories
+              </a>
+              @for (cat of categories; track cat.id) {
+                <a routerLink="/products" [queryParams]="{ category: cat.name }" (click)="closeMobileMenu()" class="mobile-sub-item">
+                  {{ cat.name }}
+                </a>
+              }
+            </div>
+          }
+        </div>
+
+        <a routerLink="/blog" routerLinkActive="active" (click)="closeMobileMenu()">Factory Insights</a>
+        <a routerLink="/request-quote" routerLinkActive="active" (click)="closeMobileMenu()">Request Quote</a>
+        <a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact Us</a>
+
+        <div class="mobile-menu-footer">
+          <a routerLink="/request-quote" class="btn-shopify-red w-full" (click)="closeMobileMenu()">
+            <i class="fa-solid fa-pen-ruler me-1"></i> Request Custom Quote
+          </a>
+        </div>
+      </div>
+    }
+  </nav>
+</header>
